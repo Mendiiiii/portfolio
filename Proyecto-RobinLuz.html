@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robin Luz — Iñigo Mendizábal</title>
+  <meta name="description" content="Robin Luz: ecosistema digital completo diseñado por Iñigo Mendizábal. App móvil, landing page, identidad visual y SaaS B2B para Optimiza Recursos.">
+  <script>
+    document.documentElement.classList.remove('no-js');
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: { DEFAULT: '#4F46E5', light: '#6366F1', dark: '#4338CA' },
+            surface: { light: '#FFFFFF', dark: '#0F172A' },
+            muted: { light: '#64748B', dark: '#94A3B8' },
+            card: { light: '#F8FAFC', dark: '#1E293B' },
+            border: { light: '#E2E8F0', dark: '#334155' }
+          },
+          fontFamily: { display: ['Space Grotesk','sans-serif'], body: ['DM Sans','sans-serif'] },
+          borderRadius: { '2xl':'1rem','3xl':'1.5rem','4xl':'2rem' }
+        }
+      }
+    }
+  </script>
+  <style>
+    body{font-family:'DM Sans',sans-serif;}
+    :root{--bg:#FFFFFF;--fg:#0F172A;--muted:#64748B;--accent:#4F46E5;--card:#F8FAFC;--border:#E2E8F0;}
+    .dark{--bg:#0F172A;--fg:#F1F5F9;--muted:#94A3B8;--accent:#6366F1;--card:#1E293B;--border:#334155;}
+    .font-display{font-family:'Space Grotesk',sans-serif;}
+    .reveal{opacity:1;transform:translateY(0);transition:opacity .6s ease-out,transform .6s ease-out;}
+    .js-ready .reveal{opacity:0;transform:translateY(24px);}
+    .js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+    .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+    .focus-ring:focus{outline:none;box-shadow:0 0 0 3px rgba(79,70,229,.4);}
+    .sub-card{transition:transform .35s ease, box-shadow .35s ease;}
+    .sub-card:hover{transform:translateY(-6px);}
+    #progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#8A38F5,#6B63FF);z-index:100;transition:width .1s;}
+    .hero-bg{background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(138,56,245,.14),transparent 65%),radial-gradient(ellipse 50% 40% at 85% 70%,rgba(107,99,255,.08),transparent);}
+    .dark .hero-bg{background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(138,56,245,.22),transparent 65%),radial-gradient(ellipse 50% 40% at 85% 70%,rgba(107,99,255,.14),transparent);}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}.reveal{opacity:1!important;transform:none!important;}.sub-card:hover{transform:none;}}
+  </style>
+</head>
+<body class="bg-surface-light dark:bg-surface-dark min-h-screen">
+<div id="progress-bar" style="width:0%"></div>
+
+<header class="fixed left-0 right-0 z-50 backdrop-blur-xl bg-surface-light/80 dark:bg-surface-dark/80 border-b border-border-light dark:border-border-dark" style="top:3px">
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 text-muted-light dark:text-muted-dark hover:text-primary transition-colors focus-ring rounded-lg px-2 py-1 text-sm font-medium">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <span data-i18n="nav.back">Volver</span>
+      </a>
+    <div class="flex items-center gap-2">
+      <button id="langToggle" class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring">
+        <span class="text-sm font-medium" id="langLabel">EN</span>
+      </button>
+      <button id="themeToggle" class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring">
+        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="pt-[67px]">
+
+  <!-- Hero -->
+  <section class="relative hero-bg overflow-hidden py-20 lg:py-28">
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="reveal flex flex-wrap gap-2 mb-6">
+            <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-violet-50 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400 rounded-full border border-violet-200 dark:border-violet-800">UX Design</span>
+            <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary dark:text-primary-light rounded-full border border-primary/20">Web Design</span>
+            <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-full border border-orange-200 dark:border-orange-800">Brand Identity</span>
+            <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 rounded-full border border-emerald-200 dark:border-emerald-800">SaaS Design</span>
+          </div>
+          <h1 class="reveal font-display text-7xl sm:text-8xl lg:text-9xl font-bold tracking-tight text-surface-dark dark:text-surface-light mb-6 leading-none">Robin Luz</h1>
+          <p class="reveal text-lg text-muted-light dark:text-muted-dark max-w-lg leading-relaxed mb-8" data-i18n="hero.desc">App móvil, landing, identidad visual y SaaS B2B — cuatro disciplinas, una misma marca.</p>
+          <div class="reveal flex flex-wrap gap-6">
+            <div>
+              <div class="font-display text-2xl font-bold text-violet-500">4</div>
+              <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat1">Entregables distintos</div>
+            </div>
+            <div>
+              <div class="font-display text-2xl font-bold text-primary dark:text-primary-light">2024</div>
+              <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat2">Año</div>
+            </div>
+            <div>
+              <div class="font-display text-2xl font-bold text-emerald-500">+6 <span class="text-base font-medium" data-i18n="months">meses</span></div>
+              <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat3">Duración total</div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal flex justify-center lg:justify-end">
+          <div class="relative">
+            <div class="absolute inset-0 bg-violet-500/20 rounded-full blur-3xl"></div>
+            <img src="Assests/Img/18.png"
+                 alt="Robin Luz logo"
+                 class="relative w-64 h-64 object-contain drop-shadow-2xl"
+                 onerror="this.parentElement.innerHTML='<div class=\'w-64 h-64 rounded-3xl bg-[#15181C] flex items-center justify-center\'><span class=\'font-display text-4xl font-bold text-violet-400\'>RL</span></div>'">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Context bar -->
+  <section class="py-10 bg-card-light/40 dark:bg-card-dark/40 border-y border-border-light dark:border-border-dark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-px bg-border-light dark:bg-border-dark rounded-2xl overflow-hidden">
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.role">Rol</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Product Designer</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.client">Empresa</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Optimiza Recursos</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.tools">Herramientas</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Figma · Maze · Miro</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.platforms">Plataformas</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">iOS · Android · Web</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Sub-case studies -->
+  <section class="py-24 lg:py-32">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="grid sm:grid-cols-2 gap-4">
+
+        <!-- 1. UX & Product Design -->
+        <a href="RobinLuz-UX.html" class="reveal stagger-1 sub-card relative group block overflow-hidden rounded-3xl bg-[#15181C] border border-[#8A38F5]/20" style="min-height:280px;">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:radial-gradient(ellipse 80% 60% at 30% 80%,rgba(138,56,245,.2),transparent);"></div>
+          <!-- Arrow top-right -->
+          <div class="absolute top-6 right-6 w-8 h-8 rounded-full bg-violet-500/10 border border-violet-500/20 flex items-center justify-center opacity-50 group-hover:opacity-100 group-hover:bg-violet-500/20 group-hover:scale-110 transition-all duration-300 z-20">
+            <svg class="w-3.5 h-3.5 text-violet-400 transition-transform duration-300 group-hover:translate-x-px group-hover:-translate-y-px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </div>
+          <div class="relative z-10 p-8" style="min-height:280px;">
+            <div class="flex items-center gap-3 mb-8">
+              <div class="w-9 h-9 rounded-xl bg-[#8A38F5]/20 flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-violet-400/70" data-i18n="c1.tag">UX & Product Design</span>
+            </div>
+            <h3 class="font-display text-3xl font-bold text-white mb-3 leading-tight" data-i18n="c1.title">App móvil</h3>
+            <p class="text-white/40 text-sm" data-i18n="c1.meta">iOS · Android &nbsp;·&nbsp; 3 iteraciones &nbsp;·&nbsp; −55% abandono</p>
+          </div>
+        </a>
+
+        <!-- 2. Web Design -->
+        <a href="RobinLuz-Web.html" class="reveal stagger-2 sub-card relative group block overflow-hidden rounded-3xl bg-[#0D1F1F] border border-teal-500/20" style="min-height:280px;">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:radial-gradient(ellipse 80% 60% at 70% 80%,rgba(20,184,166,.17),transparent);"></div>
+          <div class="absolute top-6 right-6 w-8 h-8 rounded-full bg-teal-500/10 border border-teal-500/20 flex items-center justify-center opacity-50 group-hover:opacity-100 group-hover:bg-teal-500/20 group-hover:scale-110 transition-all duration-300 z-20">
+            <svg class="w-3.5 h-3.5 text-teal-400 transition-transform duration-300 group-hover:translate-x-px group-hover:-translate-y-px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </div>
+          <div class="relative z-10 p-8" style="min-height:280px;">
+            <div class="flex items-center gap-3 mb-8">
+              <div class="w-9 h-9 rounded-xl bg-teal-500/20 flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/></svg>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-teal-400/70" data-i18n="c2.tag">Web Design</span>
+            </div>
+            <h3 class="font-display text-3xl font-bold text-white mb-3 leading-tight" data-i18n="c2.title">Landing robinluz.com</h3>
+            <p class="text-white/40 text-sm" data-i18n="c2.meta">Workshop con CEO &nbsp;·&nbsp; Wireframes &nbsp;·&nbsp; En producción</p>
+          </div>
+        </a>
+
+        <!-- 3. Brand & Visual Identity -->
+        <a href="RobinLuz-Brand.html" class="reveal stagger-3 sub-card relative group block overflow-hidden rounded-3xl bg-[#1A1208] border border-orange-500/20" style="min-height:280px;">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:radial-gradient(ellipse 80% 60% at 30% 80%,rgba(249,115,22,.16),transparent);"></div>
+          <div class="absolute top-6 right-6 w-8 h-8 rounded-full bg-orange-500/10 border border-orange-500/20 flex items-center justify-center opacity-50 group-hover:opacity-100 group-hover:bg-orange-500/20 group-hover:scale-110 transition-all duration-300 z-20">
+            <svg class="w-3.5 h-3.5 text-orange-400 transition-transform duration-300 group-hover:translate-x-px group-hover:-translate-y-px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </div>
+          <div class="relative z-10 p-8" style="min-height:280px;">
+            <div class="flex items-center gap-3 mb-8">
+              <div class="w-9 h-9 rounded-xl bg-orange-500/20 flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-orange-400/70" data-i18n="c3.tag">Brand & Visual Identity</span>
+            </div>
+            <h3 class="font-display text-3xl font-bold text-white mb-3 leading-tight" data-i18n="c3.title">Logo e identidad visual</h3>
+            <p class="text-white/40 text-sm" data-i18n="c3.meta">Logo · Paleta · App Store &nbsp;·&nbsp; Todas las resoluciones</p>
+          </div>
+        </a>
+
+        <!-- 4. OptiDashboard SaaS -->
+        <a href="RobinLuz-OptiDashboard.html" class="reveal stagger-4 sub-card relative group block overflow-hidden rounded-3xl bg-[#081A0F] border border-emerald-500/20" style="min-height:280px;">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:radial-gradient(ellipse 80% 60% at 70% 80%,rgba(16,185,129,.16),transparent);"></div>
+          <div class="absolute top-6 right-6 w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center opacity-50 group-hover:opacity-100 group-hover:bg-emerald-500/20 group-hover:scale-110 transition-all duration-300 z-20">
+            <svg class="w-3.5 h-3.5 text-emerald-400 transition-transform duration-300 group-hover:translate-x-px group-hover:-translate-y-px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </div>
+          <div class="relative z-10 p-8" style="min-height:280px;">
+            <div class="flex items-center gap-3 mb-8">
+              <div class="w-9 h-9 rounded-xl bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400/70" data-i18n="c4.tag">SaaS B2B Design</span>
+            </div>
+            <h3 class="font-display text-3xl font-bold text-white mb-3 leading-tight" data-i18n="c4.title">OptiDashboard</h3>
+            <p class="text-white/40 text-sm" data-i18n="c4.meta">Web App · Desktop &nbsp;·&nbsp; IoT + IA &nbsp;·&nbsp; Rediseño completo</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="py-8 border-t border-border-light dark:border-border-dark">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <a href="index.html" class="font-display font-bold text-surface-dark dark:text-surface-light hover:text-primary transition-colors">Iñigo Mendizábal</a>
+    <span class="text-sm text-muted-light dark:text-muted-dark" data-i18n="footer">© 2026 Todos los derechos reservados</span>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const i18n = {
+    es:{"nav.back":"Volver","hero.desc":"App móvil, landing, identidad visual y SaaS B2B — cuatro disciplinas, una misma marca.","stat1":"Entregables distintos","stat2":"Año","stat3":"Duración total","months":"meses","ctx.role":"Rol","ctx.client":"Empresa","ctx.tools":"Herramientas","ctx.platforms":"Plataformas","c1.tag":"UX & Product Design","c1.title":"App móvil","c1.meta":"iOS · Android · 3 iteraciones · −55% abandono","c2.tag":"Web Design","c2.title":"Landing robinluz.com","c2.meta":"Workshop con CEO · Wireframes · En producción","c3.tag":"Brand & Visual Identity","c3.title":"Logo e identidad visual","c3.meta":"Logo · Paleta · App Store · Todas las resoluciones","c4.tag":"SaaS B2B Design","c4.title":"OptiDashboard","c4.meta":"Web App · Desktop · IoT + IA · Rediseño completo","footer":"© 2026 Todos los derechos reservados"},
+    en:{"nav.back":"Back","hero.desc":"Mobile app, landing page, visual identity and B2B SaaS — four disciplines, one brand.","stat1":"Distinct deliverables","stat2":"Year","stat3":"Total duration","months":"months","ctx.role":"Role","ctx.client":"Company","ctx.tools":"Tools","ctx.platforms":"Platforms","c1.tag":"UX & Product Design","c1.title":"Mobile app","c1.meta":"iOS · Android · 3 iterations · −55% drop-off","c2.tag":"Web Design","c2.title":"Landing robinluz.com","c2.meta":"CEO workshop · Wireframes · Live in production","c3.tag":"Brand & Visual Identity","c3.title":"Logo and visual identity","c3.meta":"Logo · Palette · App Store · All resolutions","c4.tag":"SaaS B2B Design","c4.title":"OptiDashboard","c4.meta":"Web App · Desktop · IoT + AI · Full redesign","footer":"© 2026 All rights reserved"}
+  };
+  let lang = localStorage.getItem('lang') || 'es';
+  function applyLang(l){lang=l;localStorage.setItem('lang',l);document.documentElement.lang=l;document.getElementById('langLabel').textContent=l==='en'?'ES':'EN';document.querySelectorAll('[data-i18n]').forEach(el=>{if(i18n[l][el.dataset.i18n])el.textContent=i18n[l][el.dataset.i18n];});}
+  document.getElementById('langToggle').addEventListener('click',()=>applyLang(lang==='en'?'es':'en'));
+  applyLang(lang);
+  document.getElementById('themeToggle').addEventListener('click',()=>{document.documentElement.classList.toggle('dark');localStorage.theme=document.documentElement.classList.contains('dark')?'dark':'light';});
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('progress-bar').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';});
+</script>
+</body>
+</html>

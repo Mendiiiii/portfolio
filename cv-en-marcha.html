@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>En Marcha — Iñigo Mendizábal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] } } } }</script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { transition: background-color .3s, color .3s; }
+        :focus-visible { outline: 2px solid #8A38F5; outline-offset: 3px; border-radius: 4px; }
+        .skip-link { position:absolute; top:-9999px; left:1rem; background:#8A38F5; color:#fff; padding:.5rem 1rem; border-radius:0 0 6px 6px; font-weight:600; z-index:9999; }
+        .skip-link:focus { top:0; }
+        .row-divider { border-top: 1px solid; }
+        .dark .row-divider { border-color: rgba(255,255,255,0.06); }
+        html:not(.dark) .row-divider { border-color: rgba(0,0,0,0.07); }
+        .reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease,transform .6s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+    </style>
+</head>
+<body class="dark:bg-[#111111] bg-[#F5F4F1] dark:text-[#EFEFEF] text-[#111111] font-sans antialiased">
+
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+
+    <!-- NAV -->
+    <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 h-14
+                   border-b dark:border-white/5 border-black/6
+                   dark:bg-[#111111]/90 bg-[#F5F4F1]/90 backdrop-blur-md">
+        <a href="cv.html" class="flex items-center gap-1.5 text-sm dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            <span id="backLabel">Volver</span>
+        </a>
+        <div class="flex items-center gap-4">
+            <button id="langBtn" aria-label="Switch language"
+                    class="text-[11px] font-semibold tracking-[0.2em] uppercase
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">EN</button>
+            <button id="themeBtn" aria-label="Cambiar tema"
+                    class="w-7 h-7 flex items-center justify-center
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">
+                <svg id="sunIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/>
+                </svg>
+                <svg id="moonIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="main" class="pt-14">
+
+        <!-- CONTENT -->
+        <div class="px-6 lg:px-12 max-w-5xl mx-auto">
+
+            <!-- Title -->
+            <div class="pt-16 pb-12 reveal">
+                <p class="text-xs tracking-[0.25em] uppercase dark:text-white/50 text-black/55 mb-4" data-i18n="tags">2025 · Innovación social · Web · Identidad visual · Cofundador</p>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold dark:text-white text-[#111] leading-[1.06] tracking-tight">En Marcha</h1>
+            </div>
+
+            <!-- Opening image -->
+            <div class="row-divider pt-0 pb-12 reveal">
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1400&q=80&auto=format&fit=crop"
+                         alt="En Marcha — Innovación social rural"
+                         class="w-full h-full object-cover" loading="eager">
+                </div>
+            </div>
+
+            <!-- The Challenge -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s1_title">El problema real</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s1_p1">
+                    Cada pocos años llega alguien a un pueblo rural con un programa de formación, organiza talleres, saca fotos y se va. Los pueblos han aprendido a desconfiar. El problema de En Marcha no era el contenido — era la credibilidad. Ninguna institución va a apostar por un programa que no tiene historial, cara visible ni arraigo local.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s1_p2">
+                    La misión era clara: que la gente no tenga que irse del pueblo para tener futuro. Mejorar el territorio para que quedarse sea una elección, no una resignación. Miguel Gatoó — cofundador con experiencia en la OIT y Naciones Unidas — tenía el conocimiento institucional y los contenidos. Yo entré como socio de diseño y estrategia.
+                </p>
+            </div>
+
+            <!-- User Research -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s2_title">Lo que encontramos sobre el terreno</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s2_p1">
+                    Hablamos con alcaldes, asociaciones locales y futuros participantes. Los alcaldes ya sabían que sus vecinos necesitaban formación — eso no era el hallazgo. El hallazgo fue que los fondos europeos llegan con condiciones, plazos y requisitos de justificación que los Ayuntamientos pequeños no pueden gestionar solos. Necesitan un socio que navegue eso por ellos, no solo alguien que imparta talleres.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-8" data-i18n="s2_p2">
+                    Tres perfiles se repetían: jóvenes que quieren quedarse pero no ven futuro económico, mujeres que vuelven al mercado laboral después de años cuidando familia, y trabajadores mayores que se enfrentan a automatización o paro. En los tres casos, el obstáculo no era el aprendizaje — era la confianza y el acceso. El contenido de los programas era secundario; lo primero era demostrar que estábamos ahí para quedarnos.
+                </p>
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=80&auto=format&fit=crop"
+                         alt="Investigación territorial — trabajo colaborativo"
+                         class="w-full h-full object-cover" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Design Solution -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s3_title">División de trabajo y decisiones de diseño</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s3_p1">
+                    La división fue deliberada: Miguel gestionó las relaciones institucionales, la búsqueda de financiación y el diseño de los programas. Yo me encargué de todo lo que las instituciones verían antes de decir que sí: identidad visual, web y materiales de presentación. En los contenidos curriculares trabajamos juntos — los programas tenían que sostenerse metodológicamente, no solo parecer creíbles.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s3_p2">
+                    La identidad visual tenía que leer como institucional — no como una ONG improvisada — pero con calidez de territorio. El sistema de color se ancló en el paisaje de La Vera: bosque, oliva, ocre, tierra. No para ser decorativo, sino para señalar arraigo. La web estaba diseñada para un único visitante decisivo: el funcionario o político local que necesita decidir si colaborar. La arquitectura de la información responde sus preguntas en orden: qué es esto, quién está detrás, qué han hecho, cómo trabajamos juntos.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s3_p3">
+                    Lo que dejé fuera fue igual de importante: nada de lenguaje de startup, nada de promesas de impacto sin evidencia, nada de estética que gritara "proyecto de diseñador". En contextos institucionales, el trabajo del diseño no es impresionar — es no dar ninguna razón para decir no.
+                </p>
+            </div>
+
+            <!-- Impact -->
+            <div class="row-divider py-12 pb-20 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s4_title">Estado actual</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s4_p1">
+                    Organización activa, web publicada en <a href="https://en-marcha-web.vercel.app" target="_blank" rel="noopener noreferrer" class="underline dark:text-white text-[#111] hover:text-[#8A38F5] transition-colors">en-marcha-web.vercel.app</a> y primeros contactos institucionales establecidos con Ayuntamientos de la comarca. El trabajo avanza despacio — así funciona esto. La confianza se construye en persona, no en una web.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s4_p2">
+                    Lo que aprendí: en proyectos de innovación social, el diseño no es el producto — es el argumento de que el producto existe. Sin credibilidad visual e institucional, el mejor contenido no llega a la primera reunión.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="row-divider px-6 lg:px-12 py-7 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-xs dark:text-white/50 text-black/55 order-2 sm:order-1">© 2026 Iñigo Mendizábal</p>
+        <nav class="flex items-center gap-5 order-1 sm:order-2">
+            <a href="cv.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">CV</a>
+            <a href="index.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Portfolio</a>
+            <a href="mailto:imendifp@gmail.com" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Contacto</a>
+        </nav>
+    </footer>
+
+    <script>
+        const T = {
+            es: {
+                back:     'Volver',
+                tags:     '2025 · Innovación social · Web · Identidad visual · Cofundador',
+                s1_title: 'El problema real',
+                s1_p1:    'Cada pocos años llega alguien a un pueblo rural con un programa de formación, organiza talleres, saca fotos y se va. Los pueblos han aprendido a desconfiar. El problema de En Marcha no era el contenido — era la credibilidad. Ninguna institución va a apostar por un programa que no tiene historial, cara visible ni arraigo local.',
+                s1_p2:    'La misión era clara: que la gente no tenga que irse del pueblo para tener futuro. Mejorar el territorio para que quedarse sea una elección, no una resignación. Miguel Gatoó — cofundador con experiencia en la OIT y Naciones Unidas — tenía el conocimiento institucional y los contenidos. Yo entré como socio de diseño y estrategia.',
+                s2_title: 'Lo que encontramos sobre el terreno',
+                s2_p1:    'Hablamos con alcaldes, asociaciones locales y futuros participantes. Los alcaldes ya sabían que sus vecinos necesitaban formación — eso no era el hallazgo. El hallazgo fue que los fondos europeos llegan con condiciones, plazos y requisitos de justificación que los Ayuntamientos pequeños no pueden gestionar solos. Necesitan un socio que navegue eso por ellos, no solo alguien que imparta talleres.',
+                s2_p2:    'Tres perfiles se repetían: jóvenes que quieren quedarse pero no ven futuro económico, mujeres que vuelven al mercado laboral después de años cuidando familia, y trabajadores mayores que se enfrentan a automatización o paro. En los tres casos, el obstáculo no era el aprendizaje — era la confianza y el acceso. El contenido de los programas era secundario; lo primero era demostrar que estábamos ahí para quedarnos.',
+                s3_title: 'División de trabajo y decisiones de diseño',
+                s3_p1:    'La división fue deliberada: Miguel gestionó las relaciones institucionales, la búsqueda de financiación y el diseño de los programas. Yo me encargué de todo lo que las instituciones verían antes de decir que sí: identidad visual, web y materiales de presentación. En los contenidos curriculares trabajamos juntos — los programas tenían que sostenerse metodológicamente, no solo parecer creíbles.',
+                s3_p2:    'La identidad visual tenía que leer como institucional — no como una ONG improvisada — pero con calidez de territorio. El sistema de color se ancló en el paisaje de La Vera: bosque, oliva, ocre, tierra. No para ser decorativo, sino para señalar arraigo. La web estaba diseñada para un único visitante decisivo: el funcionario o político local que necesita decidir si colaborar. La arquitectura de la información responde sus preguntas en orden: qué es esto, quién está detrás, qué han hecho, cómo trabajamos juntos.',
+                s3_p3:    'Lo que dejé fuera fue igual de importante: nada de lenguaje de startup, nada de promesas de impacto sin evidencia, nada de estética que gritara "proyecto de diseñador". En contextos institucionales, el trabajo del diseño no es impresionar — es no dar ninguna razón para decir no.',
+                s4_title: 'Estado actual',
+                s4_p1:    'Organización activa, web publicada en <a href="https://en-marcha-web.vercel.app" target="_blank" rel="noopener noreferrer" class="underline dark:text-white text-[#111] hover:text-[#8A38F5] transition-colors">en-marcha-web.vercel.app</a> y primeros contactos institucionales establecidos con Ayuntamientos de la comarca. El trabajo avanza despacio — así funciona esto. La confianza se construye en persona, no en una web.',
+                s4_p2:    'Lo que aprendí: en proyectos de innovación social, el diseño no es el producto — es el argumento de que el producto existe. Sin credibilidad visual e institucional, el mejor contenido no llega a la primera reunión.',
+            },
+            en: {
+                back:     'Back',
+                tags:     '2025 · Social innovation · Web · Visual identity · Co-founder',
+                s1_title: 'The real problem',
+                s1_p1:    'Every few years someone arrives in a rural village with a training programme, runs workshops, takes photos, and leaves. Villages have learned to distrust. En Marcha\'s problem wasn\'t content — it was credibility. No institution will back a programme with no track record, no visible faces, and no local roots.',
+                s1_p2:    'The mission was clear: people shouldn\'t have to leave their village to have a future. Make the territory better so staying is a choice, not resignation. Miguel Gatoó — co-founder with experience at the ILO and United Nations — had the institutional knowledge and the content. I joined as the design and strategy partner.',
+                s2_title: 'What we found in the field',
+                s2_p1:    'We spoke with mayors, local associations, and future participants. Mayors already knew their residents needed retraining — that wasn\'t the finding. The finding was that European funds come with conditions, timelines, and reporting requirements that small town councils can\'t manage alone. They need a partner who can navigate that, not just someone to run workshops.',
+                s2_p2:    'Three profiles kept appearing: young people who want to stay but see no economic future, women re-entering the workforce after years of caregiving, and older workers facing automation or unemployment. In all three cases, the barrier wasn\'t learning — it was trust and access. The programme content was secondary; what mattered first was proving we were there to stay.',
+                s3_title: 'Division of work and design decisions',
+                s3_p1:    'The division was deliberate: Miguel managed institutional relationships, funding applications, and programme design. I handled everything institutions would see before saying yes: visual identity, website, and pitch materials. On the curriculum content we worked together — the programmes had to hold up methodologically, not just look credible.',
+                s3_p2:    'The visual identity had to read as institutional — not like an improvised NGO — but with the warmth of the territory. The colour system was anchored in the landscape of La Vera: forest, olive, ochre, earth. Not decorative — it signals rootedness. The website was designed for one decisive visitor: the local official or politician who needs to decide whether to collaborate. The information architecture answers their questions in order: what is this, who is behind it, what have they done, how do we work together.',
+                s3_p3:    'What I left out was equally important: no startup language, no impact promises without evidence, no aesthetic that screamed "designer\'s project". In institutional contexts, design\'s job isn\'t to impress — it\'s to not give anyone a reason to say no.',
+                s4_title: 'Current status',
+                s4_p1:    'Active organisation, website live at <a href="https://en-marcha-web.vercel.app" target="_blank" rel="noopener noreferrer" class="underline dark:text-white text-[#111] hover:text-[#8A38F5] transition-colors">en-marcha-web.vercel.app</a> and first institutional contacts established with local town councils. Progress is slow — that\'s how this works. Trust is built in person, not on a website.',
+                s4_p2:    'What I learned: in social innovation projects, design isn\'t the product — it\'s the argument that the product exists. Without visual and institutional credibility, the best content never makes it to the first meeting.',
+            }
+        };
+
+        let lang = 'es';
+        function applyLang(l) {
+            lang = l;
+            document.documentElement.lang = l;
+            document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
+            document.getElementById('backLabel').textContent = T[l].back;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const v = T[l][el.dataset.i18n];
+                if (v !== undefined) el.innerHTML = v;
+            });
+        }
+        document.getElementById('langBtn').addEventListener('click', () => applyLang(lang === 'es' ? 'en' : 'es'));
+
+        let dark = true;
+        document.getElementById('themeBtn').addEventListener('click', () => {
+            dark = !dark;
+            document.documentElement.classList.toggle('dark', dark);
+            document.getElementById('sunIcon').classList.toggle('hidden', !dark);
+            document.getElementById('moonIcon').classList.toggle('hidden', dark);
+        });
+        const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:0.1});
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>

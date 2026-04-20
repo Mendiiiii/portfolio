@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robin Luz — Iñigo Mendizábal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] } } } }</script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { transition: background-color .3s, color .3s; }
+        :focus-visible { outline: 2px solid #8A38F5; outline-offset: 3px; border-radius: 4px; }
+        .skip-link { position:absolute; top:-9999px; left:1rem; background:#8A38F5; color:#fff; padding:.5rem 1rem; border-radius:0 0 6px 6px; font-weight:600; z-index:9999; }
+        .skip-link:focus { top:0; }
+        .row-divider { border-top: 1px solid; }
+        .dark .row-divider { border-color: rgba(255,255,255,0.06); }
+        html:not(.dark) .row-divider { border-color: rgba(0,0,0,0.07); }
+        .reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease,transform .6s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+    </style>
+</head>
+<body class="dark:bg-[#111111] bg-[#F5F4F1] dark:text-[#EFEFEF] text-[#111111] font-sans antialiased">
+
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+
+    <!-- NAV -->
+    <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 h-14
+                   border-b dark:border-white/5 border-black/6
+                   dark:bg-[#111111]/90 bg-[#F5F4F1]/90 backdrop-blur-md">
+        <!-- Breadcrumb -->
+        <a href="cv.html" class="flex items-center gap-1.5 text-sm dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            <span id="backLabel">Volver</span>
+        </a>
+        <!-- Controls -->
+        <div class="flex items-center gap-4">
+            <button id="langBtn" aria-label="Switch language"
+                    class="text-[11px] font-semibold tracking-[0.2em] uppercase
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">EN</button>
+            <button id="themeBtn" aria-label="Cambiar tema"
+                    class="w-7 h-7 flex items-center justify-center
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">
+                <svg id="sunIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/>
+                </svg>
+                <svg id="moonIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="main" class="pt-14">
+
+        <!-- CONTENT -->
+        <div class="px-6 lg:px-12 max-w-5xl mx-auto">
+
+            <!-- Title -->
+            <div class="pt-16 pb-12 reveal">
+                <p class="text-xs tracking-[0.25em] uppercase dark:text-white/50 text-black/55 mb-4" data-i18n="tags">2025 · App móvil · Landing · Identidad visual · SaaS B2B</p>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold dark:text-white text-[#111] leading-[1.06] tracking-tight">Robin Luz</h1>
+            </div>
+
+            <!-- Opening image -->
+            <div class="row-divider pt-0 pb-12 reveal">
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1400&q=80&auto=format&fit=crop"
+                         alt="Robin Luz — App de análisis de facturas energéticas"
+                         class="w-full h-full object-cover" loading="eager">
+                </div>
+            </div>
+
+            <!-- El Reto -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s1_title">El Reto</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s1_p1">
+                    Cuando entré en Robin Luz el producto ya existía. La app estaba diseñada, el OptiDashboard funcionaba, había un CEO con visión y un equipo de desarrollo. El problema era que nadie había hablado con usuarios todavía — y el CEO estaba quemando sus reservas personales financiando un producto que crecía sin dirección clara.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s1_p2">
+                    Mi trabajo no era solo diseñar. Era ordenar: introducir una forma de trabajar con sprints, establecer un modelo de gasto sostenible y, desde ahí, usar la investigación con usuarios para decidir qué construir, qué descartar y hacia dónde virar el producto.
+                </p>
+            </div>
+
+            <!-- Investigación -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s2_title">Investigación</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s2_p1">
+                    Hice 11 entrevistas — 6 hombres, 5 mujeres, entre 20 y 79 años. Gente corporate, usuarios del día a día, técnicos y una señora de casi 80 que nunca había usado una app de energía. El rango era intencional: si el producto no lo entiende alguien mayor, no lo entiende nadie.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-8" data-i18n="s2_p2">
+                    El hallazgo más incómodo: la app no era necesaria para la mayoría de los usuarios, y muchas funcionalidades del dashboard sobraban. Emergieron cuatro arquetipos claros — el que quiere ahorrar pero no entiende la factura, el desconfiado del sector energético, el quemado por su compañía y el que sabe de energía pero necesita números concretos para moverse. Cada uno con barreras distintas, ninguna resoluble con más funcionalidades.
+                </p>
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=1200&q=80&auto=format&fit=crop"
+                         alt="Investigación de usuario — arquetipos y sprints"
+                         class="w-full h-full object-cover" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Solución -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s3_title">Solución de Diseño</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s3_p1">
+                    Trabajamos en sprints semanales con el CEO y el equipo de desarrollo. Cada reunión producía decisiones concretas: mover el CTA de contratar a la derecha, hacer el botón sticky, cambiar el copy de "seleccionar archivo" a "Analicemos tu factura", añadir información sobre cómo gana dinero Robin Luz. Pequeñas decisiones que, juntas, redujeron la carga cognitiva del flujo principal.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s3_p2">
+                    El OptiDashboard pasó de una interfaz oscura y técnicamente densa a un diseño limpio orientado a la tarea. No era un cambio cosmético — era una decisión sobre para quién era el producto: no para el CEO que lo construyó, sino para el asesor que lo usa en una reunión con un cliente.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s3_p3">
+                    La investigación también cambió la dirección del negocio. Robin Luz está virando hacia un modelo B2B: empresas y autónomos que venden energía usan la app como su propio asesor energético de marca. Cada comercial lleva Robin Luz en el bolsillo con sus precios, su identidad y su propuesta de valor — sin necesidad de desarrollar su propio producto.
+                </p>
+            </div>
+
+            <!-- Impacto -->
+            <div class="row-divider py-12 pb-20 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s4_title">Impacto</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s4_p1">
+                    MVP lanzado con cuatro productos coherentes bajo una misma marca. El trabajo más importante no fue el diseño — fue convencer al CEO de parar, escuchar a los usuarios y redirigir el producto antes de seguir construyendo. Eso es lo que salvó el proyecto.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s4_p2">
+                    La nueva línea B2B abre un mercado más grande que el original: no una app para el usuario final, sino una plataforma que cualquier empresa del sector energético puede hacer suya. La investigación no solo mejoró el producto — cambió el modelo de negocio.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="row-divider px-6 lg:px-12 py-7 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-xs dark:text-white/50 text-black/55 order-2 sm:order-1">© 2026 Iñigo Mendizábal</p>
+        <nav class="flex items-center gap-5 order-1 sm:order-2">
+            <a href="cv.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">CV</a>
+            <a href="index.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Portfolio</a>
+            <a href="mailto:imendifp@gmail.com" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Contacto</a>
+        </nav>
+    </footer>
+
+    <script>
+        const T = {
+            es: {
+                back:   'Volver',
+                tags:   '2025 · App móvil · OptiDashboard · Identidad visual · SaaS B2B',
+                s1_title: 'El Reto',
+                s1_p1:  'Cuando entré en Robin Luz el producto ya existía. La app estaba diseñada, el OptiDashboard funcionaba, había un CEO con visión y un equipo de desarrollo. El problema era que nadie había hablado con usuarios todavía — y el CEO estaba quemando sus reservas personales financiando un producto que crecía sin dirección clara.',
+                s1_p2:  'Mi trabajo no era solo diseñar. Era ordenar: introducir una forma de trabajar con sprints, establecer un modelo de gasto sostenible y, desde ahí, usar la investigación con usuarios para decidir qué construir, qué descartar y hacia dónde virar el producto.',
+                s2_title: 'Investigación',
+                s2_p1:  'Hice 11 entrevistas — 6 hombres, 5 mujeres, entre 20 y 79 años. Gente corporate, usuarios del día a día, técnicos y una señora de casi 80 que nunca había usado una app de energía. El rango era intencional: si el producto no lo entiende alguien mayor, no lo entiende nadie.',
+                s2_p2:  'El hallazgo más incómodo: la app no era necesaria para la mayoría de los usuarios, y muchas funcionalidades del dashboard sobraban. Emergieron cuatro arquetipos claros — el que quiere ahorrar pero no entiende la factura, el desconfiado del sector energético, el quemado por su compañía y el que sabe de energía pero necesita números concretos para moverse. Cada uno con barreras distintas, ninguna resoluble con más funcionalidades.',
+                s3_title: 'Solución de Diseño',
+                s3_p1:  'Trabajamos en sprints semanales con el CEO y el equipo de desarrollo. Cada reunión producía decisiones concretas: mover el CTA de contratar a la derecha, hacer el botón sticky, cambiar el copy de "seleccionar archivo" a "Analicemos tu factura", añadir información sobre cómo gana dinero Robin Luz. Pequeñas decisiones que, juntas, redujeron la carga cognitiva del flujo principal.',
+                s3_p2:  'El OptiDashboard pasó de una interfaz oscura y técnicamente densa a un diseño limpio orientado a la tarea. No era un cambio cosmético — era una decisión sobre para quién era el producto: no para el CEO que lo construyó, sino para el asesor que lo usa en una reunión con un cliente.',
+                s3_p3:  'La investigación también cambió la dirección del negocio. Robin Luz está virando hacia un modelo B2B: empresas y autónomos que venden energía usan la app como su propio asesor energético de marca. Cada comercial lleva Robin Luz en el bolsillo con sus precios, su identidad y su propuesta de valor — sin necesidad de desarrollar su propio producto.',
+                s4_title: 'Impacto',
+                s4_p1:  'MVP lanzado con cuatro productos coherentes bajo una misma marca. El trabajo más importante no fue el diseño — fue convencer al CEO de parar, escuchar a los usuarios y redirigir el producto antes de seguir construyendo. Eso es lo que salvó el proyecto.',
+                s4_p2:  'La nueva línea B2B abre un mercado más grande que el original: no una app para el usuario final, sino una plataforma que cualquier empresa del sector energético puede hacer suya. La investigación no solo mejoró el producto — cambió el modelo de negocio.',
+                footer_contact: 'Contacto',
+            },
+            en: {
+                back:   'Back',
+                tags:   '2025 · Mobile app · OptiDashboard · Visual identity · B2B SaaS',
+                s1_title: 'The Challenge',
+                s1_p1:  'When I joined Robin Luz the product already existed. The app was designed, OptiDashboard was running, there was a CEO with a vision and a development team. The problem was that nobody had spoken to users yet — and the CEO was burning through his personal savings funding a product that was growing without clear direction.',
+                s1_p2:  'My job wasn\'t just to design. It was to bring order: introduce a sprint-based way of working, establish a sustainable spending model, and then use user research to decide what to build, what to cut, and where to take the product.',
+                s2_title: 'Research',
+                s2_p1:  'I ran 11 interviews — 6 men, 5 women, between 20 and 79 years old. Corporate users, everyday people, technical profiles and a woman approaching 80 who had never used an energy app. The range was intentional: if the product isn\'t understood by an older user, it isn\'t understood by anyone.',
+                s2_p2:  'The most uncomfortable finding: the app wasn\'t necessary for most users, and many dashboard features were redundant. Four clear archetypes emerged — the one who wants to save but doesn\'t understand their bill, the one who distrusts the energy sector, the one burned by their electricity company, and the one who knows about energy but needs concrete numbers to act. Each with different barriers, none solvable by adding more features.',
+                s3_title: 'Design Solution',
+                s3_p1:  'We worked in weekly sprints with the CEO and development team. Each meeting produced concrete decisions: move the "contract" CTA to the right, make the button sticky, change the copy from "select file" to "Let\'s analyse your bill", add information about how Robin Luz makes money. Small decisions that, together, reduced the cognitive load of the main flow.',
+                s3_p2:  'OptiDashboard went from a dark, technically dense interface to a clean, task-oriented design. It wasn\'t a cosmetic change — it was a decision about who the product was for: not the CEO who built it, but the advisor using it in a meeting with a client.',
+                s3_p3:  'The research also changed the business direction. Robin Luz is pivoting to a B2B model: companies and freelancers who sell energy use the app as their own branded energy advisor. Every salesperson carries Robin Luz with their own prices, identity and value proposition — without needing to build their own product.',
+                s4_title: 'Impact',
+                s4_p1:  'MVP launched with four coherent products under one brand. The most important work wasn\'t the design — it was convincing the CEO to stop, listen to users and redirect the product before building further. That\'s what saved the project.',
+                s4_p2:  'The new B2B line opens a bigger market than the original: not an app for the end user, but a platform any energy sector company can make their own. The research didn\'t just improve the product — it changed the business model.',
+                footer_contact: 'Contact',
+            }
+        };
+
+        let lang = 'es';
+        function applyLang(l) {
+            lang = l;
+            document.documentElement.lang = l;
+            document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
+            document.getElementById('backLabel').textContent = T[l].back;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const v = T[l][el.dataset.i18n];
+                if (v !== undefined) el.innerHTML = v;
+            });
+        }
+        document.getElementById('langBtn').addEventListener('click', () => applyLang(lang === 'es' ? 'en' : 'es'));
+
+        // Theme
+        let dark = true;
+        document.getElementById('themeBtn').addEventListener('click', () => {
+            dark = !dark;
+            document.documentElement.classList.toggle('dark', dark);
+            document.getElementById('sunIcon').classList.toggle('hidden', !dark);
+            document.getElementById('moonIcon').classList.toggle('hidden', dark);
+        });
+
+        // Scroll reveal
+        const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:0.1});
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>

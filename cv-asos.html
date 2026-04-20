@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASOS App Redesign — Iñigo Mendizábal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] } } } }</script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { transition: background-color .3s, color .3s; }
+        :focus-visible { outline: 2px solid #8A38F5; outline-offset: 3px; border-radius: 4px; }
+        .skip-link { position:absolute; top:-9999px; left:1rem; background:#8A38F5; color:#fff; padding:.5rem 1rem; border-radius:0 0 6px 6px; font-weight:600; z-index:9999; }
+        .skip-link:focus { top:0; }
+        .row-divider { border-top: 1px solid; }
+        .dark .row-divider { border-color: rgba(255,255,255,0.06); }
+        html:not(.dark) .row-divider { border-color: rgba(0,0,0,0.07); }
+        .reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease,transform .6s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+    </style>
+</head>
+<body class="dark:bg-[#111111] bg-[#F5F4F1] dark:text-[#EFEFEF] text-[#111111] font-sans antialiased">
+
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+
+    <!-- NAV -->
+    <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 h-14
+                   border-b dark:border-white/5 border-black/6
+                   dark:bg-[#111111]/90 bg-[#F5F4F1]/90 backdrop-blur-md">
+        <a href="cv.html" class="flex items-center gap-1.5 text-sm dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            <span id="backLabel">Volver</span>
+        </a>
+        <div class="flex items-center gap-4">
+            <button id="langBtn" aria-label="Switch language"
+                    class="text-[11px] font-semibold tracking-[0.2em] uppercase
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">EN</button>
+            <button id="themeBtn" aria-label="Cambiar tema"
+                    class="w-7 h-7 flex items-center justify-center
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">
+                <svg id="sunIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/>
+                </svg>
+                <svg id="moonIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="main" class="pt-14">
+        <div class="px-6 lg:px-12 max-w-5xl mx-auto">
+
+            <!-- Title -->
+            <div class="pt-16 pb-12 reveal">
+                <p class="text-xs tracking-[0.25em] uppercase dark:text-white/50 text-black/55 mb-4" data-i18n="tags">2020 · App móvil · E-commerce · Moda · iOS · TFM</p>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold dark:text-white text-[#111] leading-[1.06] tracking-tight">ASOS App Redesign</h1>
+            </div>
+
+            <!-- Opening image -->
+            <div class="row-divider pt-0 pb-12 reveal">
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1400&q=80&auto=format&fit=crop"
+                         alt="ASOS App Redesign — Rediseño de app de moda para jóvenes"
+                         class="w-full h-full object-cover" loading="eager">
+                </div>
+            </div>
+
+            <!-- El Reto -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s1_title">El Reto</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s1_p1">
+                    ASOS atraía a jóvenes de 16 a 26 años pero no los convertía en compradores recurrentes. Su app funcionaba, pero la experiencia no respondía a cómo esa generación descubre, compra y se relaciona con la moda: a través del móvil, de las redes sociales y con una fuerte resistencia a los problemas de talla y las devoluciones complicadas.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s1_p2">
+                    El reto del proyecto era rediseñar la app para convertirla en un referente de moda para ese target — no solo un e-commerce, sino un espacio donde los usuarios expresan quiénes son. Mi rol en el equipo fue el de UX Researcher: responsable de toda la fase de investigación que daría fundamento a cada decisión de diseño posterior.
+                </p>
+            </div>
+
+            <!-- Investigación -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s2_title">Mi rol: UX Research</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s2_p1">
+                    Me encargué de construir el mapa completo del problema antes de que el equipo tocara ningún wireframe. Eso implicó análisis PEST y DAFO del sector, benchmarking de más de 10 competidores y referentes (Zara, Zalando, Vinted, Pinterest, Glovo…), análisis heurístico del mercado móvil de moda y un mapa de tendencias tecnológicas que identificó realidad aumentada, social commerce y personalización como las apuestas ganadoras del sector.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-8" data-i18n="s2_p2">
+                    Las encuestas y entrevistas con usuarios revelaron algo contraintuitivo: el precio era el factor más valorado (45%), pero las principales razones de abandono no eran el precio — eran las tallas (no acertar obliga a pedir dos tallas y devolver una), las devoluciones complicadas y la desconfianza ante métodos de pago. Los usuarios no abandonaban ASOS por lo que costaba, sino por lo que les costaba usarlo. El card sorting con 10 usuarios y 30 conceptos terminó de definir la arquitectura de información que el equipo de diseño usó como base.
+                </p>
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80&auto=format&fit=crop"
+                         alt="Investigación de usuario — encuestas, entrevistas y card sorting"
+                         class="w-full h-full object-cover" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Solución -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s3_title">De la investigación al diseño</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s3_p1">
+                    La investigación definió 12 retos concretos que el equipo tradujo en 7 casos de uso con prototipo, test de usuario y diseño visual final. Las funcionalidades surgieron directamente de los datos: la calculadora de tallas nació porque el 52% de usuarios encuestados quería guardar sus medidas; el probador virtual con AR, porque la necesidad de tocar y probar era la primera resistencia a comprar online; el Try Before You Pay, porque la desconfianza en la foto del producto frenaba la decisión de compra.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s3_p2">
+                    El proceso de devolución se simplificó con cuestionario digitalizado y seguimiento del reembolso en tiempo real — directamente de la fricción identificada en los tests. La pasarela de pago se rediseñó con barra de progreso y botón flotante de compra siempre visible, resolviendo uno de los hallazgos del user testing: el botón "Comprar" no podía estar escondido detrás de un scroll.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s3_p3">
+                    La tarjeta de puntos ASOS y las funcionalidades sociales (tableros compartidos, listas de deseos, pago entre amigos) respondían a otro insight clave: el 21% de usuarios quería compartir listas de deseos y comprar de forma conjunta. La fidelización no venía de descuentos, sino de convertir la app en un espacio social.
+                </p>
+            </div>
+
+            <!-- Impacto -->
+            <div class="row-divider py-12 pb-20 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s4_title">Validación</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s4_p1">
+                    El test de concepto validó las propuestas con puntuaciones altas: calculadora de tallas 4,6/5, tarjeta de puntos ASOS 4,6/5, home personalizada 4,4/5, probador virtual 4,4/5. El Try Before You Pay obtuvo 3,8/5 — la puntuación más baja, pero el feedback indicó que el concepto era válido y la ejecución del prototipo era lo que generaba dudas, no la idea.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s4_p2">
+                    Lo que aprendí con este proyecto es que la investigación no es la fase previa al diseño — es la que decide qué se diseña. Sin el dato de que los usuarios abandonaban por las tallas y no por el precio, el equipo habría diseñado más descuentos en lugar de una calculadora. La investigación cambió el brief.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="row-divider px-6 lg:px-12 py-7 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-xs dark:text-white/50 text-black/55 order-2 sm:order-1">© 2026 Iñigo Mendizábal</p>
+        <nav class="flex items-center gap-5 order-1 sm:order-2">
+            <a href="cv.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">CV</a>
+            <a href="index.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Portfolio</a>
+            <a href="mailto:imendifp@gmail.com" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors" data-i18n="footer_contact">Contacto</a>
+        </nav>
+    </footer>
+
+    <script>
+        const T = {
+            es: {
+                back:     'Volver',
+                tags:     '2020 · App móvil · E-commerce · Moda · iOS · UX Research',
+                s1_title: 'El Reto',
+                s1_p1:    'ASOS atraía a jóvenes de 16 a 26 años pero no los convertía en compradores recurrentes. Su app funcionaba, pero la experiencia no respondía a cómo esa generación descubre, compra y se relaciona con la moda: a través del móvil, de las redes sociales y con una fuerte resistencia a los problemas de talla y las devoluciones complicadas.',
+                s1_p2:    'El reto del proyecto era rediseñar la app para convertirla en un referente de moda para ese target — no solo un e-commerce, sino un espacio donde los usuarios expresan quiénes son. Mi rol en el equipo fue el de UX Researcher: responsable de toda la fase de investigación que daría fundamento a cada decisión de diseño posterior.',
+                s2_title: 'Mi rol: UX Research',
+                s2_p1:    'Me encargué de construir el mapa completo del problema antes de que el equipo tocara ningún wireframe. Eso implicó análisis PEST y DAFO del sector, benchmarking de más de 10 competidores y referentes (Zara, Zalando, Vinted, Pinterest, Glovo…), análisis heurístico del mercado móvil de moda y un mapa de tendencias tecnológicas que identificó realidad aumentada, social commerce y personalización como las apuestas ganadoras del sector.',
+                s2_p2:    'Las encuestas y entrevistas con usuarios revelaron algo contraintuitivo: el precio era el factor más valorado (45%), pero las principales razones de abandono no eran el precio — eran las tallas, las devoluciones complicadas y la desconfianza ante métodos de pago. Los usuarios no abandonaban ASOS por lo que costaba, sino por lo que les costaba usarlo. El card sorting con 10 usuarios y 30 conceptos terminó de definir la arquitectura de información que el equipo de diseño usó como base.',
+                s3_title: 'De la investigación al diseño',
+                s3_p1:    'La investigación definió 12 retos concretos que el equipo tradujo en 7 casos de uso con prototipo, test de usuario y diseño visual final. Las funcionalidades surgieron directamente de los datos: la calculadora de tallas nació porque el 52% de usuarios quería guardar sus medidas; el probador virtual con AR, porque tocar y probar era la primera resistencia a comprar online; el Try Before You Pay, porque la desconfianza en la foto del producto frenaba la decisión de compra.',
+                s3_p2:    'El proceso de devolución se simplificó con cuestionario digitalizado y seguimiento del reembolso en tiempo real — directamente de la fricción identificada en los tests. La pasarela de pago se rediseñó con barra de progreso y botón flotante de compra siempre visible, resolviendo uno de los hallazgos del user testing: el botón "Comprar" no podía estar escondido detrás de un scroll.',
+                s3_p3:    'La tarjeta de puntos ASOS y las funcionalidades sociales (tableros compartidos, listas de deseos, pago entre amigos) respondían a otro insight clave: el 21% de usuarios quería compartir listas de deseos y comprar de forma conjunta. La fidelización no venía de descuentos, sino de convertir la app en un espacio social.',
+                s4_title: 'Validación',
+                s4_p1:    'El test de concepto validó las propuestas con puntuaciones altas: calculadora de tallas 4,6/5, tarjeta de puntos ASOS 4,6/5, home personalizada 4,4/5, probador virtual 4,4/5. El Try Before You Pay obtuvo 3,8/5 — la puntuación más baja, pero el feedback indicó que el concepto era válido y la ejecución del prototipo era lo que generaba dudas, no la idea.',
+                s4_p2:    'Lo que aprendí con este proyecto es que la investigación no es la fase previa al diseño — es la que decide qué se diseña. Sin el dato de que los usuarios abandonaban por las tallas y no por el precio, el equipo habría diseñado más descuentos en lugar de una calculadora. La investigación cambió el brief.',
+                footer_contact: 'Contacto',
+            },
+            en: {
+                back:     'Back',
+                tags:     '2020 · Mobile app · E-commerce · Fashion · iOS · UX Research',
+                s1_title: 'The Challenge',
+                s1_p1:    'ASOS attracted young users (16–26) but failed to convert them into repeat buyers. The app worked, but the experience didn\'t reflect how that generation discovers, buys and relates to fashion: through mobile, social media, and with a strong resistance to sizing issues and complicated returns.',
+                s1_p2:    'The project\'s goal was to redesign the app to turn it into a fashion reference for that target — not just an e-commerce, but a space where users express who they are. My role in the team was UX Researcher: responsible for the entire research phase that would underpin every subsequent design decision.',
+                s2_title: 'My role: UX Research',
+                s2_p1:    'I built a complete map of the problem before the team touched a single wireframe. That meant PEST and SWOT analysis, benchmarking of 10+ competitors and references (Zara, Zalando, Vinted, Pinterest, Glovo…), heuristic analysis of the mobile fashion market and a technology trend map that identified augmented reality, social commerce and personalisation as the sector\'s winning bets.',
+                s2_p2:    'Surveys and user interviews revealed something counterintuitive: price was the most valued factor (45%), but the main reasons for abandonment weren\'t price — they were sizing, complicated returns and distrust of payment methods. Users weren\'t abandoning ASOS because of what it cost, but because of what it cost them to use it. A card sorting exercise with 10 users and 30 concepts finalised the information architecture the design team used as their foundation.',
+                s3_title: 'From research to design',
+                s3_p1:    'The research defined 12 concrete challenges that the team translated into 7 use cases with prototype, user test and final visual design. Features came directly from the data: the size calculator was born because 52% of users wanted to save their measurements; the AR virtual fitting room, because needing to touch and try on was the first barrier to buying online; Try Before You Pay, because distrust of product photos was blocking the purchase decision.',
+                s3_p2:    'The returns process was simplified with a digitalised questionnaire and real-time refund tracking — directly addressing friction identified in tests. The checkout was redesigned with a progress bar and a permanently visible floating buy button, resolving one of the user testing findings: the "Buy" button couldn\'t be hidden behind a scroll.',
+                s3_p3:    'The ASOS points card and social features (shared boards, wishlists, split payments) responded to another key insight: 21% of users wanted to share wishlists and shop together. Loyalty didn\'t come from discounts — it came from turning the app into a social space.',
+                s4_title: 'Validation',
+                s4_p1:    'Concept testing validated the proposals with high scores: size calculator 4.6/5, ASOS points card 4.6/5, personalised home 4.4/5, virtual fitting room 4.4/5. Try Before You Pay scored 3.8/5 — the lowest score, but feedback indicated the concept was valid and it was the prototype execution that raised doubts, not the idea.',
+                s4_p2:    'What I learned from this project is that research isn\'t the phase before design — it\'s the one that decides what gets designed. Without the data showing users were leaving because of sizing and not price, the team would have designed more discounts instead of a size calculator. The research changed the brief.',
+                footer_contact: 'Contact',
+            }
+        };
+
+        let lang = 'es';
+        function applyLang(l) {
+            lang = l;
+            document.documentElement.lang = l;
+            document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
+            document.getElementById('backLabel').textContent = T[l].back;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const v = T[l][el.dataset.i18n];
+                if (v !== undefined) el.innerHTML = v;
+            });
+        }
+        document.getElementById('langBtn').addEventListener('click', () => applyLang(lang === 'es' ? 'en' : 'es'));
+
+        let dark = true;
+        document.getElementById('themeBtn').addEventListener('click', () => {
+            dark = !dark;
+            document.documentElement.classList.toggle('dark', dark);
+            document.getElementById('sunIcon').classList.toggle('hidden', !dark);
+            document.getElementById('moonIcon').classList.toggle('hidden', dark);
+        });
+
+        const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:0.1});
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>

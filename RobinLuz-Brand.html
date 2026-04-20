@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robin Luz — Brand & Visual Identity · Iñigo Mendizábal</title>
+  <meta name="description" content="Case study: identidad visual de Robin Luz. Rediseño del logo, sistema de color y assets para App Store y Google Play.">
+  <script>
+    document.documentElement.classList.remove('no-js');
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: { DEFAULT: '#F97316', light: '#FB923C', dark: '#EA580C' },
+            surface: { light: '#FFFFFF', dark: '#0F172A' },
+            muted: { light: '#64748B', dark: '#94A3B8' },
+            card: { light: '#F8FAFC', dark: '#1E293B' },
+            border: { light: '#E2E8F0', dark: '#334155' }
+          },
+          fontFamily: { display: ['Space Grotesk','sans-serif'], body: ['DM Sans','sans-serif'] },
+          borderRadius: { '2xl':'1rem','3xl':'1.5rem','4xl':'2rem' }
+        }
+      }
+    }
+  </script>
+  <style>
+    body{font-family:'DM Sans',sans-serif;}
+    :root{--bg:#FFFFFF;--fg:#0F172A;--muted:#64748B;--accent:#F97316;--card:#F8FAFC;--border:#E2E8F0;}
+    .dark{--bg:#0F172A;--fg:#F1F5F9;--muted:#94A3B8;--accent:#FB923C;--card:#1E293B;--border:#334155;}
+    .font-display{font-family:'Space Grotesk',sans-serif;}
+    .reveal{opacity:1;transform:translateY(0);transition:opacity .6s ease-out,transform .6s ease-out;}
+    .js-ready .reveal{opacity:0;transform:translateY(24px);}
+    .js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+    .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+    .focus-ring:focus{outline:none;box-shadow:0 0 0 3px rgba(249,115,22,.4);}
+    #progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#F97316,#8A38F5);z-index:100;transition:width .1s;}
+    .hero-bg{background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(249,115,22,.08),transparent 65%);}
+    .dark .hero-bg{background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(249,115,22,.14),transparent 65%);}
+    .img-frame{background:rgba(249,115,22,.03);border:1px solid rgba(249,115,22,.12);border-radius:1.25rem;overflow:hidden;}
+    .dark .img-frame{background:rgba(249,115,22,.05);border-color:rgba(249,115,22,.18);}
+    .color-swatch{width:100%;height:80px;border-radius:.75rem;transition:transform .25s ease;}
+    .color-swatch:hover{transform:scale(1.04);}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}.reveal{opacity:1!important;transform:none!important;}.color-swatch:hover{transform:none;}}
+  </style>
+</head>
+<body class="bg-surface-light dark:bg-surface-dark min-h-screen">
+<div id="progress-bar" style="width:0%"></div>
+
+<header class="fixed left-0 right-0 z-50 backdrop-blur-xl bg-surface-light/80 dark:bg-surface-dark/80 border-b border-border-light dark:border-border-dark" style="top:3px">
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="Proyecto-RobinLuz.html" class="flex items-center gap-2 text-muted-light dark:text-muted-dark hover:text-primary transition-colors focus-ring rounded-lg px-2 py-1 text-sm font-medium">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <span data-i18n="nav.back">Robin Luz</span>
+      </a>
+      <span class="text-muted-light dark:text-muted-dark">/</span>
+      <span class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm" data-i18n="nav.title">Brand & Visual Identity</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="langToggle" class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring">
+        <span class="text-sm font-medium" id="langLabel">EN</span>
+      </button>
+      <button id="themeToggle" class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring">
+        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="pt-[67px]">
+
+  <!-- Hero -->
+  <section class="relative hero-bg overflow-hidden py-20 lg:py-28">
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="reveal flex flex-wrap gap-2 mb-6">
+          <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full border border-orange-200 dark:border-orange-800">Brand & Visual Identity</span>
+          <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-surface-dark/5 dark:bg-white/5 text-muted-light dark:text-muted-dark rounded-full border border-border-light dark:border-border-dark">Logo · Color · Assets</span>
+        </div>
+        <h1 class="reveal font-display text-5xl sm:text-6xl font-bold tracking-tight text-surface-dark dark:text-surface-light mb-6 leading-none" data-i18n="hero.title">Identidad visual Robin Luz</h1>
+        <p class="reveal text-xl text-muted-light dark:text-muted-dark max-w-2xl leading-relaxed mb-10" data-i18n="hero.desc">El logo antiguo era un wordmark corporativo que nadie recordaba. El nuevo tiene un símbolo propio, una historia detrás, y funciona desde los 16px hasta el cartel de una feria energética.</p>
+        <div class="reveal flex flex-wrap gap-8">
+          <div>
+            <div class="font-display text-2xl font-bold text-orange-500">2</div>
+            <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat1">Versiones del logo</div>
+          </div>
+          <div>
+            <div class="font-display text-2xl font-bold text-orange-400">4</div>
+            <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat2">Colores del sistema</div>
+          </div>
+          <div>
+            <div class="font-display text-2xl font-bold text-orange-300" data-i18n="stat3n">Todas</div>
+            <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat3">Resoluciones de App Store</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Context bar -->
+  <section class="py-10 bg-card-light/40 dark:bg-card-dark/40 border-y border-border-light dark:border-border-dark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-px bg-border-light dark:bg-border-dark rounded-2xl overflow-hidden">
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.role">Rol</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Brand Designer</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.scope">Entregables</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Logo · Paleta · App Store</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.tools">Herramientas</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Figma · Illustrator</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.formats">Formatos</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">SVG · PNG · PDF</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logo evolution -->
+  <section class="py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <span class="inline-block text-xs font-semibold tracking-wider uppercase text-orange-500 mb-4" data-i18n="s1.label">Evolución del logo</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-4" data-i18n="s1.title">De wordmark a símbolo</h2>
+        <p class="text-muted-light dark:text-muted-dark max-w-2xl mx-auto" data-i18n="s1.desc">El logo antiguo era texto puro — funcional, pero sin carácter. La nueva identidad combina un símbolo que une la bombilla (energía) con un detalle de sombrero que da personalidad, con el wordmark tipográfico.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Old logo -->
+        <div class="reveal stagger-1">
+          <div class="img-frame p-8 flex flex-col items-center justify-center min-h-[300px]" style="background:rgba(0,0,0,.02);">
+            <img src="Assests/Img/19.png"
+                 alt="Logo antiguo de Robin Luz — wordmark corporativo"
+                 class="max-w-[280px] w-full object-contain"
+                 onerror="this.style.display='none'">
+          </div>
+          <div class="mt-4 flex items-center gap-3">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium bg-surface-dark/5 dark:bg-white/5 text-muted-light dark:text-muted-dark rounded-full border border-border-light dark:border-border-dark">
+              <span data-i18n="logo.before">Antes</span>
+            </span>
+            <p class="text-sm text-muted-light dark:text-muted-dark" data-i18n="s1.old">Wordmark corporativo — texto sin símbolo</p>
+          </div>
+        </div>
+        <!-- New logo -->
+        <div class="reveal stagger-2">
+          <div class="img-frame p-8 flex flex-col items-center justify-center min-h-[300px]" style="background:#15181C;">
+            <img src="Assests/Img/18.png"
+                 alt="Logo nuevo de Robin Luz — símbolo bombilla + wordmark"
+                 class="max-w-[240px] w-full object-contain"
+                 onerror="this.style.display='none'">
+          </div>
+          <div class="mt-4 flex items-center gap-3">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full border border-orange-200 dark:border-orange-800">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <span data-i18n="logo.after">Nuevo</span>
+            </span>
+            <p class="text-sm text-muted-light dark:text-muted-dark" data-i18n="s1.new">Símbolo + wordmark — identidad con carácter</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Old logo full + context -->
+  <section class="py-24 bg-card-light/30 dark:bg-card-dark/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal">
+          <span class="inline-block text-xs font-semibold tracking-wider uppercase text-orange-500 mb-4" data-i18n="s2.label">Contexto de marca</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-6" data-i18n="s2.title">Robin Luz en Optimiza Recursos</h2>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="s2.p1">Robin Luz no es una marca independiente — es el producto consumer de Optimiza Recursos, una empresa de consultoría energética. La identidad visual tenía que ser lo suficientemente diferente para tener vida propia, pero coherente con el universo de Optimiza.</p>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed" data-i18n="s2.p2">El logo antiguo completo incluía el wordmark de empresa. Con el rediseño, Robin Luz adquirió un símbolo propio — la bombilla con el detalle del sombrero que refuerza la promesa de marca: hacer el ahorro energético fácil y cercano.</p>
+        </div>
+        <div class="reveal stagger-2">
+          <div class="img-frame">
+            <img src="Assests/Img/16.png"
+                 alt="Logo antiguo completo — Robin Luz en el contexto de Optimiza Recursos"
+                 class="w-full object-cover"
+                 onerror="this.style.display='none'">
+          </div>
+          <p class="text-xs text-muted-light dark:text-muted-dark mt-3 text-center" data-i18n="s2.caption">Logo antiguo completo — marca dentro de Optimiza Recursos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Color system -->
+  <section class="py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <span class="inline-block text-xs font-semibold tracking-wider uppercase text-orange-500 mb-4" data-i18n="s3.label">Sistema de color</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-4" data-i18n="s3.title">Una paleta que trabaja en modo oscuro y claro</h2>
+        <p class="text-muted-light dark:text-muted-dark max-w-2xl mx-auto" data-i18n="s3.desc">Los 4 colores del sistema están diseñados para funcionar en dark mode (app móvil, dashboard) y en light mode (landing). El negro profundo como base, el violeta y el índigo como acción y energía, el blanco como espacio y claridad.</p>
+      </div>
+      <div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div>
+          <div class="color-swatch" style="background:#15181C;border:1px solid rgba(255,255,255,.08);"></div>
+          <div class="mt-3">
+            <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">#15181C</div>
+            <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="c1">Fondo oscuro</div>
+          </div>
+        </div>
+        <div>
+          <div class="color-swatch" style="background:#8A38F5;"></div>
+          <div class="mt-3">
+            <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">#8A38F5</div>
+            <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="c2">Violeta principal</div>
+          </div>
+        </div>
+        <div>
+          <div class="color-swatch" style="background:#6B63FF;"></div>
+          <div class="mt-3">
+            <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">#6B63FF</div>
+            <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="c3">Índigo secundario</div>
+          </div>
+        </div>
+        <div>
+          <div class="color-swatch" style="background:#9D58FF;"></div>
+          <div class="mt-3">
+            <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">#9D58FF</div>
+            <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="c4">Violeta claro</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Store assets -->
+  <section class="py-24 bg-card-light/30 dark:bg-card-dark/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal order-2 lg:order-1">
+          <div class="img-frame">
+            <img src="Assests/Img/17.png"
+                 alt="Assets para App Store y Google Play — mockups en producción"
+                 class="w-full object-cover"
+                 onerror="this.style.display='none'">
+          </div>
+          <p class="text-xs text-muted-light dark:text-muted-dark mt-3 text-center" data-i18n="s4.caption">Assets App Store · Google Play — en producción</p>
+        </div>
+        <div class="reveal stagger-1 order-1 lg:order-2">
+          <span class="inline-block text-xs font-semibold tracking-wider uppercase text-orange-500 mb-4" data-i18n="s4.label">App Store & Google Play</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-6" data-i18n="s4.title">La identidad en las tiendas</h2>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="s4.p1">Los assets de las tiendas son la primera impresión del producto antes de la descarga. Diseñé mockups de presentación que combinan el nuevo símbolo de marca con screenshots reales de la app, dentro del sistema de color establecido.</p>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed" data-i18n="s4.p2">Todos los formatos requeridos por Apple y Google: ícono de la app en múltiples resoluciones, screenshots para iPhone, iPad y Android, y assets de featured banner.</p>
+          <ul class="mt-6 space-y-2">
+            <li class="flex items-center gap-2 text-sm text-muted-light dark:text-muted-dark">
+              <div class="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></div>
+              <span data-i18n="s4.li1">Ícono de app — todas las resoluciones iOS y Android</span>
+            </li>
+            <li class="flex items-center gap-2 text-sm text-muted-light dark:text-muted-dark">
+              <div class="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></div>
+              <span data-i18n="s4.li2">Screenshots para iPhone 15, iPhone SE, iPad</span>
+            </li>
+            <li class="flex items-center gap-2 text-sm text-muted-light dark:text-muted-dark">
+              <div class="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></div>
+              <span data-i18n="s4.li3">Assets de presentación para Google Play</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation between sub-cases -->
+  <section class="py-16 border-t border-border-light dark:border-border-dark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row gap-4 justify-between items-center">
+        <a href="RobinLuz-Web.html" class="flex items-center gap-2 text-sm font-medium text-muted-light dark:text-muted-dark hover:text-primary transition-colors focus-ring rounded-lg px-3 py-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          <span data-i18n="nav.prev">Anterior: Landing robinluz.com</span>
+        </a>
+        <a href="RobinLuz-OptiDashboard.html" class="flex items-center gap-2 text-sm font-semibold text-orange-600 dark:text-orange-400 hover:text-orange-500 transition-colors focus-ring rounded-lg px-3 py-2">
+          <span data-i18n="nav.next">Siguiente: OptiDashboard</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="py-8 border-t border-border-light dark:border-border-dark">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <a href="index.html" class="font-display font-bold text-surface-dark dark:text-surface-light hover:text-primary transition-colors">Iñigo Mendizábal</a>
+    <span class="text-sm text-muted-light dark:text-muted-dark" data-i18n="footer">© 2026 Todos los derechos reservados</span>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const i18n = {
+    es:{
+      "nav.back":"Robin Luz","nav.title":"Brand & Visual Identity","nav.prev":"Anterior: Landing robinluz.com","nav.next":"Siguiente: OptiDashboard",
+      "hero.title":"Identidad visual Robin Luz","hero.desc":"El logo antiguo era un wordmark corporativo que nadie recordaba. El nuevo tiene un símbolo propio, una historia detrás, y funciona desde los 16px hasta el cartel de una feria energética.",
+      "stat1":"Versiones del logo","stat2":"Colores del sistema","stat3n":"Todas","stat3":"Resoluciones de App Store",
+      "ctx.role":"Rol","ctx.scope":"Entregables","ctx.tools":"Herramientas","ctx.formats":"Formatos",
+      "s1.label":"Evolución del logo","s1.title":"De wordmark a símbolo","s1.desc":"El logo antiguo era texto puro — funcional, pero sin carácter. La nueva identidad combina un símbolo que une la bombilla (energía) con un detalle de sombrero que da personalidad, con el wordmark tipográfico.","s1.old":"Wordmark corporativo — texto sin símbolo","s1.new":"Símbolo + wordmark — identidad con carácter",
+      "logo.before":"Antes","logo.after":"Nuevo",
+      "s2.label":"Contexto de marca","s2.title":"Robin Luz en Optimiza Recursos","s2.p1":"Robin Luz no es una marca independiente — es el producto consumer de Optimiza Recursos, una empresa de consultoría energética. La identidad visual tenía que ser lo suficientemente diferente para tener vida propia, pero coherente con el universo de Optimiza.","s2.p2":"El logo antiguo completo incluía el wordmark de empresa. Con el rediseño, Robin Luz adquirió un símbolo propio — la bombilla con el detalle del sombrero que refuerza la promesa de marca: hacer el ahorro energético fácil y cercano.","s2.caption":"Logo antiguo completo — marca dentro de Optimiza Recursos",
+      "s3.label":"Sistema de color","s3.title":"Una paleta que trabaja en modo oscuro y claro","s3.desc":"Los 4 colores del sistema están diseñados para funcionar en dark mode (app móvil, dashboard) y en light mode (landing). El negro profundo como base, el violeta y el índigo como acción y energía, el blanco como espacio y claridad.",
+      "c1":"Fondo oscuro","c2":"Violeta principal","c3":"Índigo secundario","c4":"Violeta claro",
+      "s4.label":"App Store & Google Play","s4.title":"La identidad en las tiendas","s4.p1":"Los assets de las tiendas son la primera impresión del producto antes de la descarga. Diseñé mockups de presentación que combinan el nuevo símbolo de marca con screenshots reales de la app, dentro del sistema de color establecido.","s4.p2":"Todos los formatos requeridos por Apple y Google: ícono de la app en múltiples resoluciones, screenshots para iPhone, iPad y Android, y assets de featured banner.","s4.caption":"Assets App Store · Google Play — en producción",
+      "s4.li1":"Ícono de app — todas las resoluciones iOS y Android","s4.li2":"Screenshots para iPhone 15, iPhone SE, iPad","s4.li3":"Assets de presentación para Google Play",
+      "footer":"© 2026 Todos los derechos reservados"
+    },
+    en:{
+      "nav.back":"Robin Luz","nav.title":"Brand & Visual Identity","nav.prev":"Previous: Landing robinluz.com","nav.next":"Next: OptiDashboard",
+      "hero.title":"Robin Luz Visual Identity","hero.desc":"The old logo was a corporate wordmark nobody remembered. The new one has its own symbol, a story behind it, and works from 16px to an energy fair banner.",
+      "stat1":"Logo versions","stat2":"System colours","stat3n":"All","stat3":"App Store resolutions",
+      "ctx.role":"Role","ctx.scope":"Deliverables","ctx.tools":"Tools","ctx.formats":"Formats",
+      "s1.label":"Logo evolution","s1.title":"From wordmark to symbol","s1.desc":"The old logo was pure text — functional, but without character. The new identity combines a symbol that merges the lightbulb (energy) with a hat detail that adds personality, paired with the typographic wordmark.","s1.old":"Corporate wordmark — text without symbol","s1.new":"Symbol + wordmark — identity with character",
+      "logo.before":"Before","logo.after":"New",
+      "s2.label":"Brand context","s2.title":"Robin Luz within Optimiza Recursos","s2.p1":"Robin Luz is not an independent brand — it's the consumer product of Optimiza Recursos, an energy consultancy. The visual identity needed to be distinct enough to stand on its own, but coherent with the Optimiza universe.","s2.p2":"The original full logo included the company wordmark. With the redesign, Robin Luz gained its own symbol — the lightbulb with the hat detail reinforcing the brand promise: making energy savings easy and approachable.","s2.caption":"Full original logo — brand within Optimiza Recursos",
+      "s3.label":"Colour system","s3.title":"A palette that works in both dark and light mode","s3.desc":"The 4 system colours are designed to work in dark mode (mobile app, dashboard) and light mode (landing). Deep black as the base, violet and indigo for action and energy, white for space and clarity.",
+      "c1":"Dark background","c2":"Primary violet","c3":"Secondary indigo","c4":"Light violet",
+      "s4.label":"App Store & Google Play","s4.title":"Identity in the stores","s4.p1":"Store assets are the product's first impression before download. I designed presentation mockups combining the new brand symbol with real app screenshots, within the established colour system.","s4.p2":"All formats required by Apple and Google: app icon at multiple resolutions, screenshots for iPhone, iPad and Android, and featured banner assets.","s4.caption":"App Store · Google Play assets — in production",
+      "s4.li1":"App icon — all iOS and Android resolutions","s4.li2":"Screenshots for iPhone 15, iPhone SE, iPad","s4.li3":"Google Play presentation assets",
+      "footer":"© 2026 All rights reserved"
+    }
+  };
+  let lang = localStorage.getItem('lang') || 'es';
+  function applyLang(l){lang=l;localStorage.setItem('lang',l);document.documentElement.lang=l;document.getElementById('langLabel').textContent=l==='en'?'ES':'EN';document.querySelectorAll('[data-i18n]').forEach(el=>{if(i18n[l][el.dataset.i18n])el.textContent=i18n[l][el.dataset.i18n];});}
+  document.getElementById('langToggle').addEventListener('click',()=>applyLang(lang==='en'?'es':'en'));
+  applyLang(lang);
+  document.getElementById('themeToggle').addEventListener('click',()=>{document.documentElement.classList.toggle('dark');localStorage.theme=document.documentElement.classList.contains('dark')?'dark':'light';});
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('progress-bar').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';});
+</script>
+</body>
+</html>

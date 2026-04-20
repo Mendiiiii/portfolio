@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banca Móvil — Iñigo Mendizábal</title>
+  <meta name="description" content="Case study: Transformación digital de una banca tradicional, llevando millones de clientes al canal móvil con una experiencia sin fricción.">
+  <script>
+    document.documentElement.classList.remove('no-js');
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: { DEFAULT: '#4F46E5', light: '#6366F1', dark: '#4338CA' },
+            surface: { light: '#FFFFFF', dark: '#0F172A' },
+            muted: { light: '#64748B', dark: '#94A3B8' },
+            card: { light: '#F8FAFC', dark: '#1E293B' },
+            border: { light: '#E2E8F0', dark: '#334155' }
+          },
+          fontFamily: { display: ['Space Grotesk','sans-serif'], body: ['DM Sans','sans-serif'] },
+          borderRadius: { '2xl':'1rem','3xl':'1.5rem','4xl':'2rem' }
+        }
+      }
+    }
+  </script>
+  <style>
+    body{font-family:'DM Sans',sans-serif;}
+    :root{--bg:#FFFFFF;--fg:#0F172A;--muted:#64748B;--accent:#4F46E5;--card:#F8FAFC;--border:#E2E8F0;}
+    .dark{--bg:#0F172A;--fg:#F1F5F9;--muted:#94A3B8;--accent:#6366F1;--card:#1E293B;--border:#334155;}
+    .font-display{font-family:'Space Grotesk',sans-serif;}
+    .reveal{opacity:1;transform:translateY(0);transition:opacity .6s ease-out,transform .6s ease-out;}
+    .js-ready .reveal{opacity:0;transform:translateY(24px);}
+    .js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+    .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+    .focus-ring:focus{outline:none;box-shadow:0 0 0 3px rgba(79,70,229,.4);}
+    .btn-press:active{transform:scale(.97);}
+    /* Hero azul oscuro — confianza, solidez, transformación */
+    .hero-gradient{background:radial-gradient(ellipse 80% 55% at 50% 0%,rgba(14,165,233,.15),transparent 70%),radial-gradient(ellipse 60% 40% at 10% 60%,rgba(79,70,229,.12),transparent);}
+    .dark .hero-gradient{background:radial-gradient(ellipse 80% 55% at 50% 0%,rgba(14,165,233,.22),transparent 70%),radial-gradient(ellipse 60% 40% at 10% 60%,rgba(79,70,229,.2),transparent);}
+    .aura{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+    #progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#0EA5E9,#4F46E5);z-index:100;transition:width .1s;}
+    /* Before / After split */
+    .before-after{position:relative;overflow:hidden;}
+    .before-after::after{content:'ANTES';position:absolute;top:12px;left:12px;background:rgba(239,68,68,.9);color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 8px;border-radius:6px;}
+    .after-card{position:relative;}
+    .after-card::after{content:'DESPUÉS';position:absolute;top:12px;left:12px;background:rgba(34,197,94,.9);color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 8px;border-radius:6px;}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}.reveal{opacity:1!important;transform:none!important;}}
+  </style>
+</head>
+<body class="bg-surface-light dark:bg-surface-dark min-h-screen">
+<div id="progress-bar" style="width:0%"></div>
+
+<!-- Header -->
+<header class="fixed left-0 right-0 z-50 backdrop-blur-xl bg-surface-light/80 dark:bg-surface-dark/80 border-b border-border-light dark:border-border-dark" style="top:3px">
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 text-muted-light dark:text-muted-dark hover:text-primary transition-colors focus-ring rounded-lg px-2 py-1 text-sm font-medium">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <span data-i18n="nav.back">Volver</span>
+      </a>
+    <div class="flex items-center gap-2">
+      <button id="langToggle" class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring">
+        <span class="text-sm font-medium" id="langLabel">EN</span>
+      </button>
+      <button id="themeToggle" class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring">
+        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="pt-[67px]">
+
+  <!-- Hero -->
+  <section class="relative hero-gradient overflow-hidden py-24 lg:py-36">
+    <div class="aura w-96 h-96 bg-sky-400/10 -top-10 left-1/4 opacity-60"></div>
+    <div class="aura w-72 h-72 bg-indigo-500/10 bottom-0 right-20 opacity-50"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal stagger-1 flex flex-wrap gap-2 mb-6">
+        <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-sky-50 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 rounded-full border border-sky-200 dark:border-sky-800" data-i18n="tag1">Diseño Móvil</span>
+        <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary dark:text-primary-light rounded-full border border-primary/20" data-i18n="tag2">Banca · Finanzas</span>
+        <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-card-light dark:bg-card-dark text-muted-light dark:text-muted-dark rounded-full border border-border-light dark:border-border-dark">iOS · Android</span>
+      </div>
+      <h1 class="reveal stagger-2 font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-surface-dark dark:text-surface-light mb-6 leading-none" data-i18n="h1">Banca Móvil</h1>
+      <p class="reveal stagger-3 text-xl sm:text-2xl text-muted-light dark:text-muted-dark max-w-2xl mb-12 leading-relaxed" data-i18n="hero.desc">Transformación digital de un banco tradicional. Llevar a millones de clientes al canal móvil sin perder la confianza que da lo presencial.</p>
+      <div class="reveal stagger-4 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl">
+        <div class="p-4 bg-surface-light/70 dark:bg-card-dark/70 backdrop-blur rounded-2xl border border-border-light dark:border-border-dark">
+          <div class="font-display text-2xl font-bold text-sky-500 mb-1">×2</div>
+          <div class="text-xs text-muted-light dark:text-muted-dark" data-i18n="stat1">Transacciones móviles</div>
+        </div>
+        <div class="p-4 bg-surface-light/70 dark:bg-card-dark/70 backdrop-blur rounded-2xl border border-border-light dark:border-border-dark">
+          <div class="font-display text-2xl font-bold text-primary dark:text-primary-light mb-1">−45%</div>
+          <div class="text-xs text-muted-light dark:text-muted-dark" data-i18n="stat2">Llamadas al call center</div>
+        </div>
+        <div class="p-4 bg-surface-light/70 dark:bg-card-dark/70 backdrop-blur rounded-2xl border border-border-light dark:border-border-dark">
+          <div class="font-display text-2xl font-bold text-surface-dark dark:text-surface-light mb-1">6 <span class="text-base font-medium" data-i18n="months">meses</span></div>
+          <div class="text-xs text-muted-light dark:text-muted-dark" data-i18n="stat3">Duración</div>
+        </div>
+        <div class="p-4 bg-surface-light/70 dark:bg-card-dark/70 backdrop-blur rounded-2xl border border-border-light dark:border-border-dark">
+          <div class="font-display text-2xl font-bold text-surface-dark dark:text-surface-light mb-1">4.6★</div>
+          <div class="text-xs text-muted-light dark:text-muted-dark" data-i18n="stat4">App Store rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero image -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+    <div class="reveal rounded-3xl overflow-hidden aspect-[16/7]">
+      <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1400&h=600&fit=crop&q=80" alt="Mobile Banking App" class="w-full h-full object-cover">
+    </div>
+  </div>
+
+  <!-- Overview -->
+  <section class="py-12 bg-card-light/50 dark:bg-card-dark/50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-px bg-border-light dark:bg-border-dark rounded-2xl overflow-hidden">
+        <div class="bg-surface-light dark:bg-surface-dark p-6 sm:p-8">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-2" data-i18n="ov.role">Rol</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light" data-i18n="ov.role.v">Product Designer</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-6 sm:p-8">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-2" data-i18n="ov.year">Año</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light">2022</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-6 sm:p-8">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-2" data-i18n="ov.tools">Herramientas</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light">Figma · UserTesting · Zeplin</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-6 sm:p-8">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-2" data-i18n="ov.platform">Plataforma</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light">iOS · Android</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Challenge -->
+  <section class="py-24 lg:py-32">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="reveal">
+          <span class="inline-block text-xs font-semibold tracking-wider uppercase text-sky-500 mb-4" data-i18n="ch.label">El reto</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-6" data-i18n="ch.title">Un banco de décadas intentando comportarse como una startup</h2>
+          <p class="text-lg text-muted-light dark:text-muted-dark leading-relaxed mb-8" data-i18n="ch.p1">Con más de 2 millones de clientes activos, el banco tenía una app que nadie quería usar. La experiencia digital reflejaba los procesos internos del banco, no las necesidades del usuario: flujos complejos, lenguaje corporativo, y cero confianza percibida en el canal digital.</p>
+          <p class="text-lg text-muted-light dark:text-muted-dark leading-relaxed" data-i18n="ch.p2">El objetivo era duplicar las transacciones móviles en 12 meses. Para eso, había que convencer a usuarios fieles a la sucursal de que su móvil podía ser igual de seguro y mucho más cómodo.</p>
+        </div>
+      </div>
+      <!-- Pain points -->
+      <div class="mt-16 grid sm:grid-cols-3 gap-4">
+        <div class="reveal stagger-1 p-6 bg-red-50 dark:bg-red-900/10 rounded-2xl border border-red-100 dark:border-red-900/30">
+          <div class="w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+          </div>
+          <div class="font-display font-bold text-surface-dark dark:text-surface-light mb-2" data-i18n="pain1.t">Lenguaje bancario</div>
+          <p class="text-sm text-muted-light dark:text-muted-dark" data-i18n="pain1.d">Los usuarios no entendían términos como "apunte pendiente" o "movimiento interbancario". Fricción cognitiva en cada pantalla.</p>
+        </div>
+        <div class="reveal stagger-2 p-6 bg-amber-50 dark:bg-amber-900/10 rounded-2xl border border-amber-100 dark:border-amber-900/30">
+          <div class="w-8 h-8 bg-amber-100 dark:bg-amber-900/30 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <div class="font-display font-bold text-surface-dark dark:text-surface-light mb-2" data-i18n="pain2.t">Desconfianza digital</div>
+          <p class="text-sm text-muted-light dark:text-muted-dark" data-i18n="pain2.d">El 54% de usuarios senior prefería ir a la sucursal por miedo a "equivocarse" en la app. La confianza era el verdadero bloqueador.</p>
+        </div>
+        <div class="reveal stagger-3 p-6 bg-blue-50 dark:bg-blue-900/10 rounded-2xl border border-blue-100 dark:border-blue-900/30">
+          <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          </div>
+          <div class="font-display font-bold text-surface-dark dark:text-surface-light mb-2" data-i18n="pain3.t">Flujos fragmentados</div>
+          <p class="text-sm text-muted-light dark:text-muted-dark" data-i18n="pain3.d">Una transferencia simple requería 9 pasos y 3 confirmaciones diferentes. La app penalizaba al usuario por hacer lo correcto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="py-24 bg-card-light/50 dark:bg-card-dark/50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <span class="inline-block text-xs font-semibold tracking-wider uppercase text-primary dark:text-primary-light mb-4" data-i18n="pr.label">Proceso</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light" data-i18n="pr.title">Construir confianza, pantalla a pantalla</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="reveal stagger-1 p-6 bg-surface-light dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark">
+          <div class="w-10 h-10 bg-sky-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div class="font-display font-bold text-surface-dark dark:text-surface-light mb-2" data-i18n="s1.t">Evaluación heurística</div>
+          <p class="text-sm text-muted-light dark:text-muted-dark leading-relaxed" data-i18n="s1.d">Auditoría completa de la app existente. 87 issues identificados y priorizados por impacto en usuario y viabilidad técnica.</p>
+        </div>
+        <div class="reveal stagger-2 p-6 bg-surface-light dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark">
+          <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div class="font-display font-bold text-surface-dark dark:text-surface-light mb-2" data-i18n="s2.t">Research contextual</div>
+          <p class="text-sm text-muted-light dark:text-muted-dark leading-relaxed" data-i18n="s2.d">Acompañé a 12 usuarios en situaciones reales de uso bancario. La mayoría de los insights venían de observar, no de preguntar.</p>
+        </div>
+        <div class="reveal stagger-3 p-6 bg-surface-light dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark">
+          <div class="w-10 h-10 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+          </div>
+          <div class="font-display font-bold text-surface-dark dark:text-surface-light mb-2" data-i18n="s3.t">Prototipado</div>
+          <p class="text-sm text-muted-light dark:text-muted-dark leading-relaxed" data-i18n="s3.d">Rediseño de los 8 flujos principales. Énfasis en confirmaciones claras, feedback inmediato y lenguaje humano.</p>
+        </div>
+        <div class="reveal stagger-4 p-6 bg-surface-light dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark">
+          <div class="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          </div>
+          <div class="font-display font-bold text-surface-dark dark:text-surface-light mb-2" data-i18n="s4.t">Test moderado</div>
+          <p class="text-sm text-muted-light dark:text-muted-dark leading-relaxed" data-i18n="s4.d">Sesiones de usabilidad con UserTesting. Especial atención a usuarios mayores de 55 años — el segmento con mayor potencial de adopción.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key screens -->
+  <section class="py-24 lg:py-32">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <span class="inline-block text-xs font-semibold tracking-wider uppercase text-primary dark:text-primary-light mb-4" data-i18n="sc.label">Solución</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light" data-i18n="sc.title">Simple, claro y en el que puedes confiar</h2>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-6 items-start">
+        <div class="reveal stagger-1 space-y-3">
+          <div class="rounded-2xl overflow-hidden aspect-[9/16]">
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&h=889&fit=crop&q=80" alt="Home banking" class="w-full h-full object-cover">
+          </div>
+          <p class="text-sm font-semibold text-surface-dark dark:text-surface-light" data-i18n="sc.s1">Inicio rediseñado</p>
+          <p class="text-xs text-muted-light dark:text-muted-dark" data-i18n="sc.s1d">Saldo principal y las 4 acciones más usadas. Sin ruido visual, sin menús enterrados.</p>
+        </div>
+        <div class="reveal stagger-2 space-y-3 sm:mt-16">
+          <div class="rounded-2xl overflow-hidden aspect-[9/16]">
+            <img src="https://images.unsplash.com/photo-1586880244406-556ebe35f282?w=500&h=889&fit=crop&q=80" alt="Transfer flow" class="w-full h-full object-cover">
+          </div>
+          <p class="text-sm font-semibold text-surface-dark dark:text-surface-light" data-i18n="sc.s2">Transferencias en 3 pasos</p>
+          <p class="text-xs text-muted-light dark:text-muted-dark" data-i18n="sc.s2d">De 9 pasos a 3. Con confirmación clara y posibilidad de deshacer antes de ejecutar.</p>
+        </div>
+        <div class="reveal stagger-3 space-y-3">
+          <div class="rounded-2xl overflow-hidden aspect-[9/16]">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=889&fit=crop&q=80" alt="Movements" class="w-full h-full object-cover">
+          </div>
+          <p class="text-sm font-semibold text-surface-dark dark:text-surface-light" data-i18n="sc.s3">Movimientos legibles</p>
+          <p class="text-xs text-muted-light dark:text-muted-dark" data-i18n="sc.s3d">Lenguaje humano en lugar de código bancario. Cada movimiento explica qué pasó y cuándo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="py-24 bg-card-light/50 dark:bg-card-dark/50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <span class="inline-block text-xs font-semibold tracking-wider uppercase text-sky-500 mb-4" data-i18n="re.label">Resultados</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light" data-i18n="re.title">La sucursal en el bolsillo</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="reveal stagger-1 p-6 bg-surface-light dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark text-center">
+          <div class="font-display text-4xl font-bold text-sky-500 mb-2">×2</div>
+          <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="re.r1">Transacciones en móvil</div>
+        </div>
+        <div class="reveal stagger-2 p-6 bg-surface-light dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark text-center">
+          <div class="font-display text-4xl font-bold text-primary dark:text-primary-light mb-2">−45%</div>
+          <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="re.r2">Volumen call center</div>
+        </div>
+        <div class="reveal stagger-3 p-6 bg-surface-light dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark text-center">
+          <div class="font-display text-4xl font-bold text-emerald-500 mb-2">+38%</div>
+          <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="re.r3">Adopción usuarios senior</div>
+        </div>
+        <div class="reveal stagger-4 p-6 bg-surface-light dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark text-center">
+          <div class="font-display text-4xl font-bold text-surface-dark dark:text-surface-light mb-2">4.6★</div>
+          <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="re.r4">App Store rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Next project -->
+  <section class="py-16 lg:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal flex flex-col sm:flex-row items-center justify-between gap-6 p-8 bg-card-light dark:bg-card-dark rounded-3xl border border-border-light dark:border-border-dark">
+        <div>
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1" data-i18n="next.label">Siguiente proyecto</div>
+          <div class="font-display text-2xl font-bold text-surface-dark dark:text-surface-light" data-i18n="next.name">Sucursal Virtual</div>
+          <div class="text-sm text-muted-light dark:text-muted-dark">Mobile & Web Design · Enterprise</div>
+        </div>
+        <a href="Proyecto-VirtualBranch.html" class="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white font-medium rounded-2xl transition-all focus-ring btn-press">
+          <span data-i18n="next.cta">Ver proyecto</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="py-8 border-t border-border-light dark:border-border-dark">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <a href="index.html" class="font-display font-bold text-surface-dark dark:text-surface-light hover:text-primary transition-colors">Iñigo Mendizábal</a>
+    <span class="text-sm text-muted-light dark:text-muted-dark" data-i18n="footer">© 2026 Todos los derechos reservados</span>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const i18n={
+    es:{"nav.back":"Volver","breadcrumb":"Banca Móvil","tag1":"Diseño Móvil","tag2":"Banca · Finanzas","h1":"Banca Móvil","hero.desc":"Transformación digital de un banco tradicional. Llevar a millones de clientes al canal móvil sin perder la confianza que da lo presencial.","stat1":"Transacciones móviles","stat2":"Llamadas al call center","stat3":"Duración","stat4":"App Store rating","months":"meses","ov.role":"Rol","ov.role.v":"Product Designer","ov.year":"Año","ov.tools":"Herramientas","ov.platform":"Plataforma","ch.label":"El reto","ch.title":"Un banco de décadas intentando comportarse como una startup","ch.p1":"Con más de 2 millones de clientes activos, el banco tenía una app que nadie quería usar. La experiencia digital reflejaba los procesos internos del banco, no las necesidades del usuario: flujos complejos, lenguaje corporativo, y cero confianza percibida en el canal digital.","ch.p2":"El objetivo era duplicar las transacciones móviles en 12 meses. Para eso, había que convencer a usuarios fieles a la sucursal de que su móvil podía ser igual de seguro y mucho más cómodo.","pain1.t":"Lenguaje bancario","pain1.d":"Los usuarios no entendían términos como \"apunte pendiente\" o \"movimiento interbancario\". Fricción cognitiva en cada pantalla.","pain2.t":"Desconfianza digital","pain2.d":"El 54% de usuarios senior prefería ir a la sucursal por miedo a \"equivocarse\" en la app. La confianza era el verdadero bloqueador.","pain3.t":"Flujos fragmentados","pain3.d":"Una transferencia simple requería 9 pasos y 3 confirmaciones diferentes. La app penalizaba al usuario por hacer lo correcto.","pr.label":"Proceso","pr.title":"Construir confianza, pantalla a pantalla","s1.t":"Evaluación heurística","s1.d":"Auditoría completa de la app existente. 87 issues identificados y priorizados por impacto en usuario y viabilidad técnica.","s2.t":"Research contextual","s2.d":"Acompañé a 12 usuarios en situaciones reales de uso bancario. La mayoría de los insights venían de observar, no de preguntar.","s3.t":"Prototipado","s3.d":"Rediseño de los 8 flujos principales. Énfasis en confirmaciones claras, feedback inmediato y lenguaje humano.","s4.t":"Test moderado","s4.d":"Sesiones de usabilidad con UserTesting. Especial atención a usuarios mayores de 55 años — el segmento con mayor potencial de adopción.","sc.label":"Solución","sc.title":"Simple, claro y en el que puedes confiar","sc.s1":"Inicio rediseñado","sc.s1d":"Saldo principal y las 4 acciones más usadas. Sin ruido visual, sin menús enterrados.","sc.s2":"Transferencias en 3 pasos","sc.s2d":"De 9 pasos a 3. Con confirmación clara y posibilidad de deshacer antes de ejecutar.","sc.s3":"Movimientos legibles","sc.s3d":"Lenguaje humano en lugar de código bancario. Cada movimiento explica qué pasó y cuándo.","re.label":"Resultados","re.title":"La sucursal en el bolsillo","re.r1":"Transacciones en móvil","re.r2":"Volumen call center","re.r3":"Adopción usuarios senior","re.r4":"App Store rating","next.label":"Siguiente proyecto","next.name":"Sucursal Virtual","next.cta":"Ver proyecto","footer":"© 2026 Todos los derechos reservados"},
+    en:{"nav.back":"Back","breadcrumb":"Mobile Banking","tag1":"Mobile Design","tag2":"Banking · Finance","h1":"Mobile Banking","hero.desc":"Digital transformation of a traditional bank. Bringing millions of customers to the mobile channel without losing the trust that comes from in-person banking.","stat1":"Mobile transactions","stat2":"Call center calls","stat3":"Duration","stat4":"App Store rating","months":"months","ov.role":"Role","ov.role.v":"Product Designer","ov.year":"Year","ov.tools":"Tools","ov.platform":"Platform","ch.label":"The challenge","ch.title":"A decades-old bank trying to act like a startup","ch.p1":"With over 2 million active customers, the bank had an app nobody wanted to use. The digital experience reflected the bank's internal processes, not user needs: complex flows, corporate language, and zero perceived trust in the digital channel.","ch.p2":"The goal was to double mobile transactions in 12 months. To do that, we had to convince branch-loyal customers that their phone could be just as secure and much more convenient.","pain1.t":"Banking jargon","pain1.d":"Users didn't understand terms like \"pending entry\" or \"interbank transfer\". Cognitive friction at every screen.","pain2.t":"Digital distrust","pain2.d":"54% of senior users preferred visiting a branch for fear of \"making a mistake\" in the app. Trust was the real blocker.","pain3.t":"Fragmented flows","pain3.d":"A simple transfer required 9 steps and 3 separate confirmations. The app penalized users for doing the right thing.","pr.label":"Process","pr.title":"Building trust, one screen at a time","s1.t":"Heuristic evaluation","s1.d":"Full audit of the existing app. 87 issues identified and prioritized by user impact and technical feasibility.","s2.t":"Contextual research","s2.d":"I accompanied 12 users in real banking situations. Most insights came from observing, not asking.","s3.t":"Prototyping","s3.d":"Redesign of the 8 main flows. Emphasis on clear confirmations, immediate feedback, and human language.","s4.t":"Moderated testing","s4.d":"Usability sessions with UserTesting. Special focus on users over 55 — the segment with the highest adoption potential.","sc.label":"Solution","sc.title":"Simple, clear, and trustworthy","sc.s1":"Redesigned home","sc.s1d":"Main balance and the 4 most-used actions. No visual noise, no buried menus.","sc.s2":"Transfers in 3 steps","sc.s2d":"From 9 steps to 3. With a clear confirmation and the ability to undo before executing.","sc.s3":"Readable transactions","sc.s3d":"Human language instead of banking code. Each transaction explains what happened and when.","re.label":"Results","re.title":"The branch in your pocket","re.r1":"Mobile transactions","re.r2":"Call center volume","re.r3":"Senior user adoption","re.r4":"App Store rating","next.label":"Next project","next.name":"Virtual Branch","next.cta":"View project","footer":"© 2026 All rights reserved"}
+  };
+  let lang=localStorage.getItem('lang')||'es';
+  function applyLang(l){lang=l;localStorage.setItem('lang',l);document.documentElement.lang=l;document.getElementById('langLabel').textContent=l==='en'?'ES':'EN';document.querySelectorAll('[data-i18n]').forEach(el=>{if(i18n[l][el.dataset.i18n])el.textContent=i18n[l][el.dataset.i18n];});}
+  document.getElementById('langToggle').addEventListener('click',()=>applyLang(lang==='en'?'es':'en'));
+  applyLang(lang);
+  document.getElementById('themeToggle').addEventListener('click',()=>{document.documentElement.classList.toggle('dark');localStorage.theme=document.documentElement.classList.contains('dark')?'dark':'light';});
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('progress-bar').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';});
+</script>
+</body>
+</html>

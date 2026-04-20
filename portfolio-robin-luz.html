@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robin Luz — Case Study — Iñigo Mendizábal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] } } } }</script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { transition: background-color .3s, color .3s; }
+        :focus-visible { outline: 2px solid #8A38F5; outline-offset: 3px; border-radius: 4px; }
+        .skip-link { position:absolute; top:-9999px; left:1rem; background:#8A38F5; color:#fff; padding:.5rem 1rem; border-radius:0 0 6px 6px; font-weight:600; z-index:9999; }
+        .skip-link:focus { top:0; }
+        .row-divider { border-top: 1px solid; }
+        .dark .row-divider { border-color: rgba(255,255,255,0.06); }
+        html:not(.dark) .row-divider { border-color: rgba(0,0,0,0.07); }
+        .reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease,transform .6s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+        .callout { border-left: 3px solid rgba(138,56,245,.5); }
+        .dark .callout { background: rgba(138,56,245,.06); }
+        html:not(.dark) .callout { background: rgba(138,56,245,.05); }
+    </style>
+</head>
+<body class="dark:bg-[#111111] bg-[#F5F4F1] dark:text-[#EFEFEF] text-[#111111] font-sans antialiased">
+
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+
+    <!-- NAV -->
+    <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 h-14
+                   border-b dark:border-white/5 border-black/6
+                   dark:bg-[#111111]/90 bg-[#F5F4F1]/90 backdrop-blur-md">
+        <a href="index.html#works" class="flex items-center gap-1.5 text-sm dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            <span id="backLabel">Portfolio</span>
+        </a>
+        <div class="flex items-center gap-4">
+            <button id="langBtn" aria-label="Switch language"
+                    class="text-[11px] font-semibold tracking-[0.2em] uppercase
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">EN</button>
+            <button id="themeBtn" aria-label="Cambiar tema"
+                    class="w-7 h-7 flex items-center justify-center
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">
+                <svg id="sunIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/>
+                </svg>
+                <svg id="moonIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="main" class="pt-14">
+        <div class="px-6 lg:px-12 max-w-5xl mx-auto">
+
+            <!-- Title block -->
+            <div class="pt-16 pb-10 reveal">
+                <p class="text-xs tracking-[0.25em] uppercase dark:text-white/50 text-black/55 mb-4" data-i18n="tags">2023–2024 · Energía · Producto · SaaS · App</p>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold dark:text-white text-[#111] leading-[1.06] tracking-tight mb-6">Robin Luz</h1>
+                <p class="text-lg leading-7 dark:text-white/60 text-black/60 max-w-2xl" data-i18n="intro">Entré cuando el producto existía pero no tenía usuarios. El trabajo era imponer criterio, controlar el gasto y redirigir el producto hacia donde había mercado real.</p>
+            </div>
+
+            <!-- Meta strip -->
+            <div class="row-divider pt-0 pb-10 reveal">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8">
+                    <div>
+                        <p class="text-xs uppercase tracking-widest dark:text-white/30 text-black/40 mb-1" data-i18n="meta.role_label">Rol</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111]" data-i18n="meta.role">Product Designer · Estrategia</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest dark:text-white/30 text-black/40 mb-1" data-i18n="meta.context_label">Contexto</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111]" data-i18n="meta.context">Startup early-stage</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest dark:text-white/30 text-black/40 mb-1" data-i18n="meta.year_label">Año</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111]">2023–2024</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest dark:text-white/30 text-black/40 mb-1" data-i18n="meta.sector_label">Sector</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111]" data-i18n="meta.sector">Energía · B2C / B2B</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero image -->
+            <div class="row-divider pt-0 pb-12 reveal">
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="Assests/Img/26.png"
+                         alt="Robin Luz — App"
+                         class="w-full h-full object-cover object-center" loading="eager">
+                </div>
+            </div>
+
+            <!-- 1. Contexto real -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s1_title">El contexto real</h2>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-4" data-i18n="s1_p1">
+                    Cuando llegué, Robin Luz tenía producto pero no tenía usuarios. El CEO llevaba meses invirtiendo sus ahorros en desarrollo. El equipo construía features sin un proceso claro de priorización, y el dinero se acababa. No me contrataron para "hacer UX" — me contrataron para imponer sprints, controlar el gasto de desarrollo y redirigir el producto.
+                </p>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-6" data-i18n="s1_p2">
+                    La app existente tenía una pantalla de carga de factura, un análisis de consumo y varios módulos a medio construir. La pregunta real no era "¿cómo mejoramos la UI?" — era "¿esto tiene sentido para alguien?"
+                </p>
+                <div class="callout rounded-r-xl px-5 py-4">
+                    <p class="text-sm leading-6 dark:text-purple-200/80 text-purple-900" data-i18n="s1_callout">
+                        El trabajo de diseño empezó antes de tocar ningún pixel: definir qué había que parar de construir.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. Investigación -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s2_title">11 entrevistas y un hallazgo incómodo</h2>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-4" data-i18n="s2_p1">
+                    Hice 11 entrevistas: 6 mujeres, 5 hombres, entre 20 y 79 años. Incluida la madre del CEO de 79 años, que era exactamente el tipo de usuario que el producto decía servir. El resultado fue incómodo: la app no se necesitaba. La mayoría de las features eran redundantes con lo que ya ofrecen las comercializadoras eléctricas o con el comportamiento real de las personas frente a su factura.
+                </p>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-6" data-i18n="s2_p2">
+                    Cuatro arquetipos emergieron de las entrevistas: el usuario que ignora su factura completamente, el que mira el total pero no los detalles, el que quiere entender pero se pierde en la complejidad tarifaria, y el pequeño negocio que necesita control real sobre el consumo. Solo el último tenía una necesidad que justificara un producto dedicado.
+                </p>
+
+                <div class="grid sm:grid-cols-2 gap-4 mb-4">
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="finding.label">Hallazgo clave</p>
+                        <p class="text-sm leading-6 dark:text-white/70 text-black/70" data-i18n="finding.text">El usuario B2C no tiene motivación suficiente para instalar otra app solo para entender su factura. El dolor no es lo bastante frecuente ni lo bastante intenso.</p>
+                    </div>
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="pivot.label">Consecuencia</p>
+                        <p class="text-sm leading-6 dark:text-white/70 text-black/70" data-i18n="pivot.text">El mercado B2B (pymes con factura de luz >500€/mes) tiene el mismo problema pero con motivación real para resolverlo. Pivot recomendado.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image break -->
+            <div class="row-divider pt-0 pb-12 reveal">
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="Assests/Img/RobinLuz-app.png"
+                         alt="Robin Luz — pantallas de la app"
+                         class="w-full h-full object-cover"
+                         loading="lazy"
+                         onerror="this.src='https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&q=80&auto=format&fit=crop'">
+                </div>
+            </div>
+
+            <!-- 3. Decisiones de sprint -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s3_title">Decisiones tomadas en sprint</h2>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-6" data-i18n="s3_p1">
+                    Con el proceso de sprints implantado, cada decisión tenía que justificarse antes de ir a desarrollo. Algunos ejemplos concretos:
+                </p>
+
+                <div class="space-y-4 mb-6">
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="sprint1.label">Decisión 1 — CTA de carga de factura</p>
+                        <p class="text-sm leading-6 dark:text-white/70 text-black/70" data-i18n="sprint1.text">Movimos el botón principal de la parte inferior de la pantalla a la posición central inmediata tras el login. La tasa de usuarios que completaban el primer paso subió de forma medible. La posición importa más que el diseño del botón.</p>
+                    </div>
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="sprint2.label">Decisión 2 — Copy del CTA principal</p>
+                        <p class="text-sm leading-6 dark:text-white/70 text-black/70" data-i18n="sprint2.text">"Seleccionar archivo" → "Analicemos tu factura". No es cosmético. El primer copy describe una acción técnica; el segundo describe un resultado para el usuario. La conversión mejoró.</p>
+                    </div>
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="sprint3.label">Decisión 3 — OptiDashboard</p>
+                        <p class="text-sm leading-6 dark:text-white/70 text-black/70" data-i18n="sprint3.text">El dashboard de análisis tenía fondo oscuro con visualizaciones complejas. Lo rediseñamos hacia una interfaz limpia y legible. La razón no fue estética: los usuarios no energéticos interpretaban el diseño oscuro como "herramienta de experto" y abandonaban antes de leer los datos.</p>
+                    </div>
+                </div>
+
+                <p class="text-base leading-7 dark:text-white/60 text-black/60" data-i18n="s3_p2">
+                    El pivot a B2B no fue solo un cambio de segmento — cambió el modelo de negocio completo. Las pymes pagan por ahorro demostrado, no por suscripción. Eso requería un producto diferente: menos app de consumidor, más herramienta de auditoría energética.
+                </p>
+            </div>
+
+            <!-- 4. Lo que cambió -->
+            <div class="row-divider py-12 pb-20 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s4_title">Lo que cambió la investigación</h2>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-4" data-i18n="s4_p1">
+                    La investigación no cambió el producto — cambió el negocio. El CEO pasó de invertir sus ahorros en features B2C que nadie iba a usar a tener un argumento claro para el pivot: hay un mercado B2B con dolor real, capacidad de pago y un producto que puede adaptarse sin reescribir todo.
+                </p>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-6" data-i18n="s4_p2">
+                    Lo que aprendí: en una startup sin usuarios, el trabajo del diseñador es primero hacer las preguntas que el equipo no quiere hacerse. El producto puede estar bien construido y ser completamente irrelevante. Esas dos cosas no se contradicen.
+                </p>
+                <div class="callout rounded-r-xl px-5 py-4">
+                    <p class="text-sm leading-6 dark:text-purple-200/80 text-purple-900" data-i18n="s4_callout">
+                        La decisión más valiosa no fue ningún diseño — fue recomendar parar de construir en B2C y concentrar el siguiente sprint en validar B2B.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="row-divider px-6 lg:px-12 py-7 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-xs dark:text-white/50 text-black/55 order-2 sm:order-1">© 2026 Iñigo Mendizábal</p>
+        <nav class="flex items-center gap-5 order-1 sm:order-2">
+            <a href="cv.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">CV</a>
+            <a href="index.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Portfolio</a>
+            <a href="mailto:imendifp@gmail.com" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Contacto</a>
+        </nav>
+    </footer>
+
+    <script>
+        const T = {
+            es: {
+                back: 'Portfolio',
+                tags: '2023–2024 · Energía · Producto · SaaS · App',
+                intro: 'Entré cuando el producto existía pero no tenía usuarios. El trabajo era imponer criterio, controlar el gasto y redirigir el producto hacia donde había mercado real.',
+                'meta.role_label': 'Rol', 'meta.role': 'Product Designer · Estrategia',
+                'meta.context_label': 'Contexto', 'meta.context': 'Startup early-stage',
+                'meta.year_label': 'Año', 'meta.sector_label': 'Sector', 'meta.sector': 'Energía · B2C / B2B',
+                s1_title: 'El contexto real',
+                s1_p1: 'Cuando llegué, Robin Luz tenía producto pero no tenía usuarios. El CEO llevaba meses invirtiendo sus ahorros en desarrollo. El equipo construía features sin un proceso claro de priorización, y el dinero se acababa. No me contrataron para "hacer UX" — me contrataron para imponer sprints, controlar el gasto de desarrollo y redirigir el producto.',
+                s1_p2: 'La app existente tenía una pantalla de carga de factura, un análisis de consumo y varios módulos a medio construir. La pregunta real no era "¿cómo mejoramos la UI?" — era "¿esto tiene sentido para alguien?"',
+                s1_callout: 'El trabajo de diseño empezó antes de tocar ningún pixel: definir qué había que parar de construir.',
+                s2_title: '11 entrevistas y un hallazgo incómodo',
+                s2_p1: 'Hice 11 entrevistas: 6 mujeres, 5 hombres, entre 20 y 79 años. Incluida la madre del CEO de 79 años, que era exactamente el tipo de usuario que el producto decía servir. El resultado fue incómodo: la app no se necesitaba. La mayoría de las features eran redundantes con lo que ya ofrecen las comercializadoras eléctricas.',
+                s2_p2: 'Cuatro arquetipos emergieron: el usuario que ignora su factura, el que mira el total sin detalles, el que quiere entender pero se pierde en la complejidad tarifaria, y el pequeño negocio que necesita control real del consumo. Solo el último tenía una necesidad que justificara un producto dedicado.',
+                'finding.label': 'Hallazgo clave', 'finding.text': 'El usuario B2C no tiene motivación suficiente para instalar otra app solo para entender su factura. El dolor no es lo bastante frecuente ni lo bastante intenso.',
+                'pivot.label': 'Consecuencia', 'pivot.text': 'El mercado B2B (pymes con factura de luz >500€/mes) tiene el mismo problema pero con motivación real para resolverlo. Pivot recomendado.',
+                s3_title: 'Decisiones tomadas en sprint',
+                s3_p1: 'Con el proceso de sprints implantado, cada decisión tenía que justificarse antes de ir a desarrollo. Algunos ejemplos concretos:',
+                's sprint1.label': 'Decisión 1 — CTA de carga de factura',
+                'sprint1.label': 'Decisión 1 — CTA de carga de factura',
+                'sprint1.text': 'Movimos el botón principal de la parte inferior de la pantalla a la posición central inmediata tras el login. La tasa de usuarios que completaban el primer paso subió de forma medible.',
+                'sprint2.label': 'Decisión 2 — Copy del CTA principal',
+                'sprint2.text': '"Seleccionar archivo" → "Analicemos tu factura". No es cosmético. El primer copy describe una acción técnica; el segundo describe un resultado para el usuario.',
+                'sprint3.label': 'Decisión 3 — OptiDashboard',
+                'sprint3.text': 'El dashboard tenía fondo oscuro con visualizaciones complejas. Lo rediseñamos hacia una interfaz limpia. Los usuarios sin perfil energético interpretaban el diseño oscuro como "herramienta de experto" y abandonaban antes de leer los datos.',
+                s3_p2: 'El pivot a B2B no fue solo un cambio de segmento — cambió el modelo de negocio. Las pymes pagan por ahorro demostrado, no por suscripción. Eso requería un producto diferente: menos app de consumidor, más herramienta de auditoría energética.',
+                s4_title: 'Lo que cambió la investigación',
+                s4_p1: 'La investigación no cambió el producto — cambió el negocio. El CEO pasó de invertir sus ahorros en features B2C que nadie iba a usar a tener un argumento claro para el pivot: hay un mercado B2B con dolor real, capacidad de pago y un producto que puede adaptarse.',
+                s4_p2: 'Lo que aprendí: en una startup sin usuarios, el trabajo del diseñador es primero hacer las preguntas que el equipo no quiere hacerse. El producto puede estar bien construido y ser completamente irrelevante. Esas dos cosas no se contradicen.',
+                s4_callout: 'La decisión más valiosa no fue ningún diseño — fue recomendar parar de construir en B2C y concentrar el siguiente sprint en validar B2B.',
+            },
+            en: {
+                back: 'Portfolio',
+                tags: '2023–2024 · Energy · Product · SaaS · App',
+                intro: 'I joined when the product existed but had no users. The job was to impose process, control spend, and redirect the product toward where the real market was.',
+                'meta.role_label': 'Role', 'meta.role': 'Product Designer · Strategy',
+                'meta.context_label': 'Context', 'meta.context': 'Early-stage startup',
+                'meta.year_label': 'Year', 'meta.sector_label': 'Sector', 'meta.sector': 'Energy · B2C / B2B',
+                s1_title: 'The real context',
+                s1_p1: 'When I joined, Robin Luz had a product but no users. The CEO had been investing personal savings into development for months. The team was building features without a clear prioritisation process, and the money was running out. I wasn\'t hired to "do UX" — I was hired to impose sprints, control development spend, and redirect the product.',
+                s1_p2: 'The existing app had an invoice upload screen, a consumption analysis, and several half-built modules. The real question wasn\'t "how do we improve the UI?" — it was "does this make sense for anyone?"',
+                s1_callout: 'The design work started before touching any pixels: figuring out what needed to stop being built.',
+                s2_title: '11 interviews and an uncomfortable finding',
+                s2_p1: 'I ran 11 interviews: 6 women, 5 men, aged 20 to 79. Including the 79-year-old CEO\'s mother — exactly the type of user the product claimed to serve. The result was uncomfortable: the app wasn\'t needed. Most features were redundant with what energy providers already offer.',
+                s2_p2: 'Four archetypes emerged: the user who ignores their bill entirely, the one who checks the total but not the details, the one who wants to understand but gets lost in tariff complexity, and the small business that needs real consumption control. Only the last had a need that justified a dedicated product.',
+                'finding.label': 'Key finding', 'finding.text': 'B2C users don\'t have sufficient motivation to install another app just to understand their electricity bill. The pain isn\'t frequent enough or intense enough.',
+                'pivot.label': 'Consequence', 'pivot.text': 'The B2B market (SMEs with electricity bills >€500/month) has the same problem but with real motivation to solve it. Pivot recommended.',
+                s3_title: 'Sprint decisions',
+                s3_p1: 'With sprints in place, every decision had to be justified before going to development. Some concrete examples:',
+                'sprint1.label': 'Decision 1 — Invoice upload CTA',
+                'sprint1.text': 'We moved the main button from the bottom of the screen to the central position immediately after login. The rate of users completing the first step increased measurably.',
+                'sprint2.label': 'Decision 2 — Main CTA copy',
+                'sprint2.text': '"Select file" → "Let\'s analyse your bill". Not cosmetic. The first copy describes a technical action; the second describes an outcome for the user.',
+                'sprint3.label': 'Decision 3 — OptiDashboard',
+                'sprint3.text': 'The dashboard had a dark background with complex visualisations. We redesigned it toward a clean, readable interface. Non-energy users were reading the dark design as an "expert tool" and dropping off before reading the data.',
+                s3_p2: 'The B2B pivot wasn\'t just a segment change — it changed the entire business model. SMEs pay for demonstrated savings, not subscriptions. That required a different product: less consumer app, more energy audit tool.',
+                s4_title: 'What the research changed',
+                s4_p1: 'The research didn\'t change the product — it changed the business. The CEO went from investing personal savings in B2C features no one would use, to having a clear argument for the pivot: a B2B market with real pain, real willingness to pay, and a product that could be adapted.',
+                s4_p2: 'What I learned: in a startup with no users, the designer\'s first job is to ask the questions the team doesn\'t want to ask. A product can be well-built and completely irrelevant. Those two things aren\'t contradictory.',
+                s4_callout: 'The most valuable decision wasn\'t any design — it was recommending stopping B2C development and focusing the next sprint on validating B2B.',
+            }
+        };
+
+        let lang = 'es';
+        function applyLang(l) {
+            lang = l;
+            document.documentElement.lang = l;
+            document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
+            document.getElementById('backLabel').textContent = T[l].back;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const v = T[l][el.dataset.i18n];
+                if (v !== undefined) el.innerHTML = v;
+            });
+        }
+        document.getElementById('langBtn').addEventListener('click', () => applyLang(lang === 'es' ? 'en' : 'es'));
+
+        let dark = true;
+        document.getElementById('themeBtn').addEventListener('click', () => {
+            dark = !dark;
+            document.documentElement.classList.toggle('dark', dark);
+            document.getElementById('sunIcon').classList.toggle('hidden', !dark);
+            document.getElementById('moonIcon').classList.toggle('hidden', dark);
+        });
+        const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:0.1});
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>

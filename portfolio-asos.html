@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASOS — Case Study — Iñigo Mendizábal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] } } } }</script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { transition: background-color .3s, color .3s; }
+        :focus-visible { outline: 2px solid #8A38F5; outline-offset: 3px; border-radius: 4px; }
+        .skip-link { position:absolute; top:-9999px; left:1rem; background:#8A38F5; color:#fff; padding:.5rem 1rem; border-radius:0 0 6px 6px; font-weight:600; z-index:9999; }
+        .skip-link:focus { top:0; }
+        .row-divider { border-top: 1px solid; }
+        .dark .row-divider { border-color: rgba(255,255,255,0.06); }
+        html:not(.dark) .row-divider { border-color: rgba(0,0,0,0.07); }
+        .reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease,transform .6s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+        .callout { border-left: 3px solid rgba(251,146,60,.5); }
+        .dark .callout { background: rgba(251,146,60,.05); }
+        html:not(.dark) .callout { background: rgba(251,146,60,.05); }
+    </style>
+</head>
+<body class="dark:bg-[#111111] bg-[#F5F4F1] dark:text-[#EFEFEF] text-[#111111] font-sans antialiased">
+
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+
+    <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 h-14
+                   border-b dark:border-white/5 border-black/6
+                   dark:bg-[#111111]/90 bg-[#F5F4F1]/90 backdrop-blur-md">
+        <a href="index.html#works" class="flex items-center gap-1.5 text-sm dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            <span id="backLabel">Portfolio</span>
+        </a>
+        <div class="flex items-center gap-4">
+            <button id="langBtn" aria-label="Switch language"
+                    class="text-[11px] font-semibold tracking-[0.2em] uppercase dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">EN</button>
+            <button id="themeBtn" aria-label="Cambiar tema"
+                    class="w-7 h-7 flex items-center justify-center dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">
+                <svg id="sunIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/></svg>
+                <svg id="moonIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="main" class="pt-14">
+        <div class="px-6 lg:px-12 max-w-5xl mx-auto">
+
+            <div class="pt-16 pb-10 reveal">
+                <p class="text-xs tracking-[0.25em] uppercase dark:text-white/50 text-black/55 mb-4" data-i18n="tags">2022–2023 · Moda · UX Research · Retención</p>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold dark:text-white text-[#111] leading-[1.06] tracking-tight mb-6">ASOS</h1>
+                <p class="text-lg leading-7 dark:text-white/60 text-black/60 max-w-2xl" data-i18n="intro">Responsable de toda la investigación UX en un proyecto de retención de usuarios. El hallazgo central: los usuarios no se iban por el precio, sino por el sizing y la fricción de devoluciones.</p>
+            </div>
+
+            <div class="row-divider pt-0 pb-10 reveal">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8">
+                    <div>
+                        <p class="text-xs uppercase tracking-widest dark:text-white/30 text-black/40 mb-1" data-i18n="meta.role_label">Rol</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111]" data-i18n="meta.role">UX Researcher</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest dark:text-white/30 text-black/40 mb-1" data-i18n="meta.client_label">Cliente</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111]">ASOS</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest dark:text-white/30 text-black/40 mb-1" data-i18n="meta.year_label">Año</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111]">2022–2023</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest dark:text-white/30 text-black/40 mb-1" data-i18n="meta.sector_label">Sector</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111]" data-i18n="meta.sector">Moda · E-commerce</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-divider pt-0 pb-12 reveal">
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1400&q=80&auto=format&fit=crop"
+                         alt="ASOS — moda online"
+                         class="w-full h-full object-cover" loading="eager">
+                </div>
+            </div>
+
+            <!-- 1. Mi rol -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s1_title">Mi rol: UX Research</h2>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-4" data-i18n="s1_p1">
+                    Fui el responsable de toda la investigación del proyecto. No era un rol de apoyo — era la capa que informaba las decisiones de diseño y redefinió el propio brief. El equipo venía con una hipótesis: los usuarios abandonaban ASOS porque había alternativas más baratas. Mi trabajo era verificarla o tumbarla.
+                </p>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-6" data-i18n="s1_p2">
+                    El contexto de ASOS es específico: plataforma de moda online con millones de usuarios, catálogo de miles de productos de cientos de marcas diferentes, con tallas que no son consistentes entre ellas. El usuario que compra una talla M en una marca, no sabe si en otra marca es M, S o L.
+                </p>
+                <div class="callout rounded-r-xl px-5 py-4">
+                    <p class="text-sm leading-6 dark:text-orange-200/80 text-orange-900" data-i18n="s1_callout">
+                        La investigación cambió el brief. Entramos a resolver retención por precio. Salimos con un problema de experiencia de sizing y fricción de devoluciones.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. Investigación -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s2_title">De la investigación al diseño</h2>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-6" data-i18n="s2_p1">
+                    Combiné análisis cuantitativo de patrones de abandono con entrevistas cualitativas a usuarios que habían dejado de comprar o reducido su frecuencia. Los datos cuantitativos señalaban el momento de abandono: la pantalla de talla, y el flujo de devolución. Las entrevistas explicaban el por qué.
+                </p>
+
+                <div class="grid sm:grid-cols-2 gap-4 mb-6">
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="finding1.label">Hallazgo 1</p>
+                        <p class="text-sm leading-6 dark:text-white/70 text-black/70" data-i18n="finding1.text">Los usuarios no se iban porque ASOS fuera más caro. Se iban porque el riesgo de comprar era demasiado alto: elegir una talla sin saber si te va a quedar, esperar el envío, gestionar la devolución si no queda bien. Coste emocional y logístico elevado.</p>
+                    </div>
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="finding2.label">Hallazgo 2</p>
+                        <p class="text-sm leading-6 dark:text-white/70 text-black/70" data-i18n="finding2.text">Los usuarios con más devoluciones eran también los más leales a largo plazo — siempre que el proceso de devolución fuera fácil. La devolución no era un síntoma de mal producto: era parte del comportamiento de compra de moda online.</p>
+                    </div>
+                </div>
+
+                <p class="text-base leading-7 dark:text-white/60 text-black/60" data-i18n="s2_p2">
+                    Esto cambió completamente la dirección del proyecto. La solución no era competir en precio — era reducir el riesgo percibido en el momento de decisión de talla y eliminar la fricción del proceso de devolución.
+                </p>
+            </div>
+
+            <!-- Image break -->
+            <div class="row-divider pt-0 pb-12 reveal">
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&auto=format&fit=crop"
+                         alt="ASOS — experiencia de compra online"
+                         class="w-full h-full object-cover" loading="lazy">
+                </div>
+            </div>
+
+            <!-- 3. Validación -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s3_title">Validación y entregables</h2>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-6" data-i18n="s3_p1">
+                    Los insights de investigación se tradujeron en recomendaciones de diseño concretas, validadas con usuarios antes de pasar a implementación. El foco: hacer que la decisión de talla sea menos arriesgada y que la devolución, si ocurre, sea tan fácil que no disuada de volver a comprar.
+                </p>
+
+                <div class="space-y-4 mb-6">
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="rec1.label">Recomendación 1 — Guía de tallas contextual</p>
+                        <p class="text-sm leading-6 dark:text-white/70 text-black/70" data-i18n="rec1.text">La guía de tallas genérica no sirve cuando cada marca tiene sus propias medidas. La recomendación era una guía específica por marca, con comparativas entre marcas para el usuario que ya había comprado antes.</p>
+                    </div>
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="rec2.label">Recomendación 2 — Simplificación del flujo de devolución</p>
+                        <p class="text-sm leading-6 dark:text-white/70 text-black/70" data-i18n="rec2.text">El proceso de devolución tenía demasiados pasos y decisiones. Cada punto de fricción añadía coste emocional y reducía la probabilidad de que el usuario volviera. La recomendación era reducción agresiva de pasos y confirmación inmediata.</p>
+                    </div>
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="rec3.label">Recomendación 3 — Señales de confianza en el producto</p>
+                        <p class="text-sm leading-6 dark:text-white/70 text-black/70" data-i18n="rec3.text">Las reseñas de otros compradores con medidas similares reducían la incertidumbre de talla más que cualquier guía genérica. La validación con usuarios confirmó que "alguien como yo compró esta talla" era más útil que las tablas de medidas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Lo que cambió -->
+            <div class="row-divider py-12 pb-20 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s4_title">Lo que aprendí</h2>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-4" data-i18n="s4_p1">
+                    En proyectos de retención, la hipótesis inicial casi siempre es incorrecta. Los equipos tienden a buscar causas externas (precio, competencia) porque son más fáciles de identificar y más cómodas de aceptar. Las causas internas (fricción de producto, incertidumbre de talla) requieren mirar más de cerca.
+                </p>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-6" data-i18n="s4_p2">
+                    Lo que hace útil a un UX Researcher en este contexto no es saber hacer entrevistas — es saber qué preguntar y tener criterio para interpretar lo que se escucha. La diferencia entre "los usuarios se van porque es caro" y "los usuarios se van porque el riesgo de equivocarse de talla es demasiado alto" es la diferencia entre un brief que conduce a una campaña de descuentos y uno que conduce a un rediseño del flujo de compra.
+                </p>
+                <div class="callout rounded-r-xl px-5 py-4">
+                    <p class="text-sm leading-6 dark:text-orange-200/80 text-orange-900" data-i18n="s4_callout">
+                        La investigación no confirmó la hipótesis del cliente — la reemplazó. Eso es lo que tiene que hacer.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="row-divider px-6 lg:px-12 py-7 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-xs dark:text-white/50 text-black/55 order-2 sm:order-1">© 2026 Iñigo Mendizábal</p>
+        <nav class="flex items-center gap-5 order-1 sm:order-2">
+            <a href="cv.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">CV</a>
+            <a href="index.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Portfolio</a>
+            <a href="mailto:imendifp@gmail.com" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Contacto</a>
+        </nav>
+    </footer>
+
+    <script>
+        const T = {
+            es: {
+                back: 'Portfolio', tags: '2022–2023 · Moda · UX Research · Retención',
+                intro: 'Responsable de toda la investigación UX en un proyecto de retención de usuarios. El hallazgo central: los usuarios no se iban por el precio, sino por el sizing y la fricción de devoluciones.',
+                'meta.role_label': 'Rol', 'meta.role': 'UX Researcher',
+                'meta.client_label': 'Cliente', 'meta.year_label': 'Año',
+                'meta.sector_label': 'Sector', 'meta.sector': 'Moda · E-commerce',
+                s1_title: 'Mi rol: UX Research',
+                s1_p1: 'Fui el responsable de toda la investigación del proyecto. No era un rol de apoyo — era la capa que informaba las decisiones de diseño y redefinió el propio brief. El equipo venía con una hipótesis: los usuarios abandonaban ASOS porque había alternativas más baratas.',
+                s1_p2: 'El contexto de ASOS es específico: plataforma de moda online con catálogo de miles de productos de cientos de marcas, con tallas que no son consistentes entre ellas. El usuario que compra una talla M en una marca no sabe si en otra marca es M, S o L.',
+                s1_callout: 'La investigación cambió el brief. Entramos a resolver retención por precio. Salimos con un problema de experiencia de sizing y fricción de devoluciones.',
+                s2_title: 'De la investigación al diseño',
+                s2_p1: 'Combiné análisis cuantitativo de patrones de abandono con entrevistas cualitativas a usuarios que habían dejado de comprar. Los datos señalaban el momento de abandono: la pantalla de talla y el flujo de devolución. Las entrevistas explicaban el por qué.',
+                s2_p2: 'Esto cambió completamente la dirección del proyecto. La solución no era competir en precio — era reducir el riesgo percibido en el momento de decisión de talla y eliminar la fricción del proceso de devolución.',
+                'finding1.label': 'Hallazgo 1', 'finding1.text': 'Los usuarios no se iban porque ASOS fuera más caro. Se iban porque el riesgo era demasiado alto: elegir una talla sin saber si te va a quedar, esperar el envío, gestionar la devolución. Coste emocional y logístico elevado.',
+                'finding2.label': 'Hallazgo 2', 'finding2.text': 'Los usuarios con más devoluciones eran también los más leales a largo plazo — siempre que el proceso fuera fácil. La devolución no era síntoma de mal producto: era parte del comportamiento normal de compra de moda online.',
+                s3_title: 'Validación y entregables',
+                s3_p1: 'Los insights se tradujeron en recomendaciones concretas, validadas con usuarios antes de pasar a implementación. El foco: hacer que la decisión de talla sea menos arriesgada y que la devolución, si ocurre, no disuada de volver.',
+                'rec1.label': 'Recomendación 1 — Guía de tallas contextual', 'rec1.text': 'La guía genérica no sirve cuando cada marca tiene sus propias medidas. Guía específica por marca, con comparativas para el usuario que ya ha comprado antes.',
+                'rec2.label': 'Recomendación 2 — Simplificación del flujo de devolución', 'rec2.text': 'Demasiados pasos y decisiones. Cada punto de fricción añadía coste emocional. Reducción agresiva de pasos y confirmación inmediata.',
+                'rec3.label': 'Recomendación 3 — Señales de confianza en el producto', 'rec3.text': '"Alguien como yo compró esta talla" era más útil que las tablas de medidas. Las reseñas con datos de talla de otros compradores reducían la incertidumbre más que cualquier guía genérica.',
+                s4_title: 'Lo que aprendí',
+                s4_p1: 'En proyectos de retención, la hipótesis inicial casi siempre es incorrecta. Los equipos buscan causas externas porque son más fáciles de identificar. Las causas internas requieren mirar más de cerca.',
+                s4_p2: 'Lo que hace útil a un UX Researcher no es saber hacer entrevistas — es saber qué preguntar y tener criterio para interpretar. La diferencia entre "se van porque es caro" y "se van porque el riesgo de talla es muy alto" es la diferencia entre una campaña de descuentos y un rediseño del flujo de compra.',
+                s4_callout: 'La investigación no confirmó la hipótesis del cliente — la reemplazó. Eso es lo que tiene que hacer.',
+            },
+            en: {
+                back: 'Portfolio', tags: '2022–2023 · Fashion · UX Research · Retention',
+                intro: 'Responsible for all UX research in a user retention project. The central finding: users weren\'t leaving because of price, but because of sizing uncertainty and returns friction.',
+                'meta.role_label': 'Role', 'meta.role': 'UX Researcher',
+                'meta.client_label': 'Client', 'meta.year_label': 'Year',
+                'meta.sector_label': 'Sector', 'meta.sector': 'Fashion · E-commerce',
+                s1_title: 'My role: UX Research',
+                s1_p1: 'I was responsible for all research on the project. Not a support role — it was the layer that informed design decisions and redefined the brief. The team came in with a hypothesis: users were leaving ASOS because there were cheaper alternatives.',
+                s1_p2: 'The ASOS context is specific: an online fashion platform with thousands of products from hundreds of brands, with sizing that isn\'t consistent across them. A user who buys a size M in one brand doesn\'t know if in another brand they\'re M, S or L.',
+                s1_callout: 'The research changed the brief. We entered to solve retention by price. We came out with a sizing experience and returns friction problem.',
+                s2_title: 'From research to design',
+                s2_p1: 'I combined quantitative analysis of abandonment patterns with qualitative interviews with users who had stopped buying or reduced their frequency. The data pointed to the moment of abandonment: the sizing screen and the returns flow. The interviews explained why.',
+                s2_p2: 'This completely changed the direction of the project. The solution wasn\'t competing on price — it was reducing perceived risk at the sizing decision moment and eliminating friction in the returns process.',
+                'finding1.label': 'Finding 1', 'finding1.text': 'Users weren\'t leaving because ASOS was more expensive. They were leaving because the risk was too high: choosing a size without knowing if it would fit, waiting for delivery, managing a return if it doesn\'t. High emotional and logistical cost.',
+                'finding2.label': 'Finding 2', 'finding2.text': 'Users with the most returns were also the most loyal in the long run — as long as the returns process was easy. Returns weren\'t a symptom of a bad product: they were part of normal online fashion buying behaviour.',
+                s3_title: 'Validation and deliverables',
+                s3_p1: 'Research insights were translated into concrete design recommendations, validated with users before moving to implementation. The focus: make the sizing decision less risky and ensure that returns, when they happen, don\'t deter coming back.',
+                'rec1.label': 'Recommendation 1 — Contextual size guide', 'rec1.text': 'A generic guide doesn\'t work when every brand has different measurements. Brand-specific guide, with comparisons for users who have bought before.',
+                'rec2.label': 'Recommendation 2 — Returns flow simplification', 'rec2.text': 'Too many steps and decisions. Every friction point added emotional cost. Aggressive step reduction and immediate confirmation.',
+                'rec3.label': 'Recommendation 3 — In-product trust signals', 'rec3.text': '"Someone like me bought this size" was more useful than measurement tables. Reviews with sizing data from other buyers reduced uncertainty more than any generic guide.',
+                s4_title: 'What I learned',
+                s4_p1: 'In retention projects, the initial hypothesis is almost always wrong. Teams look for external causes because they\'re easier to identify and more comfortable to accept. Internal causes require looking closer.',
+                s4_p2: 'What makes a UX Researcher useful isn\'t knowing how to run interviews — it\'s knowing what to ask and having the judgment to interpret what you hear. The difference between "they leave because it\'s expensive" and "they leave because sizing risk is too high" is the difference between a discount campaign and a purchase flow redesign.',
+                s4_callout: 'The research didn\'t confirm the client\'s hypothesis — it replaced it. That\'s what it\'s supposed to do.',
+            }
+        };
+
+        let lang = 'es';
+        function applyLang(l) {
+            lang = l; document.documentElement.lang = l;
+            document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
+            document.getElementById('backLabel').textContent = T[l].back;
+            document.querySelectorAll('[data-i18n]').forEach(el => { const v = T[l][el.dataset.i18n]; if (v !== undefined) el.innerHTML = v; });
+        }
+        document.getElementById('langBtn').addEventListener('click', () => applyLang(lang === 'es' ? 'en' : 'es'));
+        let dark = true;
+        document.getElementById('themeBtn').addEventListener('click', () => {
+            dark = !dark; document.documentElement.classList.toggle('dark', dark);
+            document.getElementById('sunIcon').classList.toggle('hidden', !dark);
+            document.getElementById('moonIcon').classList.toggle('hidden', dark);
+        });
+        const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:0.1});
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>

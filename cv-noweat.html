@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NowEat — Iñigo Mendizábal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] } } } }</script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { transition: background-color .3s, color .3s; }
+        :focus-visible { outline: 2px solid #8A38F5; outline-offset: 3px; border-radius: 4px; }
+        .skip-link { position:absolute; top:-9999px; left:1rem; background:#8A38F5; color:#fff; padding:.5rem 1rem; border-radius:0 0 6px 6px; font-weight:600; z-index:9999; }
+        .skip-link:focus { top:0; }
+        .row-divider { border-top: 1px solid; }
+        .dark .row-divider { border-color: rgba(255,255,255,0.06); }
+        html:not(.dark) .row-divider { border-color: rgba(0,0,0,0.07); }
+        .reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease,transform .6s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+    </style>
+</head>
+<body class="dark:bg-[#111111] bg-[#F5F4F1] dark:text-[#EFEFEF] text-[#111111] font-sans antialiased">
+
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+
+    <!-- NAV -->
+    <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 h-14
+                   border-b dark:border-white/5 border-black/6
+                   dark:bg-[#111111]/90 bg-[#F5F4F1]/90 backdrop-blur-md">
+        <a href="cv.html" class="flex items-center gap-1.5 text-sm dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            <span id="backLabel">Volver</span>
+        </a>
+        <div class="flex items-center gap-4">
+            <button id="langBtn" aria-label="Switch language"
+                    class="text-[11px] font-semibold tracking-[0.2em] uppercase
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">EN</button>
+            <button id="themeBtn" aria-label="Cambiar tema"
+                    class="w-7 h-7 flex items-center justify-center
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">
+                <svg id="sunIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/>
+                </svg>
+                <svg id="moonIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="main" class="pt-14">
+
+        <!-- CONTENT -->
+        <div class="px-6 lg:px-12 max-w-5xl mx-auto">
+
+            <!-- Title -->
+            <div class="pt-16 pb-12 reveal">
+                <p class="text-xs tracking-[0.25em] uppercase dark:text-white/50 text-black/55 mb-4" data-i18n="tags">2024 · SaaS para restaurantes · IA · Cofundador</p>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold dark:text-white text-[#111] leading-[1.06] tracking-tight">NowEat</h1>
+            </div>
+
+            <!-- Opening image -->
+            <div class="row-divider pt-0 pb-12 reveal">
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80&auto=format&fit=crop"
+                         alt="NowEat — SaaS para restaurantes"
+                         class="w-full h-full object-cover" loading="eager">
+                </div>
+            </div>
+
+            <!-- El Reto -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s1_title">El Reto</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s1_p1">
+                    Un restaurante medio en España usa tres o cuatro herramientas distintas para gestionar su negocio — una para el menú digital, otra para los pedidos, otra para el TPV, otra para las reservas. El coste combinado supera los 200€/mes, la configuración requiere conocimientos técnicos y, cuando falla algo en servicio, no hay nadie al teléfono.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s1_p2">
+                    NowEat nació para resolver eso. Como cofundador responsable del diseño, el reto era construir una plataforma que cualquier propietario de restaurante pudiera configurar en menos de 10 minutos y que ofreciera todo lo que necesita en un solo lugar, a un precio que tenga sentido.
+                </p>
+            </div>
+
+            <!-- Investigación -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s2_title">Investigación y competencia</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s2_p1">
+                    Qamarero es nuestra competencia directa — plataforma con menú digital, pedidos y TPV, comparable en alcance. Heydiga compite específicamente en el módulo de bot telefónico con IA. En reservas, los referentes son Cover Manager (hasta 299€/mes, orientado a grandes grupos con funcionalidades que la mayoría de restaurantes nunca usan) y The Fork, que cobra comisión por cada reserva llegada desde su directorio. OpenTable sigue el mismo modelo de comisión y tiene poca penetración en España.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-8" data-i18n="s2_p2">
+                    Nuestra posición: todo lo que necesita un restaurante mediano, sin comisiones, sin complejidad innecesaria, a un precio que tiene sentido. Entrevistamos a propietarios de varios tamaños y lo que aprendimos confirmó esa apuesta: el obstáculo real no era el precio — era el miedo a cambiar algo que ya funciona. Eso definió dos no-negociables: 15 días de prueba gratuita sin fricción y soporte humano directo cuando algo falla en servicio.
+                </p>
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80&auto=format&fit=crop"
+                         alt="NowEat — operaciones en restaurante"
+                         class="w-full h-full object-cover" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Solución -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s3_title">Solución de Diseño</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s3_p1">
+                    Diseñé la arquitectura del producto como 5 módulos independientes pero cohesivos: menú digital con traducción automática a más de 10 idiomas, sistema de pedidos en mesa, TPV/KDS, gestión de reservas y un bundle completo a 99€ que ahorra 58€ frente a contratarlos por separado. La modularidad era una decisión consciente: el restaurante pequeño empieza con el menú, el grande entra por el bundle.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s3_p2">
+                    Construimos el producto con agentes de IA que automatizaron gran parte del desarrollo — infraestructura real con servidores, SQL, APIs de LLM y Stripe — llegando a nivel de producción con un equipo de dos personas. La IA no fue un añadido de marketing: fue lo que hizo posible el producto en ese plazo y con ese equipo.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s3_p3">
+                    Estamos sacando las apps nativas para iOS y Android y la versión para tablet, pensadas para el uso en sala — el camarero necesita velocidad y un formato que no le haga cometer errores cuando tiene cuatro mesas en espera.
+                </p>
+            </div>
+
+            <!-- Impacto -->
+            <div class="row-divider py-12 pb-20 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s4_title">Estado actual</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s4_p1">
+                    MVP en producción, 4 clientes reales en activo: Restaurante El Cuervo y la Diputación de Cádiz (sección de información turística), entre ellos. La adopción es gradual — exactamente como esperábamos. Los clientes que llevan dos semanas con el producto no vuelven atrás. El reto ahora es reducir la fricción del primer día, que es donde más abandono hay.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s4_p2">
+                    Qamarero publica un +10% de incremento en facturación con su sistema de pedidos en mesa. Ese es el benchmark del sector que usamos con los restaurantes indecisos. El argumento real, sin embargo, lo dan los propios clientes: el menú digital elimina una fricción que antes costaba ventas sin que nadie lo midiera.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="row-divider px-6 lg:px-12 py-7 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-xs dark:text-white/50 text-black/55 order-2 sm:order-1">© 2026 Iñigo Mendizábal</p>
+        <nav class="flex items-center gap-5 order-1 sm:order-2">
+            <a href="cv.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">CV</a>
+            <a href="index.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Portfolio</a>
+            <a href="mailto:imendifp@gmail.com" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Contacto</a>
+        </nav>
+    </footer>
+
+    <script>
+        const T = {
+            es: {
+                back:     'Volver',
+                tags:     '2024 · SaaS para restaurantes · IA · Cofundador',
+                s1_title: 'El Reto',
+                s1_p1:    'Un restaurante medio en España usa tres o cuatro herramientas distintas para gestionar su negocio — una para el menú digital, otra para los pedidos, otra para el TPV, otra para las reservas. El coste combinado supera los 200€/mes, la configuración requiere conocimientos técnicos y, cuando falla algo en servicio, no hay nadie al teléfono.',
+                s1_p2:    'NowEat nació para resolver eso. Como cofundador responsable del diseño, el reto era construir una plataforma que cualquier propietario de restaurante pudiera configurar en menos de 10 minutos y que ofreciera todo lo que necesita en un solo lugar, a un precio que tenga sentido.',
+                s2_title: 'Investigación y competencia',
+                s2_p1:    'Qamarero es nuestra competencia directa — plataforma con menú digital, pedidos y TPV, comparable en alcance. Heydiga compite específicamente en el módulo de bot telefónico con IA. En reservas, los referentes son Cover Manager (hasta 299€/mes, orientado a grandes grupos con funcionalidades que la mayoría de restaurantes nunca usan) y The Fork, que cobra comisión por cada reserva llegada desde su directorio. OpenTable sigue el mismo modelo de comisión y tiene poca penetración en España.',
+                s2_p2:    'Nuestra posición: todo lo que necesita un restaurante mediano, sin comisiones, sin complejidad innecesaria, a un precio que tiene sentido. Entrevistamos a propietarios de varios tamaños y lo que aprendimos confirmó esa apuesta: el obstáculo real no era el precio — era el miedo a cambiar algo que ya funciona. Eso definió dos no-negociables: 15 días de prueba gratuita sin fricción y soporte humano directo cuando algo falla en servicio.',
+                s3_title: 'Solución de Diseño',
+                s3_p1:    'Diseñé la arquitectura del producto como 5 módulos independientes pero cohesivos: menú digital con traducción automática a más de 10 idiomas, sistema de pedidos en mesa, TPV/KDS, gestión de reservas y un bundle completo a 99€ que ahorra 58€ frente a contratarlos por separado. La modularidad era una decisión consciente: el restaurante pequeño empieza con el menú, el grande entra por el bundle.',
+                s3_p2:    'Construimos el producto con agentes de IA que automatizaron gran parte del desarrollo — infraestructura real con servidores, SQL, APIs de LLM y Stripe — llegando a nivel de producción con un equipo de dos personas. La IA no fue un añadido de marketing: fue lo que hizo posible el producto en ese plazo y con ese equipo.',
+                s3_p3:    'Estamos sacando las apps nativas para iOS y Android y la versión para tablet, pensadas para el uso en sala — el camarero necesita velocidad y un formato que no le haga cometer errores cuando tiene cuatro mesas en espera.',
+                s4_title: 'Estado actual',
+                s4_p1:    'MVP en producción, 4 clientes reales en activo: Restaurante El Cuervo y la Diputación de Cádiz (sección de información turística), entre ellos. La adopción es gradual — exactamente como esperábamos. Los clientes que llevan dos semanas con el producto no vuelven atrás. El reto ahora es reducir la fricción del primer día, que es donde más abandono hay.',
+                s4_p2:    'Qamarero publica un +10% de incremento en facturación con su sistema de pedidos en mesa. Ese es el benchmark del sector que usamos con los restaurantes indecisos. El argumento real, sin embargo, lo dan los propios clientes: el menú digital elimina una fricción que antes costaba ventas sin que nadie lo midiera.',
+            },
+            en: {
+                back:     'Back',
+                tags:     '2024 · Restaurant SaaS · AI · Co-founder',
+                s1_title: 'The Challenge',
+                s1_p1:    'The average restaurant in Spain uses three or four separate tools to run its business — one for the digital menu, one for orders, one for the POS, one for reservations. The combined cost exceeds €200/month, setup requires technical knowledge, and when something breaks during service, there\'s no one to call.',
+                s1_p2:    'NowEat was built to fix that. As co-founder and design lead, the challenge was to build a platform that any restaurant owner could set up in under 10 minutes, covering everything they need in one place, at a price that actually makes sense.',
+                s2_title: 'Research & Competition',
+                s2_p1:    'Qamarero is our direct competitor — a platform with digital menu, table orders and POS, comparable in scope. Heydiga competes specifically in the AI phone-bot module. On reservations, the benchmarks are Cover Manager (up to €299/month, aimed at large groups with features most restaurants never use) and The Fork, which charges a commission on every reservation coming through its directory. OpenTable follows the same commission model with limited penetration in Spain.',
+                s2_p2:    'Our position: everything a mid-sized restaurant needs, no commissions, no unnecessary complexity, at a price that makes sense. We interviewed owners of various sizes and what we learned confirmed that bet: the real barrier wasn\'t price — it was fear of changing something that already works. That defined two non-negotiables: a frictionless 15-day free trial and direct human support when something fails mid-service.',
+                s3_title: 'Design Solution',
+                s3_p1:    'I designed the product architecture as 5 independent but cohesive modules: digital menu with automatic translation into 10+ languages, table ordering system, POS/KDS, reservation management, and a full bundle at €99 — saving €58 versus individual subscriptions. The modularity was a deliberate decision: a small restaurant starts with the menu, a larger one enters via the bundle.',
+                s3_p2:    'We built the product using AI agents that automated most of the development — real infrastructure with servers, SQL, LLM APIs, and Stripe — reaching production quality with a two-person team. AI wasn\'t a marketing add-on: it\'s what made the product possible on that timeline and with that team.',
+                s3_p3:    'We\'re shipping native iOS and Android apps plus a tablet version designed for in-service use — a waiter needs speed and a format that prevents errors when four tables are waiting.',
+                s4_title: 'Current Status',
+                s4_p1:    'MVP in production, 4 real active clients: Restaurante El Cuervo and the Diputación de Cádiz (tourist information section), among them. Adoption is gradual — exactly as expected. Clients who have been using the product for two weeks don\'t go back. The challenge now is reducing day-one friction, where most drop-off happens.',
+                s4_p2:    'Qamarero publishes a +10% increase in billing with its table ordering system. That\'s the industry benchmark we use with undecided restaurants. The real argument, however, comes from our own clients: the digital menu removes friction that was costing sales without anyone measuring it.',
+            }
+        };
+
+        let lang = 'es';
+        function applyLang(l) {
+            lang = l;
+            document.documentElement.lang = l;
+            document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
+            document.getElementById('backLabel').textContent = T[l].back;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const v = T[l][el.dataset.i18n];
+                if (v !== undefined) el.innerHTML = v;
+            });
+        }
+        document.getElementById('langBtn').addEventListener('click', () => applyLang(lang === 'es' ? 'en' : 'es'));
+
+        let dark = true;
+        document.getElementById('themeBtn').addEventListener('click', () => {
+            dark = !dark;
+            document.documentElement.classList.toggle('dark', dark);
+            document.getElementById('sunIcon').classList.toggle('hidden', !dark);
+            document.getElementById('moonIcon').classList.toggle('hidden', dark);
+        });
+        const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:0.1});
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>

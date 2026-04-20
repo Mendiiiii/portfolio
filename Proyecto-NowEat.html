@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NowEat — SaaS para restaurantes · Iñigo Mendizábal</title>
+  <meta name="description" content="NowEat: SaaS all-in-one para restaurantes con IA. Menú digital, TPV, reservas y KDS — construido por dos personas y agentes de IA.">
+  <script>
+    document.documentElement.classList.remove('no-js');
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: { DEFAULT: '#F59E0B', light: '#FCD34D', dark: '#D97706' },
+            surface: { light: '#FFFFFF', dark: '#0F172A' },
+            muted: { light: '#64748B', dark: '#94A3B8' },
+            card: { light: '#F8FAFC', dark: '#1E293B' },
+            border: { light: '#E2E8F0', dark: '#334155' }
+          },
+          fontFamily: { display: ['Space Grotesk','sans-serif'], body: ['DM Sans','sans-serif'] },
+          borderRadius: { '2xl':'1rem','3xl':'1.5rem','4xl':'2rem' }
+        }
+      }
+    }
+  </script>
+  <style>
+    body{font-family:'DM Sans',sans-serif;}
+    :root{--bg:#FFFFFF;--fg:#0F172A;--muted:#64748B;--accent:#F59E0B;--card:#F8FAFC;--border:#E2E8F0;}
+    .dark{--bg:#0F172A;--fg:#F1F5F9;--muted:#94A3B8;--accent:#FCD34D;--card:#1E293B;--border:#334155;}
+    .font-display{font-family:'Space Grotesk',sans-serif;}
+    .reveal{opacity:1;transform:translateY(0);transition:opacity .6s ease-out,transform .6s ease-out;}
+    .js-ready .reveal{opacity:0;transform:translateY(24px);}
+    .js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+    .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}.stagger-5{transition-delay:.5s}
+    .focus-ring:focus{outline:none;box-shadow:0 0 0 3px rgba(245,158,11,.4);}
+    #progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#F59E0B,#EF4444);z-index:100;transition:width .1s;}
+    .hero-bg{background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(245,158,11,.1),transparent 65%),radial-gradient(ellipse 40% 40% at 90% 60%,rgba(239,68,68,.06),transparent);}
+    .dark .hero-bg{background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(245,158,11,.14),transparent 65%),radial-gradient(ellipse 40% 40% at 90% 60%,rgba(239,68,68,.08),transparent);}
+    .img-frame{background:rgba(245,158,11,.03);border:1px solid rgba(245,158,11,.12);border-radius:1.25rem;overflow:hidden;}
+    .dark .img-frame{background:rgba(245,158,11,.05);border-color:rgba(245,158,11,.16);}
+    .feature-card{transition:transform .3s ease, box-shadow .3s ease;}
+    .feature-card:hover{transform:translateY(-4px);}
+    .comp-card{border-radius:1rem;padding:1.5rem;transition:all .3s ease;}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}.reveal{opacity:1!important;transform:none!important;}.feature-card:hover{transform:none;}}
+  </style>
+</head>
+<body class="bg-surface-light dark:bg-surface-dark min-h-screen">
+<div id="progress-bar" style="width:0%"></div>
+
+<header class="fixed left-0 right-0 z-50 backdrop-blur-xl bg-surface-light/80 dark:bg-surface-dark/80 border-b border-border-light dark:border-border-dark" style="top:3px">
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 text-muted-light dark:text-muted-dark hover:text-primary transition-colors focus-ring rounded-lg px-2 py-1 text-sm font-medium">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <span data-i18n="nav.back">Volver</span>
+      </a>
+    <div class="flex items-center gap-2">
+      <button id="langToggle" class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring">
+        <span class="text-sm font-medium" id="langLabel">EN</span>
+      </button>
+      <button id="themeToggle" class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring">
+        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="pt-[67px]">
+
+  <!-- Hero -->
+  <section class="relative hero-bg overflow-hidden py-20 lg:py-28">
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="reveal flex flex-wrap gap-2 mb-6">
+            <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-full border border-amber-200 dark:border-amber-800">SaaS · Restaurantes</span>
+            <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-surface-dark/5 dark:bg-white/5 text-muted-light dark:text-muted-dark rounded-full border border-border-light dark:border-border-dark">Co-founder</span>
+            <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-surface-dark/5 dark:bg-white/5 text-muted-light dark:text-muted-dark rounded-full border border-border-light dark:border-border-dark" data-i18n="tag.ai">Construido con IA</span>
+          </div>
+          <h1 class="reveal font-display text-7xl sm:text-8xl lg:text-9xl font-bold tracking-tight text-surface-dark dark:text-surface-light mb-6 leading-none">NowEat</h1>
+          <p class="reveal text-lg text-muted-light dark:text-muted-dark max-w-lg leading-relaxed mb-10" data-i18n="hero.desc">Tu restaurante, digitalizado esta tarde. Menú con IA, TPV, reservas y cocina — todo en un dashboard. Construido por dos personas y agentes de IA, sin escribir casi una línea de código.</p>
+          <div class="reveal flex flex-wrap gap-8">
+            <div>
+              <div class="font-display text-2xl font-bold text-amber-500">+38%</div>
+              <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat1">Aumento de ventas</div>
+            </div>
+            <div>
+              <div class="font-display text-2xl font-bold text-amber-400">&lt;10 <span class="text-base font-medium" data-i18n="min">min</span></div>
+              <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat2">Setup completo</div>
+            </div>
+            <div>
+              <div class="font-display text-2xl font-bold text-amber-300">10+</div>
+              <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat3">Idiomas con IA</div>
+            </div>
+          </div>
+        </div>
+        <!-- Product mockup area -->
+        <div class="reveal stagger-1 flex justify-center lg:justify-end">
+          <div class="relative">
+            <div class="absolute inset-0 bg-amber-500/15 rounded-full blur-3xl scale-125"></div>
+            <div class="relative w-72 h-72 rounded-3xl bg-[#1A1005] border border-amber-500/20 flex flex-col items-center justify-center gap-3 overflow-hidden">
+              <div class="absolute inset-0" style="background:radial-gradient(ellipse 80% 80% at 50% 110%,rgba(245,158,11,.15),transparent)"></div>
+              <!-- Logo / wordmark area -->
+              <div class="relative z-10 flex flex-col items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center">
+                  <svg class="w-8 h-8 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                </div>
+                <div class="font-display font-bold text-2xl text-white tracking-tight">NowEat</div>
+                <div class="text-xs text-amber-400/70 text-center leading-relaxed px-6" data-i18n="card.sub">Menú · TPV · Reservas · Cocina</div>
+              </div>
+              <!-- Mini feature pills -->
+              <div class="relative z-10 flex flex-wrap gap-2 justify-center px-6 mt-2">
+                <span class="px-2 py-0.5 text-[10px] font-medium bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">IA OCR</span>
+                <span class="px-2 py-0.5 text-[10px] font-medium bg-white/5 text-white/40 rounded-full border border-white/10">QR</span>
+                <span class="px-2 py-0.5 text-[10px] font-medium bg-white/5 text-white/40 rounded-full border border-white/10">Stripe</span>
+                <span class="px-2 py-0.5 text-[10px] font-medium bg-white/5 text-white/40 rounded-full border border-white/10">KDS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Context bar -->
+  <section class="py-10 bg-card-light/40 dark:bg-card-dark/40 border-y border-border-light dark:border-border-dark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-px bg-border-light dark:bg-border-dark rounded-2xl overflow-hidden">
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.role">Rol</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm" data-i18n="ctx.role.val">Co-founder · Designer</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.team">Equipo</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm" data-i18n="ctx.team.val">2 personas + IA</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.stack">Stack</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">AI agents · SQL · LLM APIs</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.year">Año</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">2024 – 2025</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The problem -->
+  <section class="py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div class="reveal">
+          <span class="inline-block text-xs font-semibold tracking-wider uppercase text-amber-500 mb-4" data-i18n="s1.label">El problema</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-6" data-i18n="s1.title">Sin WhatsApps, sin papeles, sin sistemas que no se hablan</h2>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="s1.p1">Un restaurante medio trabaja con herramientas que no se coordinan: un TPV de los años 90, reservas por WhatsApp, menú en PDF, comandas en papel y una pantalla de cocina si tienen suerte. Cada sistema vive en su silo.</p>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed" data-i18n="s1.p2">El dueño pierde tiempo, los camareros cometen errores en el traspaso de información, y el cliente percibe la fricción aunque no sepa por qué. La digitalización existía, pero fragmentada y cara.</p>
+        </div>
+        <div class="reveal stagger-1 grid grid-cols-1 gap-3">
+          <div class="p-4 rounded-2xl bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <div class="font-medium text-surface-dark dark:text-surface-light text-sm" data-i18n="pain1.t">Reservas por WhatsApp</div>
+              <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="pain1.d">Sin confirmaciones automáticas, sin mapa de mesas, sin control de no-shows</div>
+            </div>
+          </div>
+          <div class="p-4 rounded-2xl bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <div>
+              <div class="font-medium text-surface-dark dark:text-surface-light text-sm" data-i18n="pain2.t">Menú en papel o PDF</div>
+              <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="pain2.d">Actualizar precios significa reimprimir, sin fotos, sin alérgenos, sin idiomas</div>
+            </div>
+          </div>
+          <div class="p-4 rounded-2xl bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+            </div>
+            <div>
+              <div class="font-medium text-surface-dark dark:text-surface-light text-sm" data-i18n="pain3.t">TPV desconectado de cocina</div>
+              <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="pain3.d">Comandas duplicadas, pedidos perdidos, sin visibilidad del estado en tiempo real</div>
+            </div>
+          </div>
+          <div class="p-4 rounded-2xl bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </div>
+            <div>
+              <div class="font-medium text-surface-dark dark:text-surface-light text-sm" data-i18n="pain4.t">Sin datos de negocio</div>
+              <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="pain4.d">Sin analítica de ventas, sin platos más pedidos, sin ocupación histórica</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Competitive landscape -->
+  <section class="py-24 bg-card-light/30 dark:bg-card-dark/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <span class="inline-block text-xs font-semibold tracking-wider uppercase text-amber-500 mb-4" data-i18n="s2.label">Mercado</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-4" data-i18n="s2.title">El espacio que ocupamos</h2>
+        <p class="text-muted-light dark:text-muted-dark max-w-2xl mx-auto" data-i18n="s2.desc">El mercado de digitalización para hostelería ya existe, pero los actores actuales apuntan a complejidad o a nichos concretos. NowEat entra por la simplicidad y la integración real.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+
+        <!-- Qamarero -->
+        <div class="reveal stagger-1 comp-card bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 rounded-xl bg-surface-dark/5 dark:bg-white/5 flex items-center justify-center">
+              <span class="font-display font-bold text-xs text-muted-light dark:text-muted-dark">Q</span>
+            </div>
+            <div>
+              <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Qamarero</div>
+              <div class="text-xs text-muted-light dark:text-muted-dark" data-i18n="comp1.type">POS completo · Hostelería</div>
+            </div>
+          </div>
+          <p class="text-sm text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="comp1.desc">Sistema POS robusto con KDS, delivery y cumplimiento fiscal (Verifactu). Orientado a establecimienos con infraestructura. Hardware recomendado, onboarding asistido.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 text-xs bg-surface-dark/5 dark:bg-white/5 text-muted-light dark:text-muted-dark rounded-full border border-border-light dark:border-border-dark" data-i18n="c1f1">POS avanzado</span>
+            <span class="px-2 py-0.5 text-xs bg-surface-dark/5 dark:bg-white/5 text-muted-light dark:text-muted-dark rounded-full border border-border-light dark:border-border-dark" data-i18n="c1f2">Verifactu</span>
+            <span class="px-2 py-0.5 text-xs bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-full border border-orange-200 dark:border-orange-800/40" data-i18n="c1f3">Curva de entrada alta</span>
+          </div>
+        </div>
+
+        <!-- Heydiga -->
+        <div class="reveal stagger-2 comp-card bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 rounded-xl bg-surface-dark/5 dark:bg-white/5 flex items-center justify-center">
+              <span class="font-display font-bold text-xs text-muted-light dark:text-muted-dark">H</span>
+            </div>
+            <div>
+              <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Heydiga</div>
+              <div class="text-xs text-muted-light dark:text-muted-dark" data-i18n="comp2.type">IA conversacional · Multi-sector</div>
+            </div>
+          </div>
+          <p class="text-sm text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="comp2.desc">Agente de IA que atiende llamadas y WhatsApp en 35 idiomas. Automatiza reservas y consultas. Compite más en el nicho de atención al cliente que en la operativa del restaurante.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 text-xs bg-surface-dark/5 dark:bg-white/5 text-muted-light dark:text-muted-dark rounded-full border border-border-light dark:border-border-dark" data-i18n="c2f1">35 idiomas</span>
+            <span class="px-2 py-0.5 text-xs bg-surface-dark/5 dark:bg-white/5 text-muted-light dark:text-muted-dark rounded-full border border-border-light dark:border-border-dark" data-i18n="c2f2">Voz + WhatsApp</span>
+            <span class="px-2 py-0.5 text-xs bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-full border border-orange-200 dark:border-orange-800/40" data-i18n="c2f3">Sin menú ni TPV</span>
+          </div>
+        </div>
+
+        <!-- NowEat -->
+        <div class="reveal stagger-3 comp-card bg-amber-500 border border-amber-400 text-white">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
+              <span class="font-display font-bold text-xs text-white">NE</span>
+            </div>
+            <div>
+              <div class="font-display font-semibold text-white text-sm">NowEat</div>
+              <div class="text-xs text-white/70" data-i18n="comp3.type">All-in-one · IA-first</div>
+            </div>
+          </div>
+          <p class="text-sm text-white/85 leading-relaxed mb-4" data-i18n="comp3.desc">Menú con OCR, TPV, reservas, KDS y analítica en un dashboard. Setup en menos de 10 minutos sin conocimiento técnico. Precio modular desde 29€/mes.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 text-xs bg-white/20 text-white rounded-full border border-white/20" data-i18n="c3f1">Todo integrado</span>
+            <span class="px-2 py-0.5 text-xs bg-white/20 text-white rounded-full border border-white/20" data-i18n="c3f2">IA nativa</span>
+            <span class="px-2 py-0.5 text-xs bg-white/20 text-white rounded-full border border-white/20" data-i18n="c3f3">&lt;10 min setup</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Product features -->
+  <section class="py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <span class="inline-block text-xs font-semibold tracking-wider uppercase text-amber-500 mb-4" data-i18n="s3.label">El producto</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-4" data-i18n="s3.title">De la primera mirada al último ticket de cocina</h2>
+        <p class="text-muted-light dark:text-muted-dark max-w-2xl mx-auto" data-i18n="s3.desc">Cuatro módulos que cubren todo el ciclo de un restaurante — y que funcionan solos o juntos.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+
+        <!-- Menu digital -->
+        <div class="reveal stagger-1 feature-card p-6 rounded-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark">
+          <div class="w-10 h-10 rounded-2xl bg-amber-500/10 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          </div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light mb-2" data-i18n="f1.title">Menú digital</div>
+          <p class="text-xs text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="f1.desc">OCR con IA que lee una foto del menú físico y lo digitaliza en segundos. QR por mesa. Alérgenos, fotos, 10+ idiomas automáticos. Actualización en tiempo real.</p>
+          <div class="text-sm font-semibold text-amber-500">29€<span class="text-xs font-normal text-muted-light dark:text-muted-dark">/mes</span></div>
+        </div>
+
+        <!-- Reservas -->
+        <div class="reveal stagger-2 feature-card p-6 rounded-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark">
+          <div class="w-10 h-10 rounded-2xl bg-amber-500/10 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light mb-2" data-i18n="f2.title">Reservas</div>
+          <p class="text-xs text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="f2.desc">Mapa interactivo de mesas. Confirmaciones por SMS. Sistema de depósitos vía Stripe para reducir no-shows. Asistente de IA que toma reservas por voz (NowTalk).</p>
+          <div class="text-sm font-semibold text-amber-500">50€<span class="text-xs font-normal text-muted-light dark:text-muted-dark">/mes</span></div>
+        </div>
+
+        <!-- TPV + KDS -->
+        <div class="reveal stagger-3 feature-card p-6 rounded-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark">
+          <div class="w-10 h-10 rounded-2xl bg-amber-500/10 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light mb-2" data-i18n="f3.title">TPV + KDS</div>
+          <p class="text-xs text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="f3.desc">Punto de venta en cualquier dispositivo. Pantalla de cocina inteligente que prioriza pedidos por tiempo. Pagos integrados con Stripe. Dispositivos ilimitados.</p>
+          <div class="text-sm font-semibold text-amber-500">49€<span class="text-xs font-normal text-muted-light dark:text-muted-dark">/mes</span></div>
+        </div>
+
+        <!-- Pedidos online -->
+        <div class="reveal stagger-4 feature-card p-6 rounded-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark">
+          <div class="w-10 h-10 rounded-2xl bg-amber-500/10 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
+          </div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light mb-2" data-i18n="f4.title">Takeaway · Delivery</div>
+          <p class="text-xs text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="f4.desc">Pedidos online sin comisiones de terceros. Notificaciones automáticas al cliente. Sistema de fidelización con puntos y sellos. Analítica cruzada de todos los canales.</p>
+          <div class="text-sm font-semibold text-amber-500">29€<span class="text-xs font-normal text-muted-light dark:text-muted-dark">/mes</span></div>
+        </div>
+
+      </div>
+
+      <!-- Bundle highlight -->
+      <div class="reveal">
+        <div class="relative overflow-hidden rounded-3xl p-8 sm:p-10" style="background:linear-gradient(135deg,#1A1005,#1A1205);border:1px solid rgba(245,158,11,.25);">
+          <div class="absolute inset-0" style="background:radial-gradient(ellipse 60% 80% at 100% 50%,rgba(245,158,11,.12),transparent)"></div>
+          <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div>
+              <div class="text-xs font-semibold uppercase tracking-wider text-amber-400/70 mb-2" data-i18n="bundle.label">Plan completo</div>
+              <div class="font-display text-2xl font-bold text-white mb-1" data-i18n="bundle.title">Todo incluido — 99€/mes</div>
+              <p class="text-white/50 text-sm" data-i18n="bundle.desc">Los cuatro módulos juntos. Ahorra 58€/mes frente a contratarlos por separado. 20% de descuento adicional en plan anual. 14 días gratis sin tarjeta.</p>
+            </div>
+            <div class="flex-shrink-0 text-center">
+              <div class="font-display text-4xl font-bold text-amber-400">99€</div>
+              <div class="text-xs text-white/40 mt-1" data-i18n="bundle.vs">vs. 157€ por separado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Built with AI -->
+  <section class="py-24 bg-card-light/30 dark:bg-card-dark/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div class="reveal">
+          <span class="inline-block text-xs font-semibold tracking-wider uppercase text-amber-500 mb-4" data-i18n="s4.label">Cómo lo construimos</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-6" data-i18n="s4.title">Dos personas. Cero líneas de código escritas a mano.</h2>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="s4.p1">NowEat lo construimos Adrián (desarrollador) y yo (diseñador). Pero el equipo de facto tiene más miembros: agentes de IA que escriben código, revisan PRs, generan tests, crean componentes y resuelven bugs — sin parar.</p>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed mb-6" data-i18n="s4.p2">El stack tiene infraestructura real: servidores en producción, bases de datos SQL, APIs de terceros, suscripciones a LLMs. No es un proyecto de demo — es un producto que paga sus propias facturas.</p>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-4 rounded-2xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark">
+              <div class="text-xs font-semibold uppercase tracking-wider text-muted-light dark:text-muted-dark mb-2" data-i18n="tech.infra">Infraestructura</div>
+              <div class="space-y-1">
+                <div class="text-xs text-surface-dark dark:text-surface-light">Servidores · CDN</div>
+                <div class="text-xs text-surface-dark dark:text-surface-light">SQL · Base de datos</div>
+                <div class="text-xs text-surface-dark dark:text-surface-light">Stripe · Pagos</div>
+              </div>
+            </div>
+            <div class="p-4 rounded-2xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark">
+              <div class="text-xs font-semibold uppercase tracking-wider text-muted-light dark:text-muted-dark mb-2" data-i18n="tech.ai">IA</div>
+              <div class="space-y-1">
+                <div class="text-xs text-surface-dark dark:text-surface-light">LLM APIs · GPT / Claude</div>
+                <div class="text-xs text-surface-dark dark:text-surface-light">OCR · Visión artificial</div>
+                <div class="text-xs text-surface-dark dark:text-surface-light">AI Agents · Dev</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal stagger-1 space-y-4">
+          <div class="p-6 rounded-2xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-2xl bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <div>
+                <div class="font-display font-semibold text-surface-dark dark:text-surface-light mb-1" data-i18n="ai1.t">Velocidad de un equipo grande</div>
+                <p class="text-sm text-muted-light dark:text-muted-dark" data-i18n="ai1.d">Funcionalidades que en una startup tradicional tardarían semanas, aquí se iteron en días. Los agentes no necesitan contexto, no se cansan y trabajan en paralelo.</p>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 rounded-2xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-2xl bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div>
+                <div class="font-display font-semibold text-surface-dark dark:text-surface-light mb-1" data-i18n="ai2.t">Coste estructural de startup lean</div>
+                <p class="text-sm text-muted-light dark:text-muted-dark" data-i18n="ai2.d">El gasto va a infraestructura real — servidores, SQL, LLMs — no a nóminas de ingeniería. Margen operativo que una empresa tradicional no puede igualar.</p>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 rounded-2xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-2xl bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <div>
+                <div class="font-display font-semibold text-surface-dark dark:text-surface-light mb-1" data-i18n="ai3.t">Producción real, no demo</div>
+                <p class="text-sm text-muted-light dark:text-muted-dark" data-i18n="ai3.d">Pagos con Stripe, datos reales de restaurantes, OCR procesando facturas de verdad. La IA no es el producto de cara al cliente — es el motor detrás de cada feature.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Go to market -->
+  <section class="py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <span class="inline-block text-xs font-semibold tracking-wider uppercase text-amber-500 mb-4" data-i18n="s5.label">Siguiente paso</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-4" data-i18n="s5.title">De restaurantes a cualquier comercio</h2>
+        <p class="text-muted-light dark:text-muted-dark max-w-2xl mx-auto" data-i18n="s5.desc">NowEat nació en hostelería pero la arquitectura del producto — menú digital, reservas, TPV, analítica — se replica en peluquerías, tiendas, estudios, clínicas. El siguiente reto es la expansión a comercios.</p>
+      </div>
+      <div class="reveal grid sm:grid-cols-3 gap-4">
+        <div class="p-6 rounded-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-center">
+          <div class="font-display text-3xl font-bold text-amber-500 mb-2">14</div>
+          <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="gtm1">Días de prueba gratuita</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-center">
+          <div class="font-display text-3xl font-bold text-amber-400 mb-2">99€</div>
+          <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="gtm2">Plan completo al mes</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-center">
+          <div class="font-display text-3xl font-bold text-amber-300 mb-2">0</div>
+          <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="gtm3">Comisiones sobre ventas</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="py-8 border-t border-border-light dark:border-border-dark">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <a href="index.html" class="font-display font-bold text-surface-dark dark:text-surface-light hover:text-primary transition-colors">Iñigo Mendizábal</a>
+    <span class="text-sm text-muted-light dark:text-muted-dark" data-i18n="footer">© 2026 Todos los derechos reservados</span>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const i18n = {
+    es:{
+      "nav.back":"Volver","tag.ai":"Construido con IA",
+      "hero.desc":"Tu restaurante, digitalizado esta tarde. Menú con IA, TPV, reservas y cocina — todo en un dashboard. Construido por dos personas y agentes de IA, sin escribir casi una línea de código.",
+      "stat1":"Aumento de ventas","stat2":"Setup completo","min":"min","stat3":"Idiomas con IA",
+      "card.sub":"Menú · TPV · Reservas · Cocina",
+      "ctx.role":"Rol","ctx.role.val":"Co-founder · Designer","ctx.team":"Equipo","ctx.team.val":"2 personas + IA","ctx.stack":"Stack","ctx.year":"Año",
+      "s1.label":"El problema","s1.title":"Sin WhatsApps, sin papeles, sin sistemas que no se hablan","s1.p1":"Un restaurante medio trabaja con herramientas que no se coordinan: un TPV de los años 90, reservas por WhatsApp, menú en PDF, comandas en papel y una pantalla de cocina si tienen suerte. Cada sistema vive en su silo.","s1.p2":"El dueño pierde tiempo, los camareros cometen errores en el traspaso de información, y el cliente percibe la fricción aunque no sepa por qué. La digitalización existía, pero fragmentada y cara.",
+      "pain1.t":"Reservas por WhatsApp","pain1.d":"Sin confirmaciones automáticas, sin mapa de mesas, sin control de no-shows",
+      "pain2.t":"Menú en papel o PDF","pain2.d":"Actualizar precios significa reimprimir, sin fotos, sin alérgenos, sin idiomas",
+      "pain3.t":"TPV desconectado de cocina","pain3.d":"Comandas duplicadas, pedidos perdidos, sin visibilidad del estado en tiempo real",
+      "pain4.t":"Sin datos de negocio","pain4.d":"Sin analítica de ventas, sin platos más pedidos, sin ocupación histórica",
+      "s2.label":"Mercado","s2.title":"El espacio que ocupamos","s2.desc":"El mercado de digitalización para hostelería ya existe, pero los actores actuales apuntan a complejidad o a nichos concretos. NowEat entra por la simplicidad y la integración real.",
+      "comp1.type":"POS completo · Hostelería","comp1.desc":"Sistema POS robusto con KDS, delivery y cumplimiento fiscal (Verifactu). Orientado a establecimientos con infraestructura. Hardware recomendado, onboarding asistido.",
+      "c1f1":"POS avanzado","c1f2":"Verifactu","c1f3":"Curva de entrada alta",
+      "comp2.type":"IA conversacional · Multi-sector","comp2.desc":"Agente de IA que atiende llamadas y WhatsApp en 35 idiomas. Automatiza reservas y consultas. Compite más en el nicho de atención al cliente que en la operativa del restaurante.",
+      "c2f1":"35 idiomas","c2f2":"Voz + WhatsApp","c2f3":"Sin menú ni TPV",
+      "comp3.type":"All-in-one · IA-first","comp3.desc":"Menú con OCR, TPV, reservas, KDS y analítica en un dashboard. Setup en menos de 10 minutos sin conocimiento técnico. Precio modular desde 29€/mes.",
+      "c3f1":"Todo integrado","c3f2":"IA nativa","c3f3":"<10 min setup",
+      "s3.label":"El producto","s3.title":"De la primera mirada al último ticket de cocina","s3.desc":"Cuatro módulos que cubren todo el ciclo de un restaurante — y que funcionan solos o juntos.",
+      "f1.title":"Menú digital","f1.desc":"OCR con IA que lee una foto del menú físico y lo digitaliza en segundos. QR por mesa. Alérgenos, fotos, 10+ idiomas automáticos. Actualización en tiempo real.",
+      "f2.title":"Reservas","f2.desc":"Mapa interactivo de mesas. Confirmaciones por SMS. Sistema de depósitos vía Stripe para reducir no-shows. Asistente de IA que toma reservas por voz (NowTalk).",
+      "f3.title":"TPV + KDS","f3.desc":"Punto de venta en cualquier dispositivo. Pantalla de cocina inteligente que prioriza pedidos por tiempo. Pagos integrados con Stripe. Dispositivos ilimitados.",
+      "f4.title":"Takeaway · Delivery","f4.desc":"Pedidos online sin comisiones de terceros. Notificaciones automáticas al cliente. Sistema de fidelización con puntos y sellos. Analítica cruzada de todos los canales.",
+      "bundle.label":"Plan completo","bundle.title":"Todo incluido — 99€/mes","bundle.desc":"Los cuatro módulos juntos. Ahorra 58€/mes frente a contratarlos por separado. 20% de descuento adicional en plan anual. 14 días gratis sin tarjeta.","bundle.vs":"vs. 157€ por separado",
+      "s4.label":"Cómo lo construimos","s4.title":"Dos personas. Cero líneas de código escritas a mano.","s4.p1":"NowEat lo construimos Adrián (desarrollador) y yo (diseñador). Pero el equipo de facto tiene más miembros: agentes de IA que escriben código, revisan PRs, generan tests, crean componentes y resuelven bugs — sin parar.","s4.p2":"El stack tiene infraestructura real: servidores en producción, bases de datos SQL, APIs de terceros, suscripciones a LLMs. No es un proyecto de demo — es un producto que paga sus propias facturas.",
+      "tech.infra":"Infraestructura","tech.ai":"IA",
+      "ai1.t":"Velocidad de un equipo grande","ai1.d":"Funcionalidades que en una startup tradicional tardarían semanas, aquí se iteraron en días. Los agentes no necesitan contexto, no se cansan y trabajan en paralelo.",
+      "ai2.t":"Coste estructural de startup lean","ai2.d":"El gasto va a infraestructura real — servidores, SQL, LLMs — no a nóminas de ingeniería. Margen operativo que una empresa tradicional no puede igualar.",
+      "ai3.t":"Producción real, no demo","ai3.d":"Pagos con Stripe, datos reales de restaurantes, OCR procesando facturas de verdad. La IA no es el producto de cara al cliente — es el motor detrás de cada feature.",
+      "s5.label":"Siguiente paso","s5.title":"De restaurantes a cualquier comercio","s5.desc":"NowEat nació en hostelería pero la arquitectura del producto — menú digital, reservas, TPV, analítica — se replica en peluquerías, tiendas, estudios, clínicas. El siguiente reto es la expansión a comercios.",
+      "gtm1":"Días de prueba gratuita","gtm2":"Plan completo al mes","gtm3":"Comisiones sobre ventas",
+      "footer":"© 2026 Todos los derechos reservados"
+    },
+    en:{
+      "nav.back":"Back","tag.ai":"Built with AI",
+      "hero.desc":"Your restaurant, digitalized this afternoon. AI menu, POS, reservations and kitchen — all in one dashboard. Built by two people and AI agents, writing almost zero lines of code manually.",
+      "stat1":"Sales increase","stat2":"Full setup","min":"min","stat3":"Languages with AI",
+      "card.sub":"Menu · POS · Reservations · Kitchen",
+      "ctx.role":"Role","ctx.role.val":"Co-founder · Designer","ctx.team":"Team","ctx.team.val":"2 people + AI","ctx.stack":"Stack","ctx.year":"Year",
+      "s1.label":"The problem","s1.title":"No WhatsApps, no paper, no disconnected systems","s1.p1":"The average restaurant works with tools that don't talk to each other: a 90s POS, WhatsApp reservations, a PDF menu, paper orders, and a kitchen screen if they're lucky. Every system lives in its own silo.","s1.p2":"The owner loses time, waiters make errors in handoffs, and the customer feels the friction even if they can't say why. Digitalization existed, but fragmented and expensive.",
+      "pain1.t":"WhatsApp reservations","pain1.d":"No automatic confirmations, no table map, no no-show control",
+      "pain2.t":"Paper or PDF menu","pain2.d":"Updating prices means reprinting, no photos, no allergens, no languages",
+      "pain3.t":"POS disconnected from kitchen","pain3.d":"Duplicate orders, lost tickets, no real-time status visibility",
+      "pain4.t":"No business data","pain4.d":"No sales analytics, no top dishes, no historical occupancy",
+      "s2.label":"Market","s2.title":"The space we occupy","s2.desc":"The hospitality digitalisation market already exists, but current players aim for complexity or specific niches. NowEat enters through simplicity and real integration.",
+      "comp1.type":"Full POS · Hospitality","comp1.desc":"Robust POS system with KDS, delivery and fiscal compliance (Verifactu). Aimed at established venues with infrastructure. Recommended hardware, assisted onboarding.",
+      "c1f1":"Advanced POS","c1f2":"Verifactu","c1f3":"High learning curve",
+      "comp2.type":"Conversational AI · Multi-sector","comp2.desc":"AI agent that handles calls and WhatsApp in 35 languages. Automates reservations and enquiries. Competes more in the customer service niche than in restaurant operations.",
+      "c2f1":"35 languages","c2f2":"Voice + WhatsApp","c2f3":"No menu or POS",
+      "comp3.type":"All-in-one · AI-first","comp3.desc":"AI OCR menu, POS, reservations, KDS and analytics in one dashboard. Setup in under 10 minutes with no technical knowledge. Modular pricing from 29€/month.",
+      "c3f1":"Fully integrated","c3f2":"Native AI","c3f3":"<10 min setup",
+      "s3.label":"The product","s3.title":"From first glance to last kitchen ticket","s3.desc":"Four modules covering the full restaurant cycle — working alone or together.",
+      "f1.title":"Digital menu","f1.desc":"AI OCR reads a photo of the physical menu and digitalises it in seconds. QR per table. Allergens, photos, 10+ automatic languages. Real-time updates.",
+      "f2.title":"Reservations","f2.desc":"Interactive table map. SMS confirmations. Stripe deposit system to reduce no-shows. AI voice assistant takes reservations (NowTalk).",
+      "f3.title":"POS + KDS","f3.desc":"Point of sale on any device. Intelligent kitchen display that prioritises orders by time. Stripe-integrated payments. Unlimited devices.",
+      "f4.title":"Takeaway · Delivery","f4.desc":"Online orders with zero third-party commissions. Automatic customer notifications. Loyalty system with points and stamps. Cross-channel analytics.",
+      "bundle.label":"Complete plan","bundle.title":"Everything included — 99€/month","bundle.desc":"All four modules together. Saves 58€/month vs. subscribing separately. Additional 20% discount on annual plan. 14-day free trial, no card required.","bundle.vs":"vs. 157€ separately",
+      "s4.label":"How we built it","s4.title":"Two people. Zero lines of code written by hand.","s4.p1":"NowEat was built by Adrián (developer) and me (designer). But the actual team has more members: AI agents that write code, review PRs, generate tests, create components and fix bugs — non-stop.","s4.p2":"The stack has real infrastructure: production servers, SQL databases, third-party APIs, LLM subscriptions. This isn't a demo project — it's a product that pays its own bills.",
+      "tech.infra":"Infrastructure","tech.ai":"AI",
+      "ai1.t":"Speed of a large team","ai1.d":"Features that would take weeks in a traditional startup were iterated in days. Agents need no context-setting, don't get tired and work in parallel.",
+      "ai2.t":"Lean startup cost structure","ai2.d":"Spend goes to real infrastructure — servers, SQL, LLMs — not engineering salaries. Operating margins a traditional company can't match.",
+      "ai3.t":"Real production, not a demo","ai3.d":"Stripe payments, real restaurant data, OCR processing actual bills. AI isn't the customer-facing product — it's the engine behind every feature.",
+      "s5.label":"Next step","s5.title":"From restaurants to any business","s5.desc":"NowEat started in hospitality but the product architecture — digital menu, reservations, POS, analytics — replicates across hair salons, shops, studios, clinics. The next challenge is expansion to all types of businesses.",
+      "gtm1":"Days free trial","gtm2":"Complete plan per month","gtm3":"Commission on sales",
+      "footer":"© 2026 All rights reserved"
+    }
+  };
+  let lang = localStorage.getItem('lang') || 'es';
+  function applyLang(l){lang=l;localStorage.setItem('lang',l);document.documentElement.lang=l;document.getElementById('langLabel').textContent=l==='en'?'ES':'EN';document.querySelectorAll('[data-i18n]').forEach(el=>{if(i18n[l][el.dataset.i18n])el.textContent=i18n[l][el.dataset.i18n];});}
+  document.getElementById('langToggle').addEventListener('click',()=>applyLang(lang==='en'?'es':'en'));
+  applyLang(lang);
+  document.getElementById('themeToggle').addEventListener('click',()=>{document.documentElement.classList.toggle('dark');localStorage.theme=document.documentElement.classList.contains('dark')?'dark':'light';});
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('progress-bar').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';});
+</script>
+</body>
+</html>

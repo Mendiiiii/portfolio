@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citibank White Label — Iñigo Mendizábal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] } } } }</script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { transition: background-color .3s, color .3s; }
+        :focus-visible { outline: 2px solid #8A38F5; outline-offset: 3px; border-radius: 4px; }
+        .skip-link { position:absolute; top:-9999px; left:1rem; background:#8A38F5; color:#fff; padding:.5rem 1rem; border-radius:0 0 6px 6px; font-weight:600; z-index:9999; }
+        .skip-link:focus { top:0; }
+        .row-divider { border-top: 1px solid; }
+        .dark .row-divider { border-color: rgba(255,255,255,0.06); }
+        html:not(.dark) .row-divider { border-color: rgba(0,0,0,0.07); }
+        .reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease,transform .6s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+    </style>
+</head>
+<body class="dark:bg-[#111111] bg-[#F5F4F1] dark:text-[#EFEFEF] text-[#111111] font-sans antialiased">
+
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+
+    <!-- NAV -->
+    <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 h-14
+                   border-b dark:border-white/5 border-black/6
+                   dark:bg-[#111111]/90 bg-[#F5F4F1]/90 backdrop-blur-md">
+        <a href="cv.html" class="flex items-center gap-1.5 text-sm dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            <span id="backLabel">Volver</span>
+        </a>
+        <div class="flex items-center gap-4">
+            <button id="langBtn" aria-label="Switch language"
+                    class="text-[11px] font-semibold tracking-[0.2em] uppercase
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">EN</button>
+            <button id="themeBtn" aria-label="Cambiar tema"
+                    class="w-7 h-7 flex items-center justify-center
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">
+                <svg id="sunIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/>
+                </svg>
+                <svg id="moonIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="main" class="pt-14">
+        <div class="px-6 lg:px-12 max-w-5xl mx-auto">
+
+            <!-- Title -->
+            <div class="pt-16 pb-12 reveal">
+                <p class="text-xs tracking-[0.25em] uppercase dark:text-white/50 text-black/55 mb-4" data-i18n="tags">Innomad · App móvil · Banca · White-label · iOS & Android</p>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold dark:text-white text-[#111] leading-[1.06] tracking-tight">Citibank White Label</h1>
+            </div>
+
+            <!-- Opening image -->
+            <div class="row-divider pt-0 pb-12 reveal">
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=80&auto=format&fit=crop"
+                         alt="Citibank White Label — App móvil de tarjeta de crédito"
+                         class="w-full h-full object-cover" loading="eager">
+                </div>
+            </div>
+
+            <!-- El Reto -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s1_title">El Reto</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s1_p1">
+                    Trabajando en Innomad, una agencia de producto digital en Australia, tuve a Citibank como cliente con un problema concreto: sus usuarios tenían una tarjeta de crédito que acumulaba puntos Flybuys con decenas de partners — supermercados, gasolineras, aerolíneas — pero casi nadie lo sabía ni lo usaba. La app de banca existente no hacía visible ese valor.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s1_p2">
+                    El objetivo no era solo construir una app de banca. Era resolver una pregunta de producto más importante: ¿cómo haces que alguien entienda el valor real de su tarjeta de crédito en el momento en que más importa — cuando está pagando?
+                </p>
+            </div>
+
+            <!-- Proceso -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s2_title">Proceso</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s2_p1">
+                    Arranqué con un design sprint de dos días con el equipo de Citibank: desempaquetado del problema, wireframing e ideación el primer día; revisión, prototipado de alta fidelidad y user testing el segundo. Este formato comprimido era una decisión consciente — validar las hipótesis de producto antes de comprometer meses de desarrollo.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-8" data-i18n="s2_p2">
+                    El user testing fue revelador. Los usuarios no comentaron la banca — comentaron el diseño: "parece una app muy elegante para ser de un banco, los de banca normalmente son aburridos." Lo que más valoraron fue poder ver el balance con un donut, deslizar entre cuentas y, sobre todo, activar ofertas Flybuys directamente desde la app sin salir de ella. Eso confirmó la hipótesis central: la integración con partners tenía que ser el núcleo, no un añadido.
+                </p>
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80&auto=format&fit=crop"
+                         alt="Design sprint — taller con equipo Citibank"
+                         class="w-full h-full object-cover" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Solución -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s3_title">Solución de Diseño</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s3_p1">
+                    Diseñé la app con una arquitectura white-label — reutilizable para distintos partners bancarios sin rediseño — centrada en hacer visible la propuesta de valor de Flybuys. El balance de puntos aparecía en el resumen de cuenta, junto al balance disponible, no escondido en un menú de rewards. Las ofertas de partners eran activables con un toque, sin salir de la app ni crear una cuenta externa.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s3_p2">
+                    El onboarding incluía Touch ID, pin de 4 dígitos y un sistema de quick view (snapshot) — balance visible sin login — pensado para los usuarios que consultan el saldo varias veces al día sin querer pasar por autenticación completa. La seguridad se resolvía con integración Digipass para transacciones de alto riesgo.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s3_p3">
+                    La arquitectura white-label fue una de las decisiones de mayor impacto a largo plazo: logos, tipografía, colores y vínculos legales configurables por partner sin tocar la lógica de producto. Cada nueva marca era un ejercicio de branding, no un proyecto nuevo.
+                </p>
+            </div>
+
+            <!-- Impacto -->
+            <div class="row-divider py-12 pb-20 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s4_title">Impacto</h2>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60 mb-4" data-i18n="s4_p1">
+                    El proyecto fue ejecutado con éxito dentro del plazo acordado. La integración nativa con Flybuys y los partners de rewards fue el diferenciador que convenció al cliente — no como funcionalidad extra, sino como argumento central del producto. El resultado fue una app que hacía visible el valor de la tarjeta en el día a día, no solo en el momento de la compra.
+                </p>
+                <p class="text-base leading-6 dark:text-white/60 text-black/60" data-i18n="s4_p2">
+                    Desde Innomad, el proyecto consolidó nuestra relación con Citibank como partner de confianza para soluciones móviles bancarias en Australia, con capacidad demostrada para escalar la solución a múltiples marcas desde el mismo MVP.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="row-divider px-6 lg:px-12 py-7 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-xs dark:text-white/50 text-black/55 order-2 sm:order-1">© 2026 Iñigo Mendizábal</p>
+        <nav class="flex items-center gap-5 order-1 sm:order-2">
+            <a href="cv.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">CV</a>
+            <a href="index.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Portfolio</a>
+            <a href="mailto:imendifp@gmail.com" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors" data-i18n="footer_contact">Contacto</a>
+        </nav>
+    </footer>
+
+    <script>
+        const T = {
+            es: {
+                back:     'Volver',
+                tags:     'Innomad · App móvil · Banca · White-label · iOS & Android',
+                s1_title: 'El Reto',
+                s1_p1:    'Trabajando en Innomad, una agencia de producto digital en Australia, tuve a Citibank como cliente con un problema concreto: sus usuarios tenían una tarjeta de crédito que acumulaba puntos Flybuys con decenas de partners — supermercados, gasolineras, aerolíneas — pero casi nadie lo sabía ni lo usaba. La app de banca existente no hacía visible ese valor.',
+                s1_p2:    'El objetivo no era solo construir una app de banca. Era resolver una pregunta de producto más importante: ¿cómo haces que alguien entienda el valor real de su tarjeta de crédito en el momento en que más importa — cuando está pagando?',
+                s2_title: 'Proceso',
+                s2_p1:    'Arranqué con un design sprint de dos días con el equipo de Citibank: desempaquetado del problema, wireframing e ideación el primer día; revisión, prototipado de alta fidelidad y user testing el segundo. Este formato comprimido era una decisión consciente — validar las hipótesis de producto antes de comprometer meses de desarrollo.',
+                s2_p2:    'El user testing fue revelador. Los usuarios no comentaron la banca — comentaron el diseño: "parece una app muy elegante para ser de un banco, los de banca normalmente son aburridos." Lo que más valoraron fue poder ver el balance con un donut, deslizar entre cuentas y, sobre todo, activar ofertas Flybuys directamente desde la app sin salir de ella. Eso confirmó la hipótesis central: la integración con partners tenía que ser el núcleo, no un añadido.',
+                s3_title: 'Solución de Diseño',
+                s3_p1:    'Diseñé la app con una arquitectura white-label — reutilizable para distintos partners bancarios sin rediseño — centrada en hacer visible la propuesta de valor de Flybuys. El balance de puntos aparecía en el resumen de cuenta, junto al balance disponible, no escondido en un menú de rewards. Las ofertas de partners eran activables con un toque, sin salir de la app ni crear una cuenta externa.',
+                s3_p2:    'El onboarding incluía Touch ID, pin de 4 dígitos y un sistema de quick view (snapshot) — balance visible sin login — pensado para los usuarios que consultan el saldo varias veces al día sin querer pasar por autenticación completa. La seguridad se resolvía con integración Digipass para transacciones de alto riesgo.',
+                s3_p3:    'La arquitectura white-label fue una de las decisiones de mayor impacto a largo plazo: logos, tipografía, colores y vínculos legales configurables por partner sin tocar la lógica de producto. Cada nueva marca era un ejercicio de branding, no un proyecto nuevo.',
+                s4_title: 'Impacto',
+                s4_p1:    'El proyecto fue ejecutado con éxito dentro del plazo acordado. La integración nativa con Flybuys y los partners de rewards fue el diferenciador que convenció al cliente — no como funcionalidad extra, sino como argumento central del producto. El resultado fue una app que hacía visible el valor de la tarjeta en el día a día, no solo en el momento de la compra.',
+                s4_p2:    'Desde Innomad, el proyecto consolidó nuestra relación con Citibank como partner de confianza para soluciones móviles bancarias en Australia, con capacidad demostrada para escalar la solución a múltiples marcas desde el mismo MVP.',
+                footer_contact: 'Contacto',
+            },
+            en: {
+                back:     'Back',
+                tags:     'Innomad · Mobile app · Banking · White-label · iOS & Android',
+                s1_title: 'The Challenge',
+                s1_p1:    'Working at Innomad, a digital product agency in Australia, Citibank came to us with a concrete problem: their users had a credit card that earned Flybuys points with dozens of partners — supermarkets, petrol stations, airlines — but almost nobody knew about it or used it. The existing banking app made that value invisible.',
+                s1_p2:    'The goal wasn\'t just to build a banking app. It was to answer a more important product question: how do you help someone understand the real value of their credit card at the moment it matters most — when they\'re paying?',
+                s2_title: 'Process',
+                s2_p1:    'We kicked off with a two-day design sprint with the Citibank team: unpacking the problem, wireframing and ideation on day one; design review, hi-fidelity prototyping and user testing on day two. This compressed format was a deliberate choice — validate the product hypotheses before committing months of development.',
+                s2_p2:    'User testing was revealing. Users didn\'t talk about the banking — they talked about the design: "it looks very fancy for a banking app, banking apps are normally boring." What they valued most was seeing their balance as a doughnut, swiping between accounts and, above all, activating Flybuys offers directly inside the app without leaving it. That confirmed the central hypothesis: partner integration had to be the core, not an add-on.',
+                s3_title: 'Design Solution',
+                s3_p1:    'I designed the app with a white-label architecture — reusable across different banking partners without redesign — centred on making Flybuys\' value proposition visible. The points balance appeared in the account summary, next to the available balance, not buried in a rewards menu. Partner offers were activatable with one tap, without leaving the app or creating an external account.',
+                s3_p2:    'Onboarding included Touch ID, a 4-digit PIN and a quick view (snapshot) system — balance visible without login — designed for users who check their balance several times a day without wanting to go through full authentication. Security was handled via Digipass integration for high-risk transactions.',
+                s3_p3:    'The white-label architecture was one of the highest-impact long-term decisions: logos, typography, colours and legal links configurable per partner without touching product logic. Each new brand was a branding exercise, not a new project.',
+                s4_title: 'Impact',
+                s4_p1:    'The project was delivered successfully within the agreed timeline. The native Flybuys and rewards partner integration was the differentiator that convinced the client — not as an extra feature, but as the central product argument. The result was an app that made the card\'s value visible day-to-day, not just at the point of purchase.',
+                s4_p2:    'Through Innomad, the project cemented our relationship with Citibank as a trusted partner for mobile banking solutions in Australia, with a demonstrated ability to scale the solution across multiple brands from the same MVP.',
+                footer_contact: 'Contact',
+            }
+        };
+
+        let lang = 'es';
+        function applyLang(l) {
+            lang = l;
+            document.documentElement.lang = l;
+            document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
+            document.getElementById('backLabel').textContent = T[l].back;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const v = T[l][el.dataset.i18n];
+                if (v !== undefined) el.innerHTML = v;
+            });
+        }
+        document.getElementById('langBtn').addEventListener('click', () => applyLang(lang === 'es' ? 'en' : 'es'));
+
+        let dark = true;
+        document.getElementById('themeBtn').addEventListener('click', () => {
+            dark = !dark;
+            document.documentElement.classList.toggle('dark', dark);
+            document.getElementById('sunIcon').classList.toggle('hidden', !dark);
+            document.getElementById('moonIcon').classList.toggle('hidden', dark);
+        });
+
+        const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:0.1});
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>

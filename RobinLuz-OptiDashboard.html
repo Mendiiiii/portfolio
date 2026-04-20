@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robin Luz — OptiDashboard SaaS · Iñigo Mendizábal</title>
+  <meta name="description" content="Case study: rediseño del SaaS B2B OptiDashboard para Optimiza Recursos. Gestión energética, IoT e inteligencia artificial.">
+  <script>
+    document.documentElement.classList.remove('no-js');
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: { DEFAULT: '#10B981', light: '#34D399', dark: '#059669' },
+            surface: { light: '#FFFFFF', dark: '#0F172A' },
+            muted: { light: '#64748B', dark: '#94A3B8' },
+            card: { light: '#F8FAFC', dark: '#1E293B' },
+            border: { light: '#E2E8F0', dark: '#334155' }
+          },
+          fontFamily: { display: ['Space Grotesk','sans-serif'], body: ['DM Sans','sans-serif'] },
+          borderRadius: { '2xl':'1rem','3xl':'1.5rem','4xl':'2rem' }
+        }
+      }
+    }
+  </script>
+  <style>
+    body{font-family:'DM Sans',sans-serif;}
+    :root{--bg:#FFFFFF;--fg:#0F172A;--muted:#64748B;--accent:#10B981;--card:#F8FAFC;--border:#E2E8F0;}
+    .dark{--bg:#0F172A;--fg:#F1F5F9;--muted:#94A3B8;--accent:#34D399;--card:#1E293B;--border:#334155;}
+    .font-display{font-family:'Space Grotesk',sans-serif;}
+    .reveal{opacity:1;transform:translateY(0);transition:opacity .6s ease-out,transform .6s ease-out;}
+    .js-ready .reveal{opacity:0;transform:translateY(24px);}
+    .js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+    .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+    .focus-ring:focus{outline:none;box-shadow:0 0 0 3px rgba(16,185,129,.4);}
+    #progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#10B981,#6B63FF);z-index:100;transition:width .1s;}
+    .hero-bg{background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(16,185,129,.09),transparent 65%);}
+    .dark .hero-bg{background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(16,185,129,.15),transparent 65%);}
+    .img-frame{background:rgba(16,185,129,.03);border:1px solid rgba(16,185,129,.1);border-radius:1.25rem;overflow:hidden;}
+    .dark .img-frame{background:rgba(16,185,129,.04);border-color:rgba(16,185,129,.16);}
+    .before-after-label{position:absolute;top:.75rem;left:.75rem;padding:.25rem .625rem;border-radius:9999px;font-size:.7rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}.reveal{opacity:1!important;transform:none!important;}}
+  </style>
+</head>
+<body class="bg-surface-light dark:bg-surface-dark min-h-screen">
+<div id="progress-bar" style="width:0%"></div>
+
+<header class="fixed left-0 right-0 z-50 backdrop-blur-xl bg-surface-light/80 dark:bg-surface-dark/80 border-b border-border-light dark:border-border-dark" style="top:3px">
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="Proyecto-RobinLuz.html" class="flex items-center gap-2 text-muted-light dark:text-muted-dark hover:text-primary transition-colors focus-ring rounded-lg px-2 py-1 text-sm font-medium">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <span data-i18n="nav.back">Robin Luz</span>
+      </a>
+      <span class="text-muted-light dark:text-muted-dark">/</span>
+      <span class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm" data-i18n="nav.title">OptiDashboard</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="langToggle" class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring">
+        <span class="text-sm font-medium" id="langLabel">EN</span>
+      </button>
+      <button id="themeToggle" class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring">
+        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="pt-[67px]">
+
+  <!-- Hero -->
+  <section class="relative hero-bg overflow-hidden py-20 lg:py-28">
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="reveal flex flex-wrap gap-2 mb-6">
+          <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full border border-emerald-200 dark:border-emerald-800">SaaS B2B Design</span>
+          <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-surface-dark/5 dark:bg-white/5 text-muted-light dark:text-muted-dark rounded-full border border-border-light dark:border-border-dark">Web App · Desktop</span>
+        </div>
+        <h1 class="reveal font-display text-5xl sm:text-6xl font-bold tracking-tight text-surface-dark dark:text-surface-light mb-6 leading-none" data-i18n="hero.title">OptiDashboard</h1>
+        <p class="reveal text-xl text-muted-light dark:text-muted-dark max-w-2xl leading-relaxed mb-10" data-i18n="hero.desc">La plataforma B2B que opera en la sombra para que Robin Luz funcione. Un SaaS para empresas que mide el consumo energético segundo a segundo, cruza ofertas del mercado y controla la domótica de las oficinas.</p>
+        <div class="reveal flex flex-wrap gap-8">
+          <div>
+            <div class="font-display text-2xl font-bold text-emerald-500">+40%</div>
+            <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat1">Eficiencia de los asesores</div>
+          </div>
+          <div>
+            <div class="font-display text-2xl font-bold text-emerald-400">−50%</div>
+            <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat2">Tiempo de reporting</div>
+          </div>
+          <div>
+            <div class="font-display text-2xl font-bold text-emerald-300">4</div>
+            <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat3">Módulos en producción</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Context bar -->
+  <section class="py-10 bg-card-light/40 dark:bg-card-dark/40 border-y border-border-light dark:border-border-dark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-px bg-border-light dark:bg-border-dark rounded-2xl overflow-hidden">
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.role">Rol</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Product Designer</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.type">Tipo</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">SaaS B2B</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.tools">Herramientas</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Figma · Miro</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.users">Usuarios</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Asesores energéticos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Context -->
+  <section class="py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div class="reveal">
+          <span class="inline-block text-xs font-semibold tracking-wider uppercase text-emerald-500 mb-4" data-i18n="s1.label">El contexto</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-6" data-i18n="s1.title">La herramienta que los asesores sufrían a diario</h2>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="s1.p1">Los asesores energéticos de Optimiza Recursos gestionaban más de 50 clientes cada uno, con 8 herramientas distintas abiertas a la vez. Tres horas al día perdidas en tareas manuales que el sistema debería hacer solo.</p>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed mb-6" data-i18n="s1.p2">OptiDashboard era la solución técnica. Mi trabajo fue convertirla en una herramienta que los asesores quisieran usar — no que tuvieran que usar.</p>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="p-4 rounded-2xl bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 text-center">
+              <div class="font-display font-bold text-red-500 text-lg">8</div>
+              <div class="text-xs text-muted-light dark:text-muted-dark mt-1" data-i18n="p1">Herramientas/asesor</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 text-center">
+              <div class="font-display font-bold text-red-500 text-lg">3h</div>
+              <div class="text-xs text-muted-light dark:text-muted-dark mt-1" data-i18n="p2">Manual/día</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 text-center">
+              <div class="font-display font-bold text-red-500 text-lg">50+</div>
+              <div class="text-xs text-muted-light dark:text-muted-dark mt-1" data-i18n="p3">Clientes/asesor</div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal stagger-1">
+          <div class="relative img-frame">
+            <div class="before-after-label" style="background:rgba(239,68,68,.15);color:#f87171;" data-i18n="before.label">Antes</div>
+            <img src="Assests/Img/20.png"
+                 alt="Web antigua de Optimiza Recursos — pantalla de inicio"
+                 class="w-full object-cover"
+                 onerror="this.style.display='none'">
+          </div>
+          <p class="text-xs text-muted-light dark:text-muted-dark mt-3 text-center" data-i18n="s1.caption">Web antigua — pantalla de inicio</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Old site screens -->
+  <section class="py-24 bg-card-light/30 dark:bg-card-dark/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <span class="inline-block text-xs font-semibold tracking-wider uppercase text-emerald-500 mb-4" data-i18n="s2.label">Situación inicial</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-4" data-i18n="s2.title">Lo que había antes</h2>
+        <p class="text-muted-light dark:text-muted-dark max-w-2xl mx-auto" data-i18n="s2.desc">Una web corporativa convertida en herramienta de trabajo a base de parches. Precios sin contexto, la sección de Robin Luz aislada del resto del ecosistema, y una arquitectura de información que no reflejaba cómo trabajaban los asesores.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="reveal stagger-1">
+          <div class="relative img-frame">
+            <div class="before-after-label" style="background:rgba(239,68,68,.15);color:#f87171;" data-i18n="before.label">Antes</div>
+            <img src="Assests/Img/21.png"
+                 alt="Web antigua — sección de precios"
+                 class="w-full object-cover"
+                 onerror="this.style.display='none'">
+          </div>
+          <p class="text-xs text-muted-light dark:text-muted-dark mt-3 text-center" data-i18n="s2.cap1">Pricing — sin contexto ni narrativa</p>
+        </div>
+        <div class="reveal stagger-2">
+          <div class="relative img-frame">
+            <div class="before-after-label" style="background:rgba(239,68,68,.15);color:#f87171;" data-i18n="before.label">Antes</div>
+            <img src="Assests/Img/22.png"
+                 alt="Web antigua — sección Robin Luz"
+                 class="w-full object-cover"
+                 onerror="this.style.display='none'">
+          </div>
+          <p class="text-xs text-muted-light dark:text-muted-dark mt-3 text-center" data-i18n="s2.cap2">Robin Luz — desconectado del ecosistema</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Redesign -->
+  <section class="py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal">
+          <span class="inline-block text-xs font-semibold tracking-wider uppercase text-emerald-500 mb-4" data-i18n="s3.label">El rediseño</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-6" data-i18n="s3.title">Una herramienta que respeta al asesor</h2>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="s3.p1">El rediseño de OptiDashboard parte de entender cómo trabaja un asesor energético: empieza el día revisando alertas, gestiona clientes en paralelo, genera informes y cierra propuestas. El nuevo diseño organiza la información alrededor de ese flujo real.</p>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed mb-6" data-i18n="s3.p2">El sistema de módulos — Seguridad, Optimeters, Robin Luz, Busquedas — se reorganizó en una barra lateral persistente. Los datos de consumo energético, antes enterrados en tablas, ahora tienen visualizaciones que permiten identificar anomalías de un vistazo.</p>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0"></div>
+              <span class="text-sm text-muted-light dark:text-muted-dark" data-i18n="s3.li1">Barra lateral persistente con los 4 módulos principales</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0"></div>
+              <span class="text-sm text-muted-light dark:text-muted-dark" data-i18n="s3.li2">Dark mode + Light mode — beige cálido para modo diurno</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0"></div>
+              <span class="text-sm text-muted-light dark:text-muted-dark" data-i18n="s3.li3">Datos de IoT en tiempo real con visualizaciones comprensibles</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0"></div>
+              <span class="text-sm text-muted-light dark:text-muted-dark" data-i18n="s3.li4">Adopción completa en 2 semanas desde el lanzamiento</span>
+            </li>
+          </ul>
+        </div>
+        <div class="reveal stagger-2">
+          <div class="relative img-frame">
+            <div class="before-after-label" style="background:rgba(16,185,129,.15);color:#34d399;" data-i18n="after.label">Rediseño</div>
+            <img src="Assests/Img/23.png"
+                 alt="OptiDashboard rediseñado — nuevo sistema de módulos y visualizaciones"
+                 class="w-full object-cover"
+                 onerror="this.style.display='none'">
+          </div>
+          <p class="text-xs text-muted-light dark:text-muted-dark mt-3 text-center" data-i18n="s3.caption">OptiDashboard rediseñado — visualización de datos energéticos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="py-24 bg-card-light/30 dark:bg-card-dark/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <span class="inline-block text-xs font-semibold tracking-wider uppercase text-emerald-500 mb-4" data-i18n="s4.label">Resultados</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-4" data-i18n="s4.title">El impacto en números</h2>
+      </div>
+      <div class="reveal grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="p-6 rounded-3xl bg-surface-light dark:bg-surface-dark border border-emerald-200 dark:border-emerald-900/40">
+          <div class="font-display text-3xl font-bold text-emerald-500 mb-2">+40%</div>
+          <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="r1">Eficiencia de los asesores</div>
+        </div>
+        <div class="p-6 rounded-3xl bg-surface-light dark:bg-surface-dark border border-emerald-200 dark:border-emerald-900/40">
+          <div class="font-display text-3xl font-bold text-emerald-400 mb-2">−50%</div>
+          <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="r2">Tiempo dedicado a reporting</div>
+        </div>
+        <div class="p-6 rounded-3xl bg-surface-light dark:bg-surface-dark border border-emerald-200 dark:border-emerald-900/40">
+          <div class="font-display text-3xl font-bold text-emerald-300 mb-2">4</div>
+          <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="r3">Módulos en producción</div>
+        </div>
+        <div class="p-6 rounded-3xl bg-surface-light dark:bg-surface-dark border border-emerald-200 dark:border-emerald-900/40">
+          <div class="font-display text-3xl font-bold text-emerald-200 mb-2">2 <span class="text-lg font-medium" data-i18n="weeks">sem.</span></div>
+          <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="r4">Adopción completa del equipo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation between sub-cases -->
+  <section class="py-16 border-t border-border-light dark:border-border-dark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row gap-4 justify-between items-center">
+        <a href="RobinLuz-Brand.html" class="flex items-center gap-2 text-sm font-medium text-muted-light dark:text-muted-dark hover:text-primary transition-colors focus-ring rounded-lg px-3 py-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          <span data-i18n="nav.prev">Anterior: Identidad visual</span>
+        </a>
+        <a href="Proyecto-RobinLuz.html" class="flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 transition-colors focus-ring rounded-lg px-3 py-2">
+          <span data-i18n="nav.hub">Ver todos los case studies</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="py-8 border-t border-border-light dark:border-border-dark">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <a href="index.html" class="font-display font-bold text-surface-dark dark:text-surface-light hover:text-primary transition-colors">Iñigo Mendizábal</a>
+    <span class="text-sm text-muted-light dark:text-muted-dark" data-i18n="footer">© 2026 Todos los derechos reservados</span>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const i18n = {
+    es:{
+      "nav.back":"Robin Luz","nav.title":"OptiDashboard","nav.prev":"Anterior: Identidad visual","nav.hub":"Ver todos los case studies",
+      "hero.title":"OptiDashboard","hero.desc":"La plataforma B2B que opera en la sombra para que Robin Luz funcione. Un SaaS para empresas que mide el consumo energético segundo a segundo, cruza ofertas del mercado y controla la domótica de las oficinas.",
+      "stat1":"Eficiencia de los asesores","stat2":"Tiempo de reporting","stat3":"Módulos en producción",
+      "ctx.role":"Rol","ctx.type":"Tipo","ctx.tools":"Herramientas","ctx.users":"Usuarios",
+      "s1.label":"El contexto","s1.title":"La herramienta que los asesores sufrían a diario","s1.p1":"Los asesores energéticos de Optimiza Recursos gestionaban más de 50 clientes cada uno, con 8 herramientas distintas abiertas a la vez. Tres horas al día perdidas en tareas manuales que el sistema debería hacer solo.","s1.p2":"OptiDashboard era la solución técnica. Mi trabajo fue convertirla en una herramienta que los asesores quisieran usar — no que tuvieran que usar.","s1.caption":"Web antigua — pantalla de inicio",
+      "p1":"Herramientas/asesor","p2":"Manual/día","p3":"Clientes/asesor",
+      "before.label":"Antes","after.label":"Rediseño",
+      "s2.label":"Situación inicial","s2.title":"Lo que había antes","s2.desc":"Una web corporativa convertida en herramienta de trabajo a base de parches. Precios sin contexto, la sección de Robin Luz aislada del resto del ecosistema, y una arquitectura de información que no reflejaba cómo trabajaban los asesores.","s2.cap1":"Pricing — sin contexto ni narrativa","s2.cap2":"Robin Luz — desconectado del ecosistema",
+      "s3.label":"El rediseño","s3.title":"Una herramienta que respeta al asesor","s3.p1":"El rediseño de OptiDashboard parte de entender cómo trabaja un asesor energético: empieza el día revisando alertas, gestiona clientes en paralelo, genera informes y cierra propuestas. El nuevo diseño organiza la información alrededor de ese flujo real.","s3.p2":"El sistema de módulos — Seguridad, Optimeters, Robin Luz, Busquedas — se reorganizó en una barra lateral persistente. Los datos de consumo energético, antes enterrados en tablas, ahora tienen visualizaciones que permiten identificar anomalías de un vistazo.","s3.li1":"Barra lateral persistente con los 4 módulos principales","s3.li2":"Dark mode + Light mode — beige cálido para modo diurno","s3.li3":"Datos de IoT en tiempo real con visualizaciones comprensibles","s3.li4":"Adopción completa en 2 semanas desde el lanzamiento","s3.caption":"OptiDashboard rediseñado — visualización de datos energéticos",
+      "s4.label":"Resultados","s4.title":"El impacto en números",
+      "r1":"Eficiencia de los asesores","r2":"Tiempo dedicado a reporting","r3":"Módulos en producción","r4":"Adopción completa del equipo","weeks":"sem.",
+      "footer":"© 2026 Todos los derechos reservados"
+    },
+    en:{
+      "nav.back":"Robin Luz","nav.title":"OptiDashboard","nav.prev":"Previous: Visual identity","nav.hub":"View all case studies",
+      "hero.title":"OptiDashboard","hero.desc":"The B2B platform that runs in the background to make Robin Luz work. A SaaS for businesses that measures energy consumption second by second, cross-references market offers, and controls office automation.",
+      "stat1":"Advisor efficiency","stat2":"Reporting time","stat3":"Modules in production",
+      "ctx.role":"Role","ctx.type":"Type","ctx.tools":"Tools","ctx.users":"Users",
+      "s1.label":"Context","s1.title":"The tool advisors struggled with every day","s1.p1":"Optimiza Recursos energy advisors managed over 50 clients each, with 8 different tools open at once. Three hours a day lost to manual tasks the system should have handled automatically.","s1.p2":"OptiDashboard was the technical solution. My job was to turn it into a tool advisors wanted to use — not just had to.","s1.caption":"Old web — home screen",
+      "p1":"Tools/advisor","p2":"Manual/day","p3":"Clients/advisor",
+      "before.label":"Before","after.label":"Redesign",
+      "s2.label":"Starting point","s2.title":"What existed before","s2.desc":"A corporate website patched into a work tool. Pricing without context, the Robin Luz section isolated from the rest of the ecosystem, and an information architecture that didn't reflect how advisors actually worked.","s2.cap1":"Pricing — no context or narrative","s2.cap2":"Robin Luz — disconnected from the ecosystem",
+      "s3.label":"The redesign","s3.title":"A tool that respects the advisor","s3.p1":"The OptiDashboard redesign starts from understanding how an energy advisor works: the day begins reviewing alerts, managing clients in parallel, generating reports, and closing proposals. The new design organises information around that real workflow.","s3.p2":"The module system — Security, Optimeters, Robin Luz, Search — was reorganised into a persistent sidebar. Energy consumption data, previously buried in tables, now has visualisations that allow anomalies to be spotted at a glance.","s3.li1":"Persistent sidebar with the 4 main modules","s3.li2":"Dark mode + Light mode — warm beige for daytime use","s3.li3":"Real-time IoT data with understandable visualisations","s3.li4":"Full team adoption within 2 weeks of launch","s3.caption":"Redesigned OptiDashboard — energy data visualisation",
+      "s4.label":"Results","s4.title":"The impact in numbers",
+      "r1":"Advisor efficiency","r2":"Time spent on reporting","r3":"Modules in production","r4":"Full team adoption","weeks":"wks.",
+      "footer":"© 2026 All rights reserved"
+    }
+  };
+  let lang = localStorage.getItem('lang') || 'es';
+  function applyLang(l){lang=l;localStorage.setItem('lang',l);document.documentElement.lang=l;document.getElementById('langLabel').textContent=l==='en'?'ES':'EN';document.querySelectorAll('[data-i18n]').forEach(el=>{if(i18n[l][el.dataset.i18n])el.textContent=i18n[l][el.dataset.i18n];});}
+  document.getElementById('langToggle').addEventListener('click',()=>applyLang(lang==='en'?'es':'en'));
+  applyLang(lang);
+  document.getElementById('themeToggle').addEventListener('click',()=>{document.documentElement.classList.toggle('dark');localStorage.theme=document.documentElement.classList.contains('dark')?'dark':'light';});
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('progress-bar').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';});
+</script>
+</body>
+</html>

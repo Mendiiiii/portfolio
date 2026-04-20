@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iñigo Mendizábal | Portfolio</title>
+
+    <!-- Fallback script para asegurar visibilidad -->
+    <script>
+        // Elimina la clase 'no-js' inmediatamente para activar animaciones
+        document.documentElement.classList.remove('no-js');
+        // Detectar tema del sistema o guardado
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { DEFAULT: '#4F46E5', light: '#6366F1', dark: '#4338CA' },
+                        surface: { light: '#FFFFFF', dark: '#0F172A' },
+                        muted: { light: '#64748B', dark: '#94A3B8' },
+                        card: { light: '#F8FAFC', dark: '#1E293B' },
+                        border: { light: '#E2E8F0', dark: '#334155' }
+                    },
+                    fontFamily: {
+                        display: ['Space Grotesk', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif']
+                    },
+                    borderRadius: { '2xl': '1rem', '3xl': '1.5rem', '4xl': '2rem' }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
+        }
+
+        :root {
+            --bg: #FFFFFF;
+            --fg: #0F172A;
+            --muted: #64748B;
+            --accent: #4F46E5;
+            --card: #F8FAFC;
+            --border: #E2E8F0;
+        }
+
+        .dark {
+            --bg: #0F172A;
+            --fg: #F1F5F9;
+            --muted: #94A3B8;
+            --accent: #6366F1;
+            --card: #1E293B;
+            --border: #334155;
+        }
+
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Animaciones de Entrada Seguras */
+        /* Por defecto (sin JS), los elementos son visibles */
+        .reveal {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* Si JS está activo, preparamos el estado inicial oculto */
+        .js-ready .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+
+        /* Estado visible animado */
+        .js-ready .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger delays */
+        .stagger-1 {
+            transition-delay: 0.1s;
+        }
+
+        .stagger-2 {
+            transition-delay: 0.2s;
+        }
+
+        .stagger-3 {
+            transition-delay: 0.3s;
+        }
+
+        .stagger-4 {
+            transition-delay: 0.4s;
+        }
+
+        .stagger-5 {
+            transition-delay: 0.5s;
+        }
+
+        /* Mesh Gradients */
+        .mesh-gradient-hero {
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(79, 70, 229, 0.15), transparent);
+        }
+
+        .dark .mesh-gradient-hero {
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(79, 70, 229, 0.25), transparent);
+        }
+
+        .mesh-gradient-footer {
+            background: radial-gradient(ellipse 60% 40% at 50% 100%, rgba(79, 70, 229, 0.12), transparent);
+        }
+
+        .dark .mesh-gradient-footer {
+            background: radial-gradient(ellipse 60% 40% at 50% 100%, rgba(79, 70, 229, 0.2), transparent);
+        }
+
+        /* Auras */
+        .aura {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .aura-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(79, 70, 229, 0.15);
+            opacity: 0.6;
+        }
+
+        .aura-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(16, 185, 129, 0.1);
+            opacity: 0.5;
+        }
+
+        /* Accordion */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-content.open {
+            max-height: 200px;
+        }
+
+        /* Project Card Hover */
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(15, 23, 42, 0.85) 100%);
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::before,
+        .project-card:focus-within::before {
+            opacity: 1;
+        }
+
+        .project-card .card-content {
+            transform: translateY(16px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .card-content,
+        .project-card:focus-within .card-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Focus & Buttons */
+        .focus-ring:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-press:active {
+            transform: scale(0.97);
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-surface-light dark:bg-surface-dark min-h-screen">
+
+    <!-- Header -->
+    <header
+        class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-surface-light/80 dark:bg-surface-dark/80 border-b border-border-light dark:border-border-dark">
+        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between" role="navigation">
+            <a href="#"
+                class="font-display font-bold text-xl text-surface-dark dark:text-surface-light focus-ring rounded px-1">
+                Iñigo Mendizábal
+            </a>
+
+            <div class="hidden md:flex items-center gap-1">
+                <a href="#home"
+                    class="nav-link px-4 py-2 rounded-xl text-sm font-medium text-muted-light dark:text-muted-dark hover:text-primary transition-all focus-ring"
+                    data-i18n="nav.home">Inicio</a>
+                <a href="#about"
+                    class="nav-link px-4 py-2 rounded-xl text-sm font-medium text-muted-light dark:text-muted-dark hover:text-primary transition-all focus-ring"
+                    data-i18n="nav.about">Sobre mí</a>
+                <a href="#works"
+                    class="nav-link px-4 py-2 rounded-xl text-sm font-medium text-muted-light dark:text-muted-dark hover:text-primary transition-all focus-ring"
+                    data-i18n="nav.works">Proyectos</a>
+                <a href="#services"
+                    class="nav-link px-4 py-2 rounded-xl text-sm font-medium text-muted-light dark:text-muted-dark hover:text-primary transition-all focus-ring"
+                    data-i18n="nav.services">Servicios</a>
+                <a href="cv.html"
+                    class="nav-link px-4 py-2 rounded-xl text-sm font-medium text-muted-light dark:text-muted-dark hover:text-primary transition-all focus-ring"
+                    data-i18n="nav.cv">CV</a>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button id="langToggle"
+                    class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring"
+                    title="Change language">
+                    <span class="text-sm font-medium" id="langLabel">EN</span>
+                </button>
+
+                <button id="themeToggle"
+                    class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring"
+                    title="Toggle theme">
+                    <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+
+                <a href="#contact"
+                    class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary-dark text-white text-sm font-medium rounded-2xl transition-all focus-ring btn-press">
+                    <span data-i18n="nav.contact">Contactar</span>
+                </a>
+
+                <button id="mobileMenuBtn"
+                    class="md:hidden p-2 rounded-xl text-muted-light dark:text-muted-dark focus-ring"
+                    aria-label="Open menu">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu"
+            class="md:hidden hidden border-t border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
+            <div class="px-4 py-4 space-y-2">
+                <a href="#home"
+                    class="block px-4 py-3 rounded-xl text-sm font-medium text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark"
+                    data-i18n="nav.home">Inicio</a>
+                <a href="#about"
+                    class="block px-4 py-3 rounded-xl text-sm font-medium text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark"
+                    data-i18n="nav.about">Sobre mí</a>
+                <a href="#works"
+                    class="block px-4 py-3 rounded-xl text-sm font-medium text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark"
+                    data-i18n="nav.works">Proyectos</a>
+                <a href="#services"
+                    class="block px-4 py-3 rounded-xl text-sm font-medium text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark"
+                    data-i18n="nav.services">Servicios</a>
+                <a href="cv.html"
+                    class="block px-4 py-3 rounded-xl text-sm font-medium text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark"
+                    data-i18n="nav.cv">CV</a>
+                <a href="#contact"
+                    class="block px-4 py-3 bg-primary text-white text-sm font-medium rounded-2xl text-center"
+                    data-i18n="nav.contact">Contactar</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home"
+            class="relative min-h-screen flex items-center justify-center pt-16 mesh-gradient-hero overflow-hidden">
+            <div class="aura aura-1 -top-20 left-1/4"></div>
+            <div class="aura aura-2 top-1/3 right-1/4"></div>
+
+            <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="flex flex-col items-center text-center">
+
+                    <div class="reveal stagger-1 relative mb-8">
+                        <div
+                            class="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden ring-4 ring-card-light dark:ring-card-dark bg-card-light dark:bg-card-dark">
+                            <img src="Assests/Img/Perfil/Foto-perfil.png" alt="foto portfolio"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="absolute -bottom-1 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-xs font-medium rounded-full border border-emerald-200 dark:border-emerald-800">
+                            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                            <span data-i18n="hero.status">Disponible para proyectos</span>
+                        </div>
+                    </div>
+
+                    <h1
+                        class="reveal stagger-2 font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-surface-dark dark:text-surface-light max-w-3xl leading-tight mb-6">
+                        <span data-i18n="hero.title">Soy Diseñador Freelance,</span>
+                        <br>
+                        <span class="text-primary dark:text-primary-light" data-i18n="hero.subtitle">trabajando
+                            globalmente</span>
+                    </h1>
+
+                    <p class="reveal stagger-3 text-lg sm:text-xl text-muted-light dark:text-muted-dark max-w-2xl mb-10"
+                        data-i18n="hero.description">
+                        Creo experiencias digitales que combinan estética y funcionalidad. Especializado en diseño de
+                        producto, auditoría UX y sistemas de diseño.
+                    </p>
+
+                    <div class="reveal stagger-4 flex flex-col sm:flex-row items-center gap-4">
+                        <a href="#works"
+                            class="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white font-medium rounded-2xl transition-all focus-ring btn-press">
+                            <span data-i18n="hero.cta.primary">Ver mis trabajos</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </a>
+                        <a href="#contact"
+                            class="inline-flex items-center gap-2 px-6 py-3 bg-card-light dark:bg-card-dark hover:bg-border-light dark:hover:bg-border-dark text-surface-dark dark:text-surface-light font-medium rounded-2xl border border-border-light dark:border-border-dark transition-all focus-ring btn-press">
+                            <span data-i18n="hero.cta.secondary">Contactar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 lg:py-32 relative">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                    <div class="reveal">
+                        <span
+                            class="inline-block text-xs font-semibold tracking-wider uppercase text-primary dark:text-primary-light mb-4"
+                            data-i18n="about.label">Sobre mí</span>
+                        <h2
+                            class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-surface-dark dark:text-surface-light mb-6">
+                            <span data-i18n="about.title">Diseñador, cofundador,</span>
+                            <span class="text-primary dark:text-primary-light" data-i18n="about.titleHighlight">
+                                investigador.</span>
+                        </h2>
+                        <div class="space-y-4 text-muted-light dark:text-muted-dark leading-relaxed">
+                            <p data-i18n="about.paragraph1">He cofundado dos productos desde cero — uno en energía, otro en hostelería — y he liderado investigación UX para marcas como ASOS. Eso me da perspectiva que no se aprende solo diseñando pantallas: sé lo que cuesta validar una hipótesis con usuarios reales y defender una decisión ante un CEO que quiere construir otra cosa.</p>
+                            <p data-i18n="about.paragraph2">Me muevo entre diseño, producto y código. Uso la IA no como atajo sino para tener mejor criterio antes. El resultado son productos pensados — no solo ejecutados.</p>
+                        </div>
+                        <div class="mt-8 flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1.5 text-xs font-medium bg-card-light dark:bg-card-dark text-muted-light dark:text-muted-dark rounded-lg border border-border-light dark:border-border-dark">Figma</span>
+                            <span
+                                class="px-3 py-1.5 text-xs font-medium bg-card-light dark:bg-card-dark text-muted-light dark:text-muted-dark rounded-lg border border-border-light dark:border-border-dark">Framer</span>
+                            <span
+                                class="px-3 py-1.5 text-xs font-medium bg-card-light dark:bg-card-dark text-muted-light dark:text-muted-dark rounded-lg border border-border-light dark:border-border-dark">React</span>
+                            <span
+                                class="px-3 py-1.5 text-xs font-medium bg-card-light dark:bg-card-dark text-muted-light dark:text-muted-dark rounded-lg border border-border-light dark:border-border-dark">TailwindCSS</span>
+                        </div>
+                    </div>
+
+                    <div class="reveal stagger-2">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div
+                                class="metric-card p-6 bg-card-light dark:bg-card-dark rounded-2xl border border-border-light dark:border-border-dark hover:border-primary/30 transition-all">
+                                <div
+                                    class="font-display text-4xl sm:text-5xl font-bold text-primary dark:text-primary-light mb-2">
+                                    12</div>
+                                <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="about.metric1">
+                                    Proyectos Realizados</div>
+                            </div>
+                            <div
+                                class="metric-card p-6 bg-card-light dark:bg-card-dark rounded-2xl border border-border-light dark:border-border-dark hover:border-primary/30 transition-all">
+                                <div
+                                    class="font-display text-4xl sm:text-5xl font-bold text-primary dark:text-primary-light mb-2">
+                                    8+</div>
+                                <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="about.metric2">
+                                    Clientes Satisfechos</div>
+                            </div>
+                            <div
+                                class="metric-card p-6 bg-card-light dark:bg-card-dark rounded-2xl border border-border-light dark:border-border-dark hover:border-primary/30 transition-all">
+                                <div
+                                    class="font-display text-4xl sm:text-5xl font-bold text-primary dark:text-primary-light mb-2">
+                                    4</div>
+                                <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="about.metric3">
+                                    Años de Experiencia</div>
+                            </div>
+                            <div
+                                class="metric-card p-6 bg-card-light dark:bg-card-dark rounded-2xl border border-border-light dark:border-border-dark hover:border-primary/30 transition-all">
+                                <div
+                                    class="font-display text-4xl sm:text-5xl font-bold text-primary dark:text-primary-light mb-2">
+                                    2</div>
+                                <div class="text-sm text-muted-light dark:text-muted-dark" data-i18n="about.metric4">
+                                    Startups Cofundadas</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Works Section -->
+        <section id="works" class="py-24 lg:py-32 bg-card-light/50 dark:bg-card-dark/50 relative">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="reveal text-center mb-16">
+                    <span
+                        class="inline-block text-xs font-semibold tracking-wider uppercase text-primary dark:text-primary-light mb-4"
+                        data-i18n="works.label">Portafolio</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-surface-dark dark:text-surface-light"
+                        data-i18n="works.title">Algunas muestras de mi trabajo</h2>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <!-- Project 1 — Robin Luz hub -->
+                    <article
+                        class="reveal stagger-1 project-card group relative overflow-hidden rounded-2xl bg-[#15181C] border border-[#8A38F5]/20 transition-all focus-within:ring-2 focus-within:ring-[#8A38F5]/40">
+                        <div class="aspect-[4/3] overflow-hidden relative">
+                            <img src="Assests/Img/26.png"
+                                alt="Robin Luz — App Store"
+                                class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0" style="background:linear-gradient(to bottom, transparent 30%, rgba(21,24,28,.85) 100%);"></div>
+                        </div>
+                        <div class="card-content absolute bottom-0 left-0 right-0 p-6 z-10">
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="inline-block px-2.5 py-1 text-xs font-medium bg-[#8A38F5]/30 text-violet-300 rounded-full border border-[#8A38F5]/30" data-i18n="works.project1.category">Energía · Producto · SaaS</span>
+                            </div>
+                            <h3 class="font-display text-xl font-bold text-white mb-1">Robin Luz</h3>
+                            <p class="text-sm text-white/60" data-i18n="works.project1.description">Startup sin usuarios — rediseño y pivote B2B</p>
+                        </div>
+                        <a href="portfolio-robin-luz.html" class="absolute inset-0 z-20 focus-ring rounded-2xl"
+                            aria-label="Ver Robin Luz"><span class="sr-only">Ver</span></a>
+                    </article>
+
+                    <!-- Project 2 — NowEat -->
+                    <article class="reveal stagger-2 project-card group relative overflow-hidden rounded-2xl border border-amber-500/20 transition-all focus-within:ring-2 focus-within:ring-amber-400/40" style="background:#0F0A02;">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop"
+                                alt="NowEat — restaurante"
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="card-content absolute bottom-0 left-0 right-0 p-6 z-10">
+                            <span class="inline-block px-3 py-1 text-xs font-medium bg-amber-500/20 text-amber-300 rounded-full mb-3" data-i18n="works.project2.category">SaaS · Co-founder</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-1">NowEat</h3>
+                            <p class="text-sm text-white/60" data-i18n="works.project2.description">Una plataforma, dos founders, beta activa</p>
+                        </div>
+                        <a href="portfolio-noweat.html" class="absolute inset-0 z-20 focus-ring rounded-2xl" aria-label="Ver NowEat"><span class="sr-only">Ver</span></a>
+                    </article>
+
+                    <!-- Project 3 — En Marcha -->
+                    <article class="reveal stagger-3 project-card group relative overflow-hidden rounded-2xl border border-emerald-700/30 transition-all focus-within:ring-2 focus-within:ring-emerald-500/40" style="background:#0A120D;">
+                        <div class="aspect-[4/3] overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=600&fit=crop"
+                                alt="En Marcha — impacto social"
+                                class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0" style="background:linear-gradient(to bottom, transparent 25%, rgba(10,18,13,.88) 100%);"></div>
+                        </div>
+                        <div class="card-content absolute bottom-0 left-0 right-0 p-6 z-10">
+                            <span class="inline-block px-3 py-1 text-xs font-medium bg-emerald-500/20 text-emerald-300 rounded-full mb-3" data-i18n="works.project3.category">Impact Design · Rural</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-1">En Marcha</h3>
+                            <p class="text-sm text-white/60" data-i18n="works.project3.description">Diseño institucional para el territorio</p>
+                        </div>
+                        <a href="portfolio-en-marcha.html" class="absolute inset-0 z-20 focus-ring rounded-2xl" aria-label="Ver En Marcha"><span class="sr-only">Ver</span></a>
+                    </article>
+
+                    <!-- Project 4 — Otros proyectos: ASOS + Citibank -->
+                    <article class="reveal stagger-4 relative rounded-2xl overflow-hidden border border-sky-500/15 flex flex-col" style="background:#080C14;">
+                        <!-- Header image -->
+                        <div class="relative overflow-hidden" style="aspect-ratio:16/7;">
+                            <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=350&fit=crop"
+                                 alt="Agencia y consultoría de diseño"
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0" style="background:linear-gradient(to bottom, rgba(8,12,20,.3) 0%, rgba(8,12,20,.85) 100%);"></div>
+                            <div class="absolute bottom-0 left-0 right-0 px-6 pb-5">
+                                <span class="inline-block px-2.5 py-1 text-xs font-medium bg-sky-500/20 text-sky-300 rounded-full mb-3" data-i18n="works.project4.label">Otros proyectos</span>
+                                <h3 class="font-display text-xl font-bold text-white" data-i18n="works.project4.title">Agencia &amp; consultoría</h3>
+                                <p class="text-sm text-white/50 mt-0.5" data-i18n="works.project4.subtitle">Proyectos con clientes internacionales</p>
+                            </div>
+                        </div>
+                        <!-- ASOS row -->
+                        <a href="portfolio-asos.html" class="group flex items-center gap-4 px-6 py-5 hover:bg-white/[0.04] transition-colors border-t border-white/[0.06] focus-ring">
+                            <div class="w-10 h-10 rounded-xl bg-white/8 flex items-center justify-center flex-shrink-0 border border-white/10">
+                                <span class="text-[10px] font-bold text-white/70 tracking-widest">ASOS</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-semibold text-white leading-tight mb-0.5">ASOS</p>
+                                <p class="text-xs text-white/45" data-i18n="works.project4.asos.desc">UX Research · Retención · Sizing</p>
+                            </div>
+                            <svg class="w-4 h-4 text-white/25 group-hover:text-white/60 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                        <!-- Citibank row -->
+                        <a href="portfolio-citibank.html" class="group flex items-center gap-4 px-6 py-5 hover:bg-white/[0.04] transition-colors border-t border-white/[0.06] focus-ring">
+                            <div class="w-10 h-10 rounded-xl bg-[#003B70]/25 flex items-center justify-center flex-shrink-0 border border-[#003B70]/40">
+                                <span class="text-[10px] font-bold text-blue-400 tracking-widest">CITI</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-semibold text-white leading-tight mb-0.5">Citibank</p>
+                                <p class="text-xs text-white/45" data-i18n="works.project4.citi.desc">Banca digital · Flybuys · White-label</p>
+                            </div>
+                            <svg class="w-4 h-4 text-white/25 group-hover:text-white/60 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lab Section -->
+        <section class="pb-16 lg:pb-24">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="reveal mb-8 flex items-center gap-4">
+                    <span class="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block"></span>
+                        Laboratorio
+                    </span>
+                    <div class="flex-1 h-px bg-border-light dark:bg-border-dark"></div>
+                    <span class="text-xs text-muted-light dark:text-muted-dark" data-i18n="lab.subtitle">Construyendo en vivo · Proyectos propios</span>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <!-- Job Search Autopilot -->
+                    <article class="reveal stagger-1 group relative rounded-2xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark overflow-hidden hover:border-primary/30 transition-all">
+                        <div class="p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <span class="inline-flex items-center gap-1 text-[10px] font-semibold tracking-widest uppercase text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-2 py-1 rounded-full" data-i18n="lab.wip">En desarrollo</span>
+                            </div>
+                            <h3 class="font-display text-lg font-bold text-surface-dark dark:text-surface-light mb-2" data-i18n="lab.job.title">Job Search Autopilot</h3>
+                            <p class="text-sm leading-6 text-muted-light dark:text-muted-dark mb-5" data-i18n="lab.job.desc">Herramienta para gestionar búsquedas de empleo: analiza ofertas, calcula match con tu perfil, trackea aplicaciones y entrevistas. Construida porque la necesitaba yo mismo.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-[11px] px-2.5 py-1 rounded-lg bg-surface-dark/5 dark:bg-surface-light/8 text-muted-light dark:text-muted-dark border border-border-light dark:border-border-dark">Next.js</span>
+                                <span class="text-[11px] px-2.5 py-1 rounded-lg bg-surface-dark/5 dark:bg-surface-light/8 text-muted-light dark:text-muted-dark border border-border-light dark:border-border-dark">Supabase</span>
+                                <span class="text-[11px] px-2.5 py-1 rounded-lg bg-surface-dark/5 dark:bg-surface-light/8 text-muted-light dark:text-muted-dark border border-border-light dark:border-border-dark">IA</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Conecta -->
+                    <article class="reveal stagger-2 group relative rounded-2xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark overflow-hidden hover:border-primary/30 transition-all">
+                        <div class="p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                </div>
+                                <span class="inline-flex items-center gap-1 text-[10px] font-semibold tracking-widest uppercase text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-2 py-1 rounded-full" data-i18n="lab.wip">En desarrollo</span>
+                            </div>
+                            <h3 class="font-display text-lg font-bold text-surface-dark dark:text-surface-light mb-2">Conecta</h3>
+                            <p class="text-sm leading-6 text-muted-light dark:text-muted-dark mb-5" data-i18n="lab.conecta.desc">Carpooling urbano que reduce atascos, contaminación y huella de carbono. El conductor ahorra en combustible y accede al carril VAO; el pasajero cambia tres transportes públicos por un trayecto directo. Vendible a ayuntamientos y empresas con planes de movilidad.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-[11px] px-2.5 py-1 rounded-lg bg-surface-dark/5 dark:bg-surface-light/8 text-muted-light dark:text-muted-dark border border-border-light dark:border-border-dark">Next.js</span>
+                                <span class="text-[11px] px-2.5 py-1 rounded-lg bg-surface-dark/5 dark:bg-surface-light/8 text-muted-light dark:text-muted-dark border border-border-light dark:border-border-dark">Movilidad</span>
+                                <span class="text-[11px] px-2.5 py-1 rounded-lg bg-surface-dark/5 dark:bg-surface-light/8 text-muted-light dark:text-muted-dark border border-border-light dark:border-border-dark">Smart City</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-24 lg:py-32 relative">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+                    <div class="reveal">
+                        <span
+                            class="inline-block text-xs font-semibold tracking-wider uppercase text-primary dark:text-primary-light mb-4"
+                            data-i18n="services.label">Servicios</span>
+                        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-surface-dark dark:text-surface-light mb-6"
+                            data-i18n="services.title">Lo que puedo hacer por ti</h2>
+                        <p class="text-muted-light dark:text-muted-dark leading-relaxed"
+                            data-i18n="services.description">Ofrezco servicios de diseño integrales adaptados a las
+                            necesidades de tu negocio.</p>
+                    </div>
+
+                    <div class="reveal stagger-2 space-y-3">
+                        <!-- Accordion Items -->
+                        <div
+                            class="accordion-item border border-border-light dark:border-border-dark rounded-2xl overflow-hidden">
+                            <button
+                                class="accordion-trigger w-full flex items-center justify-between p-5 text-left focus-ring rounded-2xl"
+                                aria-expanded="false" aria-controls="acc-1">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary/10 text-primary">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="font-display text-lg font-semibold text-surface-dark dark:text-surface-light"
+                                        data-i18n="services.accordion1.title">UX Audit</span>
+                                </div>
+                                <svg class="accordion-chevron w-5 h-5 text-muted-light dark:text-muted-dark transition-transform duration-300"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div id="acc-1" class="accordion-content">
+                                <div class="px-5 pb-5 text-muted-light dark:text-muted-dark pl-14"
+                                    data-i18n="services.accordion1.content">Análisis exhaustivo de tus productos
+                                    digitales para identificar problemas de usabilidad.</div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="accordion-item border border-border-light dark:border-border-dark rounded-2xl overflow-hidden">
+                            <button
+                                class="accordion-trigger w-full flex items-center justify-between p-5 text-left focus-ring rounded-2xl"
+                                aria-expanded="false" aria-controls="acc-2">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary/10 text-primary">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="font-display text-lg font-semibold text-surface-dark dark:text-surface-light"
+                                        data-i18n="services.accordion2.title">Product Design</span>
+                                </div>
+                                <svg class="accordion-chevron w-5 h-5 text-muted-light dark:text-muted-dark transition-transform duration-300"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div id="acc-2" class="accordion-content">
+                                <div class="px-5 pb-5 text-muted-light dark:text-muted-dark pl-14"
+                                    data-i18n="services.accordion2.content">Diseño de producto de principio a fin, desde
+                                    el concepto hasta la producción.</div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="accordion-item border border-border-light dark:border-border-dark rounded-2xl overflow-hidden">
+                            <button
+                                class="accordion-trigger w-full flex items-center justify-between p-5 text-left focus-ring rounded-2xl"
+                                aria-expanded="false" aria-controls="acc-3">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary/10 text-primary">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="font-display text-lg font-semibold text-surface-dark dark:text-surface-light"
+                                        data-i18n="services.accordion3.title">Design System</span>
+                                </div>
+                                <svg class="accordion-chevron w-5 h-5 text-muted-light dark:text-muted-dark transition-transform duration-300"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div id="acc-3" class="accordion-content">
+                                <div class="px-5 pb-5 text-muted-light dark:text-muted-dark pl-14"
+                                    data-i18n="services.accordion3.content">Sistemas de diseño escalables con
+                                    componentes reutilizables y documentación clara.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section id="contact" class="py-24 lg:py-32 mesh-gradient-footer relative overflow-hidden">
+            <div class="aura aura-2 bottom-0 left-1/3 opacity-60"></div>
+            <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="reveal">
+                    <span
+                        class="inline-block text-xs font-semibold tracking-wider uppercase text-primary dark:text-primary-light mb-4"
+                        data-i18n="contact.label">Contacto</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-surface-dark dark:text-surface-light mb-6"
+                        data-i18n="contact.title">Trabajemos juntos</h2>
+                    <p class="text-lg text-muted-light dark:text-muted-dark max-w-2xl mx-auto mb-10"
+                        data-i18n="contact.description">¿Tienes un proyecto en mente? Me encantaría escucharlo.</p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="mailto:hello@inigomendizabal.com"
+                            class="inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary-dark text-white font-medium rounded-2xl transition-all focus-ring btn-press">
+                            <span data-i18n="contact.cta">Contactar</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-border-light dark:border-border-dark">
+        <div
+            class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-6">
+                <span class="font-display font-bold text-surface-dark dark:text-surface-light">Iñigo Mendizábal</span>
+                <span class="text-sm text-muted-light dark:text-muted-dark" data-i18n="footer.copyright">© 2026 Todos
+                    los derechos reservados</span>
+            </div>
+            <nav class="flex items-center gap-6">
+                <a href="#"
+                    class="text-sm text-muted-light dark:text-muted-dark hover:text-primary transition-colors focus-ring rounded"
+                    data-i18n="footer.privacy">Privacidad</a>
+                <a href="#"
+                    class="text-sm text-muted-light dark:text-muted-dark hover:text-primary transition-colors focus-ring rounded"
+                    data-i18n="footer.terms">Términos</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Habilitar animaciones de forma segura
+        document.documentElement.classList.add('js-ready');
+
+        // 2. i18n Data
+        const i18n = {
+            en: {
+                "nav.home": "Home", "nav.about": "About", "nav.works": "Works", "nav.services": "Services", "nav.cv": "CV", "nav.contact": "Contact me",
+                "hero.title": "I am Freelance Designer,", "hero.subtitle": "working globally", "hero.status": "Available for new projects",
+                "hero.description": "Crafting digital experiences that blend aesthetics and functionality. Specialized in product design, UX audit, and design systems.",
+                "hero.cta.primary": "View my work", "hero.cta.secondary": "Get in touch",
+                "about.label": "About me", "about.title": "Designer, co-founder,", "about.titleHighlight": " researcher.",
+                "about.paragraph1": "I’ve co-founded two products from scratch — one in energy, one in hospitality — and led UX research for brands like ASOS. That gives me perspective you don’t get from just designing screens: I know what it costs to validate a hypothesis with real users and defend a decision in front of a CEO who wants to build something else.",
+                "about.paragraph2": "I move between design, product and code. I use AI not as a shortcut but as a way to have better criteria earlier. The result is products that are thought through — not just executed.",
+                "about.metric1": "Projects", "about.metric2": "Clients", "about.metric3": "Years Experience", "about.metric4": "Startups Founded",
+                "lab.subtitle": "Building live · Personal projects", "lab.wip": "In progress",
+                "lab.job.title": "Job Search Autopilot",
+                "lab.job.desc": "A tool to manage job searches: analyses listings, calculates match with your profile, tracks applications and interviews. Built because I needed it myself.",
+                "lab.conecta.desc": "Urban carpooling that reduces traffic, pollution and carbon footprint. The driver saves on fuel and gains HOV lane access; the passenger swaps three public transport legs for one direct ride. Viable for city councils and companies with mobility plans.",
+                "works.label": "Portfolio", "works.title": "A few samples of my work",
+                "works.project1.category": "Energy · Product · SaaS", "works.project1.description": "No-user startup — product redesign and B2B pivot",
+                "works.project2.category": "SaaS · Co-founder", "works.project2.description": "One platform, two founders, active beta",
+                "works.project3.title": "En Marcha", "works.project3.category": "Impact Design · Rural", "works.project3.description": "Institutional design for rural territory",
+                "works.project4.label": "Other projects", "works.project4.title": "Agency & consultancy", "works.project4.subtitle": "Projects with international clients",
+                "works.project4.asos.desc": "UX Research · Retention · Sizing & Returns",
+                "works.project4.citi.desc": "Digital banking · Flybuys · White-label",
+                "works.project4.note": "2022–2023 · Innomad · ASOS Research",
+                "services.label": "Services", "services.title": "What I may do for you", "services.description": "Comprehensive design services tailored to your business needs.",
+                "services.accordion1.title": "UX Audit", "services.accordion1.content": "Comprehensive analysis of digital products to identify usability issues.",
+                "services.accordion2.title": "Product Design", "services.accordion2.content": "End-to-end product design from concept to production-ready assets.",
+                "services.accordion3.title": "Design System", "services.accordion3.content": "Scalable design systems with reusable components and clear documentation.",
+                "contact.label": "Contact", "contact.title": "Let's work together", "contact.description": "Have a project in mind? I'd love to hear about it.",
+                "contact.cta": "Contact me",
+                "footer.copyright": "© 2026 All rights reserved", "footer.privacy": "Privacy", "footer.terms": "Terms"
+            },
+            es: {
+                "nav.home": "Inicio", "nav.about": "Sobre mí", "nav.works": "Proyectos", "nav.services": "Servicios", "nav.cv": "CV", "nav.contact": "Contactar",
+                "hero.title": "Soy Diseñador Freelance,", "hero.subtitle": "trabajando globalmente", "hero.status": "Disponible para proyectos",
+                "hero.description": "Creo experiencias digitales que combinan estética y funcionalidad. Especializado en diseño de producto, auditoría UX y sistemas de diseño.",
+                "hero.cta.primary": "Ver mis trabajos", "hero.cta.secondary": "Contactar",
+                "about.label": "Sobre mí", "about.title": "Diseñador, cofundador,", "about.titleHighlight": " investigador.",
+                "about.paragraph1": "He cofundado dos productos desde cero — uno en energía, otro en hostelería — y he liderado investigación UX para marcas como ASOS. Eso me da perspectiva que no se aprende solo diseñando pantallas: sé lo que cuesta validar una hipótesis con usuarios reales y defender una decisión ante un CEO que quiere construir otra cosa.",
+                "about.paragraph2": "Me muevo entre diseño, producto y código. Uso la IA no como atajo sino para tener mejor criterio antes. El resultado son productos pensados — no solo ejecutados.",
+                "about.metric1": "Proyectos", "about.metric2": "Clientes", "about.metric3": "Años de Experiencia", "about.metric4": "Startups Cofundadas",
+                "lab.subtitle": "Construyendo en vivo · Proyectos propios", "lab.wip": "En desarrollo",
+                "lab.job.title": "Job Search Autopilot",
+                "lab.job.desc": "Herramienta para gestionar búsquedas de empleo: analiza ofertas, calcula match con tu perfil, trackea aplicaciones y entrevistas. Construida porque la necesitaba yo mismo.",
+                "lab.conecta.desc": "Carpooling urbano que reduce atascos, contaminación y huella de carbono. El conductor ahorra en combustible y accede al carril VAO; el pasajero cambia tres transportes públicos por un trayecto directo. Vendible a ayuntamientos y empresas con planes de movilidad.",
+                "works.label": "Portfolio", "works.title": "Algunas muestras de mi trabajo",
+                "works.project1.category": "Energía · Producto · SaaS", "works.project1.description": "Startup sin usuarios — rediseño y pivote B2B",
+                "works.project2.category": "SaaS · Cofundador", "works.project2.description": "Una plataforma, dos founders, beta activa",
+                "works.project3.title": "En Marcha", "works.project3.category": "Impact Design · Rural", "works.project3.description": "Diseño institucional para el territorio",
+                "works.project4.label": "Otros proyectos", "works.project4.title": "Agencia &amp; consultoría", "works.project4.subtitle": "Proyectos con clientes internacionales",
+                "works.project4.asos.desc": "UX Research · Retención · Sizing & Returns",
+                "works.project4.citi.desc": "Banca digital · Flybuys · White-label",
+                "works.project4.note": "2022–2023 · Innomad · ASOS Research",
+                "services.label": "Servicios", "services.title": "Lo que puedo hacer por ti", "services.description": "Servicios de diseño integrales adaptados a las necesidades de tu negocio.",
+                "services.accordion1.title": "Auditoría UX", "services.accordion1.content": "Análisis exhaustivo de productos digitales para identificar problemas de usabilidad.",
+                "services.accordion2.title": "Diseño de Producto", "services.accordion2.content": "Diseño de producto de principio a fin, desde el concepto hasta la producción.",
+                "services.accordion3.title": "Sistema de Diseño", "services.accordion3.content": "Sistemas de diseño escalables con componentes reutilizables y documentación clara.",
+                "contact.label": "Contacto", "contact.title": "Trabajemos juntos", "contact.description": "¿Tienes un proyecto en mente? Me encantaría escucharlo.",
+                "contact.cta": "Contactar",
+                "footer.copyright": "© 2026 Todos los derechos reservados", "footer.privacy": "Privacidad", "footer.terms": "Términos"
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'es';
+
+        function updateLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang;
+            document.getElementById('langLabel').textContent = lang === 'en' ? 'ES' : 'EN';
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang][key]) el.textContent = i18n[lang][key];
+            });
+        }
+
+        document.getElementById('langToggle').addEventListener('click', () => updateLang(currentLang === 'en' ? 'es' : 'en'));
+        updateLang(currentLang);
+
+        // 3. Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        });
+
+        // 4. Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+        // 5. Accordion
+        document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const content = document.getElementById(trigger.getAttribute('aria-controls'));
+                const chevron = trigger.querySelector('.accordion-chevron');
+                const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+                // Close all
+                document.querySelectorAll('.accordion-trigger').forEach(t => {
+                    t.setAttribute('aria-expanded', 'false');
+                    document.getElementById(t.getAttribute('aria-controls')).classList.remove('open');
+                    t.querySelector('.accordion-chevron').style.transform = 'rotate(0deg)';
+                });
+
+                if (!isOpen) {
+                    trigger.setAttribute('aria-expanded', 'true');
+                    content.classList.add('open');
+                    chevron.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // 6. Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // 7. Active Nav
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) current = section.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary');
+                if (link.getAttribute('href') === `#${current}`) link.classList.add('text-primary');
+            });
+        });
+    </script>
+</body>
+
+</html>

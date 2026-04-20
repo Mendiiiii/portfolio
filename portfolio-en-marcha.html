@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>En Marcha — Case Study — Iñigo Mendizábal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] } } } }</script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { transition: background-color .3s, color .3s; }
+        :focus-visible { outline: 2px solid #8A38F5; outline-offset: 3px; border-radius: 4px; }
+        .skip-link { position:absolute; top:-9999px; left:1rem; background:#8A38F5; color:#fff; padding:.5rem 1rem; border-radius:0 0 6px 6px; font-weight:600; z-index:9999; }
+        .skip-link:focus { top:0; }
+        .row-divider { border-top: 1px solid; }
+        .dark .row-divider { border-color: rgba(255,255,255,0.06); }
+        html:not(.dark) .row-divider { border-color: rgba(0,0,0,0.07); }
+        .reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease,transform .6s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+        @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+        .callout { border-left: 3px solid rgba(52,211,153,.5); }
+        .dark .callout { background: rgba(52,211,153,.05); }
+        html:not(.dark) .callout { background: rgba(52,211,153,.05); }
+    </style>
+</head>
+<body class="dark:bg-[#111111] bg-[#F5F4F1] dark:text-[#EFEFEF] text-[#111111] font-sans antialiased">
+
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+
+    <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 h-14
+                   border-b dark:border-white/5 border-black/6
+                   dark:bg-[#111111]/90 bg-[#F5F4F1]/90 backdrop-blur-md">
+        <a href="index.html#works" class="flex items-center gap-1.5 text-sm dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            <span id="backLabel">Portfolio</span>
+        </a>
+        <div class="flex items-center gap-4">
+            <button id="langBtn" aria-label="Switch language"
+                    class="text-[11px] font-semibold tracking-[0.2em] uppercase dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">EN</button>
+            <button id="themeBtn" aria-label="Cambiar tema"
+                    class="w-7 h-7 flex items-center justify-center dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">
+                <svg id="sunIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/></svg>
+                <svg id="moonIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="main" class="pt-14">
+        <div class="px-6 lg:px-12 max-w-5xl mx-auto">
+
+            <div class="pt-16 pb-10 reveal">
+                <p class="text-xs tracking-[0.25em] uppercase dark:text-white/50 text-black/55 mb-4" data-i18n="tags">2025 · Innovación social · Web · Identidad visual · Cofundador</p>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold dark:text-white text-[#111] leading-[1.06] tracking-tight mb-6">En Marcha</h1>
+                <p class="text-lg leading-7 dark:text-white/60 text-black/60 max-w-2xl" data-i18n="intro">Una organización de innovación social para que la gente no tenga que irse de su pueblo para tener futuro. Mi rol: hacer que las instituciones confíen en que no estamos vendiendo humo.</p>
+            </div>
+
+            <div class="row-divider pt-0 pb-10 reveal">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8">
+                    <div>
+                        <p class="text-xs uppercase tracking-widest dark:text-white/30 text-black/40 mb-1" data-i18n="meta.role_label">Rol</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111]" data-i18n="meta.role">Cofundador · Diseño · Web</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest dark:text-white/30 text-black/40 mb-1" data-i18n="meta.partner_label">Cofundador</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111]">Miguel Gatoó</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest dark:text-white/30 text-black/40 mb-1" data-i18n="meta.year_label">Año</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111]">2025</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest dark:text-white/30 text-black/40 mb-1" data-i18n="meta.territory_label">Territorio</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111]" data-i18n="meta.territory">La Vera, Extremadura</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-divider pt-0 pb-12 reveal">
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1400&q=80&auto=format&fit=crop"
+                         alt="En Marcha — innovación social rural"
+                         class="w-full h-full object-cover" loading="eager">
+                </div>
+            </div>
+
+            <!-- 1. El problema real -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s1_title">El problema de credibilidad</h2>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-4" data-i18n="s1_p1">
+                    Cada pocos años llega alguien a un pueblo rural con un programa de formación. Organiza talleres, saca fotos y se va. Nada cambia. Los pueblos han aprendido a desconfiar. El problema de En Marcha no era el contenido — era convencer a las instituciones de que esta vez era diferente, sin historial que lo respaldara.
+                </p>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-6" data-i18n="s1_p2">
+                    La misión era concreta: que la gente no tenga que irse del pueblo para tener futuro. No como eslogan — como criterio de diseño. Cada decisión debía responder a esa pregunta: ¿esto hace más probable que alguien se quede?
+                </p>
+                <div class="callout rounded-r-xl px-5 py-4">
+                    <p class="text-sm leading-6 dark:text-emerald-200/80 text-emerald-900" data-i18n="s1_callout">
+                        Miguel Gatoó (OIT/Naciones Unidas) tenía el conocimiento y las relaciones institucionales. Yo tenía el diseño y la web. La pregunta era qué tenía que verse antes de que alguien cogiera el teléfono.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. Lo que encontramos -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s2_title">Lo que encontramos sobre el terreno</h2>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-6" data-i18n="s2_p1">
+                    Hablamos con alcaldes, asociaciones locales y futuros participantes en La Vera. Los alcaldes ya sabían que sus vecinos necesitaban formación. El hallazgo real fue otro: los fondos europeos llegan con condiciones, plazos y requisitos de justificación que los Ayuntamientos pequeños no pueden gestionar solos. Necesitan un socio que navegue eso, no solo alguien que imparta talleres.
+                </p>
+
+                <div class="grid sm:grid-cols-3 gap-4 mb-6">
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="profile1.label">Perfil 1</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111] mb-1" data-i18n="profile1.title">Jóvenes que quieren quedarse</p>
+                        <p class="text-sm leading-6 dark:text-white/55 text-black/55" data-i18n="profile1.text">No ven futuro económico en el territorio. El problema no es formación — es que el mercado laboral local no existe.</p>
+                    </div>
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="profile2.label">Perfil 2</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111] mb-1" data-i18n="profile2.title">Mujeres en reincorporación</p>
+                        <p class="text-sm leading-6 dark:text-white/55 text-black/55" data-i18n="profile2.text">Vuelven al mercado laboral después de años cuidando familia. Necesitan actualización y confianza, no solo conocimientos.</p>
+                    </div>
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="profile3.label">Perfil 3</p>
+                        <p class="text-sm font-medium dark:text-white text-[#111] mb-1" data-i18n="profile3.title">Trabajadores desplazados</p>
+                        <p class="text-sm leading-6 dark:text-white/55 text-black/55" data-i18n="profile3.text">Mayores, con automatización o paro. El reto es reconvertir sin que parezca que los estás enviando al paro con un diploma.</p>
+                    </div>
+                </div>
+
+                <p class="text-base leading-7 dark:text-white/60 text-black/60" data-i18n="s2_p2">
+                    En los tres casos, el obstáculo no era el aprendizaje — era la confianza y el acceso. El contenido de los programas era secundario. Lo primero era demostrar que estábamos ahí para quedarnos.
+                </p>
+            </div>
+
+            <!-- Image break -->
+            <div class="row-divider pt-0 pb-12 reveal">
+                <div class="overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=80&auto=format&fit=crop"
+                         alt="Trabajo colaborativo en territorio"
+                         class="w-full h-full object-cover" loading="lazy">
+                </div>
+            </div>
+
+            <!-- 3. Decisiones de diseño -->
+            <div class="row-divider py-12 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s3_title">División de trabajo y decisiones de diseño</h2>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-6" data-i18n="s3_p1">
+                    La división fue deliberada: Miguel gestionó instituciones, financiación y programas. Yo me encargué de todo lo que las instituciones verían antes de decir que sí. En los contenidos curriculares trabajamos juntos — los programas tenían que sostenerse metodológicamente.
+                </p>
+
+                <div class="space-y-4 mb-6">
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="d1.label">Decisión — Identidad visual</p>
+                        <p class="text-sm leading-6 dark:text-white/70 text-black/70" data-i18n="d1.text">Sistema de color anclado en el paisaje de La Vera: bosque, oliva, ocre, tierra. No para ser decorativo — para señalar arraigo. Una ONG de ciudad no usa estos colores. Una organización del territorio, sí.</p>
+                    </div>
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="d2.label">Decisión — Arquitectura web</p>
+                        <p class="text-sm leading-6 dark:text-white/70 text-black/70" data-i18n="d2.text">La web está diseñada para un único visitante decisivo: el funcionario o político local que tiene que decidir si colaborar. La IA responde sus preguntas en orden: qué es esto, quién está detrás, qué han hecho, cómo trabajamos juntos.</p>
+                    </div>
+                    <div class="rounded-xl border dark:border-white/8 border-black/8 p-5">
+                        <p class="text-xs uppercase tracking-wider dark:text-white/40 text-black/40 mb-2" data-i18n="d3.label">Decisión — Lo que dejé fuera</p>
+                        <p class="text-sm leading-6 dark:text-white/70 text-black/70" data-i18n="d3.text">Nada de lenguaje de startup. Nada de promesas de impacto sin evidencia. Nada de estética que gritara "proyecto de diseñador". En contextos institucionales, el diseño no tiene que impresionar — tiene que no dar ninguna razón para decir no.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Estado -->
+            <div class="row-divider py-12 pb-20 reveal">
+                <h2 class="text-[28px] font-semibold leading-9 dark:text-white text-[#111] mb-6" data-i18n="s4_title">Estado actual y lo que aprendí</h2>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-4" data-i18n="s4_p1">
+                    Organización activa, web publicada en <a href="https://en-marcha-web.vercel.app" target="_blank" rel="noopener noreferrer" class="underline dark:text-white text-[#111] hover:text-[#8A38F5] transition-colors">en-marcha-web.vercel.app</a> y primeros contactos institucionales establecidos con Ayuntamientos de la comarca. El trabajo avanza despacio — así funciona esto. La confianza se construye en persona, no en una web.
+                </p>
+                <p class="text-base leading-7 dark:text-white/60 text-black/60 mb-6" data-i18n="s4_p2">
+                    La restricción más difícil no fue técnica ni de recursos — fue de tiempo. Las instituciones públicas toman decisiones lentamente por diseño. Diseñar para eso significa no esperar validación rápida, sino construir credibilidad que dure.
+                </p>
+                <div class="callout rounded-r-xl px-5 py-4">
+                    <p class="text-sm leading-6 dark:text-emerald-200/80 text-emerald-900" data-i18n="s4_callout">
+                        En proyectos de innovación social, el diseño no es el producto — es el argumento de que el producto existe. Sin credibilidad visual e institucional, el mejor contenido no llega a la primera reunión.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="row-divider px-6 lg:px-12 py-7 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-xs dark:text-white/50 text-black/55 order-2 sm:order-1">© 2026 Iñigo Mendizábal</p>
+        <nav class="flex items-center gap-5 order-1 sm:order-2">
+            <a href="cv.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">CV</a>
+            <a href="index.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Portfolio</a>
+            <a href="mailto:imendifp@gmail.com" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors">Contacto</a>
+        </nav>
+    </footer>
+
+    <script>
+        const T = {
+            es: {
+                back: 'Portfolio',
+                tags: '2025 · Innovación social · Web · Identidad visual · Cofundador',
+                intro: 'Una organización de innovación social para que la gente no tenga que irse de su pueblo para tener futuro. Mi rol: hacer que las instituciones confíen en que no estamos vendiendo humo.',
+                'meta.role_label': 'Rol', 'meta.role': 'Cofundador · Diseño · Web',
+                'meta.partner_label': 'Cofundador', 'meta.year_label': 'Año',
+                'meta.territory_label': 'Territorio', 'meta.territory': 'La Vera, Extremadura',
+                s1_title: 'El problema de credibilidad',
+                s1_p1: 'Cada pocos años llega alguien a un pueblo rural con un programa de formación. Organiza talleres, saca fotos y se va. Nada cambia. Los pueblos han aprendido a desconfiar. El problema de En Marcha no era el contenido — era convencer a las instituciones de que esta vez era diferente, sin historial que lo respaldara.',
+                s1_p2: 'La misión era concreta: que la gente no tenga que irse del pueblo para tener futuro. No como eslogan — como criterio de diseño. Cada decisión debía responder a esa pregunta: ¿esto hace más probable que alguien se quede?',
+                s1_callout: 'Miguel Gatoó (OIT/Naciones Unidas) tenía el conocimiento y las relaciones institucionales. Yo tenía el diseño y la web. La pregunta era qué tenía que verse antes de que alguien cogiera el teléfono.',
+                s2_title: 'Lo que encontramos sobre el terreno',
+                s2_p1: 'Hablamos con alcaldes, asociaciones locales y futuros participantes en La Vera. Los alcaldes ya sabían que sus vecinos necesitaban formación. El hallazgo real fue otro: los fondos europeos llegan con condiciones y requisitos de justificación que los Ayuntamientos pequeños no pueden gestionar solos.',
+                s2_p2: 'En los tres casos, el obstáculo no era el aprendizaje — era la confianza y el acceso. El contenido de los programas era secundario. Lo primero era demostrar que estábamos ahí para quedarnos.',
+                'profile1.label': 'Perfil 1', 'profile1.title': 'Jóvenes que quieren quedarse', 'profile1.text': 'No ven futuro económico en el territorio. El problema no es formación — es que el mercado laboral local no existe.',
+                'profile2.label': 'Perfil 2', 'profile2.title': 'Mujeres en reincorporación', 'profile2.text': 'Vuelven al mercado laboral después de años cuidando familia. Necesitan actualización y confianza, no solo conocimientos.',
+                'profile3.label': 'Perfil 3', 'profile3.title': 'Trabajadores desplazados', 'profile3.text': 'Mayores, con automatización o paro. El reto es reconvertir sin que parezca que los estás enviando al paro con un diploma.',
+                s3_title: 'División de trabajo y decisiones de diseño',
+                s3_p1: 'La división fue deliberada: Miguel gestionó instituciones, financiación y programas. Yo me encargué de todo lo que las instituciones verían antes de decir que sí. En los contenidos curriculares trabajamos juntos.',
+                'd1.label': 'Decisión — Identidad visual', 'd1.text': 'Sistema de color anclado en el paisaje de La Vera: bosque, oliva, ocre, tierra. No para ser decorativo — para señalar arraigo. Una ONG de ciudad no usa estos colores. Una organización del territorio, sí.',
+                'd2.label': 'Decisión — Arquitectura web', 'd2.text': 'La web está diseñada para un único visitante decisivo: el funcionario o político local que tiene que decidir si colaborar. Responde sus preguntas en orden: qué es esto, quién está detrás, qué han hecho, cómo trabajamos juntos.',
+                'd3.label': 'Decisión — Lo que dejé fuera', 'd3.text': 'Nada de lenguaje de startup. Nada de promesas de impacto sin evidencia. Nada de estética que gritara "proyecto de diseñador". En contextos institucionales, el diseño no tiene que impresionar — tiene que no dar ninguna razón para decir no.',
+                s4_title: 'Estado actual y lo que aprendí',
+                s4_p1: 'Organización activa, web publicada en <a href="https://en-marcha-web.vercel.app" target="_blank" rel="noopener noreferrer" class="underline dark:text-white text-[#111] hover:text-[#8A38F5] transition-colors">en-marcha-web.vercel.app</a> y primeros contactos institucionales establecidos con Ayuntamientos de la comarca.',
+                s4_p2: 'La restricción más difícil no fue técnica ni de recursos — fue de tiempo. Las instituciones públicas toman decisiones lentamente por diseño. Diseñar para eso significa no esperar validación rápida, sino construir credibilidad que dure.',
+                s4_callout: 'En proyectos de innovación social, el diseño no es el producto — es el argumento de que el producto existe. Sin credibilidad visual e institucional, el mejor contenido no llega a la primera reunión.',
+            },
+            en: {
+                back: 'Portfolio',
+                tags: '2025 · Social innovation · Web · Visual identity · Co-founder',
+                intro: 'A social innovation organisation so people don\'t have to leave their village to have a future. My role: make institutions trust we\'re not selling hot air.',
+                'meta.role_label': 'Role', 'meta.role': 'Co-founder · Design · Web',
+                'meta.partner_label': 'Co-founder', 'meta.year_label': 'Year',
+                'meta.territory_label': 'Territory', 'meta.territory': 'La Vera, Extremadura',
+                s1_title: 'The credibility problem',
+                s1_p1: 'Every few years someone arrives in a rural village with a training programme. Runs workshops, takes photos, and leaves. Nothing changes. Villages have learned to distrust. En Marcha\'s problem wasn\'t content — it was convincing institutions this time was different, with no track record to back it up.',
+                s1_p2: 'The mission was concrete: people shouldn\'t have to leave their village to have a future. Not as a slogan — as a design criterion. Every decision had to answer that question: does this make it more likely that someone stays?',
+                s1_callout: 'Miguel Gatoó (ILO/United Nations) had the knowledge and institutional relationships. I had design and web. The question was what needed to be visible before anyone picked up the phone.',
+                s2_title: 'What we found in the field',
+                s2_p1: 'We spoke with mayors, local associations, and future participants in La Vera. Mayors already knew their residents needed retraining. The real finding was different: European funds come with conditions and reporting requirements that small town councils can\'t manage alone.',
+                s2_p2: 'In all three cases, the barrier wasn\'t learning — it was trust and access. Programme content was secondary. The first job was proving we were there to stay.',
+                'profile1.label': 'Profile 1', 'profile1.title': 'Young people who want to stay', 'profile1.text': 'They see no economic future in the territory. The problem isn\'t training — it\'s that the local labour market doesn\'t exist.',
+                'profile2.label': 'Profile 2', 'profile2.title': 'Women re-entering work', 'profile2.text': 'Returning to the labour market after years of caregiving. They need upskilling and confidence, not just knowledge.',
+                'profile3.label': 'Profile 3', 'profile3.title': 'Displaced workers', 'profile3.text': 'Older, facing automation or unemployment. The challenge is retraining without making them feel like you\'re handing them a diploma on the way out.',
+                s3_title: 'Division of work and design decisions',
+                s3_p1: 'The division was deliberate: Miguel managed institutions, funding, and programmes. I handled everything institutions would see before saying yes. On curriculum content we worked together.',
+                'd1.label': 'Decision — Visual identity', 'd1.text': 'Colour system anchored in the La Vera landscape: forest, olive, ochre, earth. Not decorative — it signals rootedness. A city NGO doesn\'t use these colours. A territory organisation does.',
+                'd2.label': 'Decision — Web architecture', 'd2.text': 'The website is designed for one decisive visitor: the local official or politician who has to decide whether to collaborate. It answers their questions in order: what is this, who is behind it, what have they done, how do we work together.',
+                'd3.label': 'Decision — What I left out', 'd3.text': 'No startup language. No impact promises without evidence. No aesthetic that screamed "designer\'s project". In institutional contexts, design doesn\'t need to impress — it needs to not give anyone a reason to say no.',
+                s4_title: 'Current status and what I learned',
+                s4_p1: 'Active organisation, website live at <a href="https://en-marcha-web.vercel.app" target="_blank" rel="noopener noreferrer" class="underline dark:text-white text-[#111] hover:text-[#8A38F5] transition-colors">en-marcha-web.vercel.app</a> and first institutional contacts established with local town councils.',
+                s4_p2: 'The hardest constraint wasn\'t technical or financial — it was time. Public institutions make decisions slowly by design. Designing for that means not expecting fast validation, but building credibility that lasts.',
+                s4_callout: 'In social innovation projects, design isn\'t the product — it\'s the argument that the product exists. Without visual and institutional credibility, the best content never makes it to the first meeting.',
+            }
+        };
+
+        let lang = 'es';
+        function applyLang(l) {
+            lang = l;
+            document.documentElement.lang = l;
+            document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
+            document.getElementById('backLabel').textContent = T[l].back;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const v = T[l][el.dataset.i18n];
+                if (v !== undefined) el.innerHTML = v;
+            });
+        }
+        document.getElementById('langBtn').addEventListener('click', () => applyLang(lang === 'es' ? 'en' : 'es'));
+        let dark = true;
+        document.getElementById('themeBtn').addEventListener('click', () => {
+            dark = !dark;
+            document.documentElement.classList.toggle('dark', dark);
+            document.getElementById('sunIcon').classList.toggle('hidden', !dark);
+            document.getElementById('moonIcon').classList.toggle('hidden', dark);
+        });
+        const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:0.1});
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>

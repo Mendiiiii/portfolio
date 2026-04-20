@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iñigo Mendizábal — UX/Product Designer</title>
+    <meta name="description" content="Diseñador UX/UI y de Producto. Madrid. Proyectos: Robin Luz, NowEat, En Marcha.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] } } }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { transition: background-color 0.3s, color 0.3s; }
+
+        /* Typewriter cursor */
+        .tw-cursor::after {
+            content: '|';
+            animation: blink 0.75s step-end infinite;
+            margin-left: 2px;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        /* Focus ring */
+        :focus-visible { outline: 2px solid #8A38F5; outline-offset: 3px; border-radius: 4px; }
+
+        /* Skip link */
+        .skip-link { position:absolute; top:-9999px; left:1rem; background:#8A38F5; color:#fff; padding:.5rem 1rem; border-radius:0 0 6px 6px; font-weight:600; font-size:.875rem; z-index:9999; }
+        .skip-link:focus { top:0; }
+
+        /* Image hover zoom */
+        .img-zoom { overflow: hidden; }
+        .img-zoom img { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .img-zoom:hover img { transform: scale(1.03); }
+
+        /* Pill chip */
+        .pill {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: all 0.2s;
+        }
+        .dark .pill {
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.65);
+        }
+        .dark .pill:hover {
+            border-color: rgba(255,255,255,0.3);
+            color: #fff;
+        }
+        html:not(.dark) .pill {
+            border: 1px solid rgba(0,0,0,0.12);
+            color: rgba(0,0,0,0.6);
+        }
+        html:not(.dark) .pill:hover {
+            border-color: rgba(0,0,0,0.3);
+            color: #111;
+        }
+
+        /* Form inputs */
+        .cv-input {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+            background: transparent;
+        }
+        .dark .cv-input {
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.85);
+        }
+        .dark .cv-input:focus { border-color: rgba(255,255,255,0.35); }
+        .dark .cv-input::placeholder { color: rgba(255,255,255,0.25); }
+        html:not(.dark) .cv-input {
+            border: 1px solid rgba(0,0,0,0.12);
+            color: rgba(0,0,0,0.8);
+        }
+        html:not(.dark) .cv-input:focus { border-color: rgba(0,0,0,0.35); }
+        html:not(.dark) .cv-input::placeholder { color: rgba(0,0,0,0.3); }
+
+        /* Section divider */
+        .row-divider { border-top: 1px solid; }
+        .dark .row-divider { border-color: rgba(255,255,255,0.05); }
+        html:not(.dark) .row-divider { border-color: rgba(0,0,0,0.07); }
+
+        /* Scroll reveal */
+        .reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease,transform .6s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity:1; transform:none; transition:none; }
+            .img-zoom img { transition:none; }
+            .tw-cursor::after { animation:none; }
+        }
+
+        /* ── PRINT / PDF ─────────────────────────────────────────────── */
+        @media print {
+            * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+            /* Hide interactive / decorative elements */
+            header, footer, .skip-link, #contact, section[aria-label="Introducción"] { display: none !important; }
+
+            body {
+                background: #fff !important;
+                color: #111 !important;
+                font-size: 11pt;
+                line-height: 1.5;
+            }
+
+            /* Remove padding-top added for fixed nav */
+            main { padding-top: 0 !important; }
+
+            .reveal { opacity: 1 !important; transform: none !important; }
+
+            /* Content wrapper */
+            .px-6 { padding-left: 0 !important; padding-right: 0 !important; }
+            .max-w-5xl { max-width: 100% !important; margin: 0 !important; }
+
+            /* Dividers */
+            .row-divider { border-color: rgba(0,0,0,0.12) !important; }
+
+            /* Section labels */
+            .text-xs.tracking-\[0\.28em\] { color: #111 !important; }
+
+            /* Muted text → readable on white */
+            [class*="text-white\/"] { color: #444 !important; }
+            [class*="text-black\/"] { color: #444 !important; }
+            .dark\:text-white { color: #111 !important; }
+
+            /* Pills */
+            .pill { border-color: rgba(0,0,0,0.2) !important; color: #333 !important; }
+
+            /* Hide case study images and contact form */
+            .img-zoom, #contact { display: none !important; }
+
+            /* Avoid page breaks inside items */
+            [role="listitem"] { page-break-inside: avoid; }
+            .row-divider { page-break-inside: avoid; }
+
+            /* Page header with name */
+            .px-6.lg\:px-12.max-w-5xl::before {
+                content: "Iñigo Mendizábal — UX/Product Designer · imendifp@gmail.com · Madrid";
+                display: block;
+                font-size: 10pt;
+                color: #666;
+                padding-bottom: 16pt;
+                border-bottom: 1px solid #ddd;
+                margin-bottom: 8pt;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark:bg-[#111111] bg-[#F5F4F1] dark:text-[#EFEFEF] text-[#111111] font-sans antialiased">
+
+    <a href="#main" class="skip-link" data-i18n="skip">Saltar al contenido</a>
+
+    <!-- ── NAV ─────────────────────────────────────────────────────────── -->
+    <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between
+                   px-6 lg:px-12 h-14
+                   border-b dark:border-white/5 border-black/6
+                   dark:bg-[#111111]/90 bg-[#F5F4F1]/90 backdrop-blur-md">
+        <a href="#" class="text-xs font-semibold tracking-[0.18em] uppercase
+                           dark:text-white text-[#111] hover:opacity-50 transition-opacity"
+           aria-label="Inicio">
+            Iñigo Mendizábal
+        </a>
+        <div class="flex items-center gap-4">
+            <button id="langBtn" aria-label="Switch language"
+                    class="text-[11px] font-semibold tracking-[0.2em] uppercase
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">EN</button>
+            <button id="themeBtn" aria-label="Cambiar tema"
+                    class="w-7 h-7 flex items-center justify-center
+                           dark:text-white/50 text-black/55
+                           hover:dark:text-white hover:text-black transition-colors">
+                <svg id="sunIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/>
+                </svg>
+                <svg id="moonIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z"/>
+                </svg>
+            </button>
+            <button onclick="window.print()"
+                    class="text-[11px] font-semibold tracking-[0.15em] uppercase
+                           border dark:border-white/20 border-black/20 px-4 py-1.5 rounded-full
+                           dark:text-white/60 text-black/55
+                           hover:dark:text-white hover:text-black hover:border-current
+                           transition-all duration-200 print:hidden"
+                    aria-label="Descargar CV en PDF">
+                <span data-i18n="nav_download">Descargar CV</span>
+            </button>
+            <a href="#contact"
+               class="text-[11px] font-semibold tracking-[0.15em] uppercase
+                      border dark:border-white/20 border-black/20 px-4 py-1.5 rounded-full
+                      dark:text-white text-[#111]
+                      hover:bg-[#8A38F5] hover:border-[#8A38F5] hover:text-white
+                      transition-all duration-200">
+                <span data-i18n="nav_contact">Contacto</span>
+            </a>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ── HERO ──────────────────────────────────────────────────────── -->
+        <section class="relative min-h-[60vh] sm:min-h-[70vh] flex flex-col items-start justify-end overflow-hidden pb-12 pt-14"
+                 aria-label="Introducción">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#1a0533] via-[#0d1240] to-[#111111]" aria-hidden="true"></div>
+            <div class="absolute inset-0 opacity-30"
+                 style="background-image:url('https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1600&q=75&auto=format&fit=crop');
+                        background-size:cover;background-position:center;"
+                 role="presentation" aria-hidden="true"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/20 to-transparent" aria-hidden="true"></div>
+
+            <div class="relative z-10 px-6 lg:px-12 max-w-4xl">
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.06] tracking-tight">
+                    <span data-i18n="hero_pre">Diseñando mejores</span><br>
+                    <span id="typewriter" class="tw-cursor text-[#B06EFF]" aria-live="polite">experiencias.</span>
+                </h1>
+            </div>
+        </section>
+
+        <!-- ── CONTENT ───────────────────────────────────────────────────── -->
+        <div class="px-6 lg:px-12 max-w-5xl mx-auto">
+
+            <!-- PROFILE ─────────────────────────────────────────────────── -->
+            <section class="row-divider py-10 reveal" aria-label="Perfil">
+                <div class="flex gap-6 items-start">
+                    <!-- Photo -->
+                    <div class="flex-shrink-0 w-[125px] h-[125px] rounded-xl overflow-hidden relative">
+                        <img src="Assests/Img/Perfil/Mendi - linkedin fondo blanco.jpg"
+                             alt="Foto de Iñigo Mendizábal"
+                             class="absolute inset-0 w-full h-full object-cover"
+                             style="object-position: 50% 8%; transform: scale(1.5); transform-origin: 50% 8%;">
+                    </div>
+                    <div class="flex-1 min-w-0 pt-1">
+                        <p class="text-[22px] font-semibold leading-7 dark:text-white text-[#111] mb-2">Iñigo Mendizábal</p>
+                        <p class="text-sm leading-5 dark:text-white/50 text-black/55 mb-5 max-w-sm" data-i18n="profile_sub">
+                            Diseñador UX/UI y de Producto con más de 4 años de experiencia. Madrid, España.
+                        </p>
+                        <a href="mailto:imendifp@gmail.com"
+                           class="inline-flex items-center justify-center h-10 text-sm font-medium tracking-[0.01em]
+                                  bg-white text-[#111] px-6 rounded-full
+                                  hover:bg-[#8A38F5] hover:text-white
+                                  transition-all duration-200"
+                           aria-label="Enviar email a Iñigo">
+                            <span data-i18n="profile_cta">Contactar</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LINKS ───────────────────────────────────────────────────── -->
+            <div class="row-divider py-10 grid sm:grid-cols-[128px_1fr] gap-x-8 gap-y-4 items-start reveal">
+                <p class="text-xs tracking-[0.28em] uppercase dark:text-white text-[#111] font-medium pt-0.5"
+                   data-i18n="links_label">Links</p>
+                <div class="flex flex-wrap gap-2">
+                    <a href="https://www.linkedin.com/in/inigo-mendizabal/" target="_blank" rel="noopener noreferrer"
+                       class="pill" aria-label="LinkedIn (abre en nueva pestaña)">LinkedIn</a>
+                    <a href="index.html" class="pill" aria-label="Portfolio principal">Portfolio</a>
+                    <a href="https://en-marcha-web.vercel.app" target="_blank" rel="noopener noreferrer"
+                       class="pill" aria-label="En Marcha (abre en nueva pestaña)">En Marcha</a>
+                </div>
+            </div>
+
+            <!-- BIO ─────────────────────────────────────────────────────── -->
+            <div class="row-divider py-10 grid sm:grid-cols-[128px_1fr] gap-x-8 gap-y-4 reveal">
+                <p class="text-xs tracking-[0.28em] uppercase dark:text-white text-[#111] font-medium pt-1"
+                   data-i18n="bio_label">Bio</p>
+                <div class="space-y-4 text-base leading-6 dark:text-white/60 text-black/60">
+                    <p data-i18n="bio_p1">
+                        Diseñador estratégico con más de 4 años de experiencia diseñando y lanzando productos digitales
+                        desde fases iniciales hasta producción. He contribuido a definir la estructura y dirección
+                        estratégica en startups, agencias y entornos corporativos.
+                    </p>
+                    <p data-i18n="bio_p2">
+                        Especializado en traducir datos y métricas en soluciones escalables, con experiencia en
+                        investigación, definición y diseño de productos complejos, siempre adaptados a estándares
+                        de accesibilidad WCAG y una visión centrada en las personas.
+                    </p>
+                    <p data-i18n="bio_p3">
+                        Mi motivación es resolver problemas complejos mediante el diseño estratégico, creando
+                        soluciones digitales donde la innovación y la escalabilidad generen un impacto positivo.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SKILLS ──────────────────────────────────────────────────── -->
+            <div class="row-divider py-10 grid sm:grid-cols-[128px_1fr] gap-x-8 gap-y-4 items-start reveal">
+                <p class="text-xs tracking-[0.28em] uppercase dark:text-white text-[#111] font-medium pt-0.5"
+                   data-i18n="skills_label">Skills</p>
+                <div class="flex flex-wrap gap-2" role="list" aria-label="Habilidades">
+                    <span class="pill" role="listitem">Figma</span>
+                    <span class="pill" role="listitem">Design Systems</span>
+                    <span class="pill" role="listitem">Prototyping</span>
+                    <span class="pill" role="listitem">User Research</span>
+                    <span class="pill" role="listitem">Adobe XD</span>
+                    <span class="pill" role="listitem">Miro</span>
+                    <span class="pill" role="listitem">Notion</span>
+                    <span class="pill" role="listitem">Hotjar</span>
+                    <span class="pill" role="listitem">HTML / CSS / JS</span>
+                    <span class="pill" role="listitem">Python &amp; ML</span>
+                    <span class="pill" role="listitem">Photoshop</span>
+                    <span class="pill" role="listitem">Illustrator</span>
+                    <span class="pill" role="listitem">Final Cut</span>
+                    <span class="pill" role="listitem">Lean UX</span>
+                    <span class="pill" role="listitem">Design Thinking</span>
+                    <span class="pill" role="listitem">Information Architecture</span>
+                </div>
+            </div>
+
+            <!-- EXPERIENCE ──────────────────────────────────────────────── -->
+            <div class="row-divider py-10 grid sm:grid-cols-[128px_1fr] gap-x-8 gap-y-4 reveal"
+                 role="region" aria-labelledby="exp-label">
+                <p id="exp-label"
+                   class="text-xs tracking-[0.28em] uppercase dark:text-white text-[#111] font-medium pt-1"
+                   data-i18n="exp_label">Experiencia</p>
+                <div class="space-y-8" role="list">
+
+                    <div role="listitem">
+                        <p class="text-base font-medium leading-6 dark:text-white text-[#111]">
+                            <span data-i18n="exp1_role">Diseñador UX multidisciplinar</span> · Optimiza Recursos
+                        </p>
+                        <p class="text-xs leading-4 dark:text-white/50 text-black/55 mt-2">2025 – <span data-i18n="present">Presente</span></p>
+                    </div>
+
+                    <div role="listitem">
+                        <p class="text-base font-medium leading-6 dark:text-white text-[#111]">
+                            <span data-i18n="exp2_role">Diseñador UX — Cofundador</span> · NowEat
+                        </p>
+                        <p class="text-xs leading-4 dark:text-white/50 text-black/55 mt-2">2024</p>
+                    </div>
+
+                    <div role="listitem">
+                        <p class="text-base font-medium leading-6 dark:text-white text-[#111]">
+                            <span data-i18n="exp3_role">Diseñador UX/CX</span> · Innomad
+                        </p>
+                        <p class="text-xs leading-4 dark:text-white/50 text-black/55 mt-2">2023 – 2024</p>
+                    </div>
+
+                    <div role="listitem">
+                        <p class="text-base font-medium leading-6 dark:text-white text-[#111]">
+                            <span data-i18n="exp4_role">Diseñador UX/UI Junior</span> · Olistiko
+                        </p>
+                        <p class="text-xs leading-4 dark:text-white/50 text-black/55 mt-2">2021 – 2023</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CASE STUDIES ────────────────────────────────────────────── -->
+            <div class="row-divider py-10 grid sm:grid-cols-[128px_1fr] gap-x-8 gap-y-4 reveal"
+                 role="region" aria-labelledby="cs-label">
+                <p id="cs-label"
+                   class="text-xs tracking-[0.28em] uppercase dark:text-white text-[#111] font-medium pt-1"
+                   data-i18n="cs_label">Proyectos</p>
+
+                <div class="space-y-10">
+
+                    <!-- Robin Luz -->
+                    <div>
+                        <div class="img-zoom rounded-lg overflow-hidden mb-4">
+                            <a href="cv-robin-luz.html" aria-label="Ver caso de estudio Robin Luz">
+                                <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80&auto=format&fit=crop"
+                                     alt="Robin Luz — App de facturas energéticas"
+                                     class="w-full object-cover"
+                                     style="aspect-ratio: 16/9; height: auto;"
+                                     loading="lazy">
+                            </a>
+                        </div>
+                        <p class="text-base font-medium leading-6 dark:text-white text-[#111]" data-i18n="p1_title">Robin Luz</p>
+                        <p class="text-xs leading-4 dark:text-white/50 text-black/55 mt-2" data-i18n="p1_tags">App móvil · Landing · Identidad visual · SaaS B2B</p>
+                    </div>
+
+                    <!-- NowEat -->
+                    <div>
+                        <div class="img-zoom rounded-lg overflow-hidden mb-4">
+                            <a href="cv-noweat.html" aria-label="Ver caso de estudio NowEat">
+                                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80&auto=format&fit=crop"
+                                     alt="NowEat — SaaS para restaurantes"
+                                     class="w-full object-cover"
+                                     style="aspect-ratio: 16/9; height: auto;"
+                                     loading="lazy">
+                            </a>
+                        </div>
+                        <p class="text-base font-medium leading-6 dark:text-white text-[#111]" data-i18n="p2_title">NowEat</p>
+                        <p class="text-xs leading-4 dark:text-white/50 text-black/55 mt-2" data-i18n="p2_tags">SaaS para restaurantes · IA</p>
+                    </div>
+
+                    <!-- En Marcha -->
+                    <div>
+                        <div class="img-zoom rounded-lg overflow-hidden mb-4">
+                            <a href="cv-en-marcha.html" aria-label="Ver caso de estudio En Marcha">
+                                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&q=80&auto=format&fit=crop"
+                                     alt="En Marcha — Innovación social rural"
+                                     class="w-full object-cover"
+                                     style="aspect-ratio: 16/9; height: auto;"
+                                     loading="lazy">
+                            </a>
+                        </div>
+                        <p class="text-base font-medium leading-6 dark:text-white text-[#111]" data-i18n="p3_title">En Marcha</p>
+                        <p class="text-xs leading-4 dark:text-white/50 text-black/55 mt-2" data-i18n="p3_tags">Innovación social · Web · Identidad · Cofundador</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CONTACT ─────────────────────────────────────────────────── -->
+            <div id="contact" class="row-divider py-10 pb-24 grid sm:grid-cols-[128px_1fr] gap-x-8 gap-y-4 reveal"
+                 role="region" aria-labelledby="contact-label">
+                <p id="contact-label"
+                   class="text-xs tracking-[0.28em] uppercase dark:text-white text-[#111] font-medium pt-1"
+                   data-i18n="contact_label">Contacto</p>
+
+                <form id="contactForm" class="space-y-3 w-full max-w-md" novalidate
+                      aria-label="Formulario de contacto">
+                    <div>
+                        <label for="emailInput" class="sr-only">Email</label>
+                        <input id="emailInput" type="email" name="email" autocomplete="email"
+                               class="cv-input" data-i18n-ph="contact_ph_email" placeholder="Email" required>
+                    </div>
+                    <div>
+                        <label for="msgInput" class="sr-only" data-i18n="contact_msg_label">Mensaje</label>
+                        <textarea id="msgInput" name="message" rows="4"
+                                  class="cv-input resize-none" data-i18n-ph="contact_ph_msg" placeholder="Mensaje" required></textarea>
+                    </div>
+                    <button type="submit"
+                            class="w-full h-10 text-sm font-medium tracking-[0.01em]
+                                   border dark:border-white/15 border-black/15
+                                   rounded-full
+                                   dark:text-white/80 text-black/70
+                                   hover:bg-[#8A38F5] hover:border-[#8A38F5] hover:text-white
+                                   transition-all duration-200">
+                        <span data-i18n="contact_send">Enviar</span>
+                    </button>
+                </form>
+            </div>
+
+        </div><!-- /max-w-4xl -->
+
+    </main>
+
+    <!-- ── FOOTER ─────────────────────────────────────────────────────────── -->
+    <footer class="row-divider px-6 lg:px-12 py-7 flex flex-col sm:flex-row items-center justify-between gap-3"
+            role="contentinfo">
+        <p class="text-xs dark:text-white/50 text-black/55 order-2 sm:order-1">
+            © 2026 Iñigo Mendizábal
+        </p>
+        <nav class="flex items-center gap-5 order-1 sm:order-2" aria-label="Footer">
+            <a href="#contact" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors"
+               data-i18n="footer_contact">Contacto</a>
+            <a href="https://www.linkedin.com/in/inigo-mendizabal/" target="_blank" rel="noopener noreferrer"
+               class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors"
+               aria-label="LinkedIn (abre en nueva pestaña)">LinkedIn</a>
+            <a href="index.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors"
+               data-i18n="footer_portfolio">Portfolio</a>
+            <button onclick="window.print()"
+                    class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors print:hidden"
+                    data-i18n="footer_download">Descargar CV</button>
+        </nav>
+    </footer>
+
+    <!-- ── SCRIPTS ────────────────────────────────────────────────────────── -->
+    <script>
+        // ── I18N ──────────────────────────────────────────────────────────
+        const T = {
+            es: {
+                skip:             'Saltar al contenido',
+                nav_contact:      'Contacto',
+                nav_download:     'Descargar CV',
+                hero_pre:         'Diseñando mejores',
+                hero_words:       ['experiencias.', 'productos.', 'soluciones.', 'futuros.'],
+                profile_sub:      'Diseñador UX/UI y de Producto con más de 4 años de experiencia. Madrid, España.',
+                profile_cta:      'Contactar',
+                links_label:      'Links',
+                bio_label:        'Bio',
+                bio_p1:           'Diseñador estratégico con más de 4 años de experiencia diseñando y lanzando productos digitales desde fases iniciales hasta producción. He contribuido a definir la estructura y dirección estratégica en startups, agencias y entornos corporativos.',
+                bio_p2:           'Especializado en traducir datos y métricas en soluciones escalables, con experiencia en investigación, definición y diseño de productos complejos, siempre adaptados a estándares de accesibilidad WCAG y una visión centrada en las personas.',
+                bio_p3:           'Mi motivación es resolver problemas complejos mediante el diseño estratégico, creando soluciones digitales donde la innovación y la escalabilidad generen un impacto positivo.',
+                skills_label:     'Skills',
+                exp_label:        'Experiencia',
+                exp1_role:        'Diseñador UX multidisciplinar',
+                exp2_role:        'Diseñador UX — Cofundador',
+                exp3_role:        'Diseñador UX/CX',
+                exp4_role:        'Diseñador UX/UI Junior',
+                present:          'Presente',
+                cs_label:         'Proyectos',
+                p1_title:         'Robin Luz',
+                p1_tags:          'App móvil · Landing · Identidad visual · SaaS B2B',
+                p2_title:         'NowEat',
+                p2_tags:          'SaaS para restaurantes · IA',
+                p3_title:         'En Marcha',
+                p3_tags:          'Innovación social · Web · Identidad · Cofundador',
+                contact_label:    'Contacto',
+                contact_ph_email: 'Email',
+                contact_ph_msg:   'Mensaje',
+                contact_msg_label:'Mensaje',
+                contact_send:     'Enviar',
+                footer_contact:   'Contacto',
+                footer_portfolio: 'Portfolio',
+                footer_download:  'Descargar CV',
+            },
+            en: {
+                skip:             'Skip to content',
+                nav_contact:      'Contact',
+                nav_download:     'Download CV',
+                hero_pre:         'Designing better',
+                hero_words:       ['experiences.', 'products.', 'solutions.', 'futures.'],
+                profile_sub:      'UX/UI & Product Designer with 4+ years of experience. Madrid, Spain.',
+                profile_cta:      'Get in touch',
+                links_label:      'Links',
+                bio_label:        'Bio',
+                bio_p1:           'Strategic designer with 4+ years of experience designing and launching digital products from early stages through production. Contributed to defining structure and strategic direction across startups, agencies and corporate environments.',
+                bio_p2:           'Specialized in translating data and metrics into scalable solutions, with experience in research, definition and complex product design, always aligned with WCAG accessibility standards and a human-centered approach.',
+                bio_p3:           'My motivation is solving complex problems through strategic design, creating digital solutions where innovation and scalability generate a positive impact.',
+                skills_label:     'Skills',
+                exp_label:        'Experience',
+                exp1_role:        'Multidisciplinary UX Designer',
+                exp2_role:        'UX Designer — Co-founder',
+                exp3_role:        'UX/CX Designer',
+                exp4_role:        'Junior UX/UI Designer',
+                present:          'Present',
+                cs_label:         'Case Studies',
+                p1_title:         'Robin Luz',
+                p1_tags:          'Mobile app · Landing · Visual identity · B2B SaaS',
+                p2_title:         'NowEat',
+                p2_tags:          'Restaurant SaaS · AI',
+                p3_title:         'En Marcha',
+                p3_tags:          'Social innovation · Web · Identity · Co-founder',
+                contact_label:    'Contact',
+                contact_ph_email: 'Email',
+                contact_ph_msg:   'Message',
+                contact_msg_label:'Message',
+                contact_send:     'Send',
+                footer_contact:   'Contact',
+                footer_portfolio: 'Portfolio',
+                footer_download:  'Download CV',
+            }
+        };
+
+        let lang = 'es';
+
+        function applyLang(l) {
+            lang = l;
+            document.documentElement.lang = l;
+            document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const v = T[l][el.dataset.i18n];
+                if (v !== undefined) el.textContent = v;
+            });
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                const v = T[l][el.dataset.i18nPh];
+                if (v !== undefined) el.placeholder = v;
+            });
+            wordList = T[lang].hero_words;
+        }
+
+        document.getElementById('langBtn').addEventListener('click', () => {
+            applyLang(lang === 'es' ? 'en' : 'es');
+        });
+
+        // ── THEME ─────────────────────────────────────────────────────────
+        let dark = true;
+        const html = document.documentElement;
+
+        document.getElementById('themeBtn').addEventListener('click', () => {
+            dark = !dark;
+            html.classList.toggle('dark', dark);
+            document.getElementById('sunIcon').classList.toggle('hidden', !dark);
+            document.getElementById('moonIcon').classList.toggle('hidden', dark);
+        });
+
+        // ── TYPEWRITER ────────────────────────────────────────────────────
+        let wordList = T[lang].hero_words;
+        let wIdx = 0, cIdx = 0, deleting = false;
+        const twEl = document.getElementById('typewriter');
+
+        function tick() {
+            const word = wordList[wIdx % wordList.length];
+            cIdx = deleting ? cIdx - 1 : cIdx + 1;
+            twEl.textContent = word.substring(0, cIdx);
+            let delay = deleting ? 55 : 90;
+            if (!deleting && cIdx === word.length) { delay = 2200; deleting = true; }
+            else if (deleting && cIdx === 0) { deleting = false; wIdx++; delay = 350; }
+            setTimeout(tick, delay);
+        }
+        tick();
+
+        // ── SCROLL REVEAL ─────────────────────────────────────────────────
+        const obs = new IntersectionObserver(
+            entries => entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+            }),
+            { threshold: 0.1 }
+        );
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // ── CONTACT FORM ──────────────────────────────────────────────────
+        document.getElementById('contactForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const email   = document.getElementById('emailInput').value;
+            const message = document.getElementById('msgInput').value;
+            window.location.href = `mailto:imendifp@gmail.com?subject=Contacto desde portfolio&body=${encodeURIComponent('De: ' + email + '\n\n' + message)}`;
+        });
+    </script>
+</body>
+</html>

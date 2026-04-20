@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robin Luz — Web Design · Iñigo Mendizábal</title>
+  <meta name="description" content="Case study: diseño de la landing page robinluz.com. De la estrategia con el CEO a la web en producción.">
+  <script>
+    document.documentElement.classList.remove('no-js');
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: { DEFAULT: '#14B8A6', light: '#2DD4BF', dark: '#0D9488' },
+            surface: { light: '#FFFFFF', dark: '#0F172A' },
+            muted: { light: '#64748B', dark: '#94A3B8' },
+            card: { light: '#F8FAFC', dark: '#1E293B' },
+            border: { light: '#E2E8F0', dark: '#334155' }
+          },
+          fontFamily: { display: ['Space Grotesk','sans-serif'], body: ['DM Sans','sans-serif'] },
+          borderRadius: { '2xl':'1rem','3xl':'1.5rem','4xl':'2rem' }
+        }
+      }
+    }
+  </script>
+  <style>
+    body{font-family:'DM Sans',sans-serif;}
+    :root{--bg:#FFFFFF;--fg:#0F172A;--muted:#64748B;--accent:#14B8A6;--card:#F8FAFC;--border:#E2E8F0;}
+    .dark{--bg:#0F172A;--fg:#F1F5F9;--muted:#94A3B8;--accent:#2DD4BF;--card:#1E293B;--border:#334155;}
+    .font-display{font-family:'Space Grotesk',sans-serif;}
+    .reveal{opacity:1;transform:translateY(0);transition:opacity .6s ease-out,transform .6s ease-out;}
+    .js-ready .reveal{opacity:0;transform:translateY(24px);}
+    .js-ready .reveal.visible{opacity:1;transform:translateY(0);}
+    .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+    .focus-ring:focus{outline:none;box-shadow:0 0 0 3px rgba(20,184,166,.4);}
+    #progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#14B8A6,#6B63FF);z-index:100;transition:width .1s;}
+    .hero-bg{background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(20,184,166,.1),transparent 65%);}
+    .dark .hero-bg{background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(20,184,166,.16),transparent 65%);}
+    .img-frame{background:rgba(20,184,166,.03);border:1px solid rgba(20,184,166,.12);border-radius:1.25rem;overflow:hidden;}
+    .dark .img-frame{background:rgba(20,184,166,.05);border-color:rgba(20,184,166,.18);}
+    .phase-card{transition:transform .3s ease;}
+    .phase-card:hover{transform:translateY(-4px);}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}.reveal{opacity:1!important;transform:none!important;}.phase-card:hover{transform:none;}}
+  </style>
+</head>
+<body class="bg-surface-light dark:bg-surface-dark min-h-screen">
+<div id="progress-bar" style="width:0%"></div>
+
+<header class="fixed left-0 right-0 z-50 backdrop-blur-xl bg-surface-light/80 dark:bg-surface-dark/80 border-b border-border-light dark:border-border-dark" style="top:3px">
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="Proyecto-RobinLuz.html" class="flex items-center gap-2 text-muted-light dark:text-muted-dark hover:text-primary transition-colors focus-ring rounded-lg px-2 py-1 text-sm font-medium">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <span data-i18n="nav.back">Robin Luz</span>
+      </a>
+      <span class="text-muted-light dark:text-muted-dark">/</span>
+      <span class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm" data-i18n="nav.title">Web Design</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="langToggle" class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring">
+        <span class="text-sm font-medium" id="langLabel">EN</span>
+      </button>
+      <button id="themeToggle" class="p-2 rounded-xl text-muted-light dark:text-muted-dark hover:bg-card-light dark:hover:bg-card-dark transition-all focus-ring">
+        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="pt-[67px]">
+
+  <!-- Hero -->
+  <section class="relative hero-bg overflow-hidden py-20 lg:py-28">
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="reveal flex flex-wrap gap-2 mb-6">
+          <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 rounded-full border border-teal-200 dark:border-teal-800">Web Design</span>
+          <span class="px-3 py-1 text-xs font-semibold tracking-wide uppercase bg-surface-dark/5 dark:bg-white/5 text-muted-light dark:text-muted-dark rounded-full border border-border-light dark:border-border-dark">En producción</span>
+        </div>
+        <h1 class="reveal font-display text-5xl sm:text-6xl font-bold tracking-tight text-surface-dark dark:text-surface-light mb-6 leading-none" data-i18n="hero.title">Landing robinluz.com</h1>
+        <p class="reveal text-xl text-muted-light dark:text-muted-dark max-w-2xl leading-relaxed mb-10" data-i18n="hero.desc">Una landing que no se diseñó desde el pixel 1. Empezamos con una sesión de estrategia con el CEO y stakeholders para alinear qué comunicar, en qué orden, y para quién. El diseño llegó después.</p>
+        <div class="reveal flex flex-wrap gap-8">
+          <div>
+            <div class="font-display text-2xl font-bold text-teal-500">Workshop</div>
+            <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat1">Estrategia con CEO</div>
+          </div>
+          <div>
+            <div class="font-display text-2xl font-bold text-teal-400" data-i18n="stat2live">En vivo</div>
+            <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat2">robinluz.com</div>
+          </div>
+          <div>
+            <div class="font-display text-2xl font-bold text-teal-300">+3</div>
+            <div class="text-xs text-muted-light dark:text-muted-dark mt-0.5" data-i18n="stat3">Iteraciones de diseño</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Context bar -->
+  <section class="py-10 bg-card-light/40 dark:bg-card-dark/40 border-y border-border-light dark:border-border-dark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-px bg-border-light dark:bg-border-dark rounded-2xl overflow-hidden">
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.role">Rol</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Web Designer</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.scope">Alcance</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Estrategia · UX · UI</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.tools">Herramientas</div>
+          <div class="font-display font-semibold text-surface-dark dark:text-surface-light text-sm">Figma · Miro</div>
+        </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-5 sm:p-7">
+          <div class="text-xs font-semibold tracking-wider uppercase text-muted-light dark:text-muted-dark mb-1.5" data-i18n="ctx.url">URL</div>
+          <div class="font-display font-semibold text-teal-600 dark:text-teal-400 text-sm">robinluz.com</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Strategy -->
+  <section class="py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <div class="reveal">
+            <span class="inline-block text-xs font-semibold tracking-wider uppercase text-teal-500 mb-4" data-i18n="s1.label">Fase 1 — Estrategia</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-6" data-i18n="s1.title">Antes de abrir Figma</h2>
+            <p class="text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="s1.p1">Organizamos una sesión de trabajo con el CEO y los stakeholders clave para definir las priority guidelines: quién es el usuario objetivo, qué mensaje es crítico, qué acción queremos que tome, y qué podemos dejar para después.</p>
+            <p class="text-muted-light dark:text-muted-dark leading-relaxed" data-i18n="s1.p2">El resultado fue una pirámide de contenidos que sirvió de brújula para todo el proceso de diseño posterior. Sin ella, habríamos diseñado una landing bonita sin propósito claro.</p>
+          </div>
+        </div>
+        <div class="reveal stagger-1">
+          <div class="img-frame">
+            <img src="Assests/Img/8.png"
+                 alt="Sesión de estrategia con CEO y stakeholders — priority guidelines"
+                 class="w-full object-cover"
+                 onerror="this.style.display='none'">
+          </div>
+          <p class="text-xs text-muted-light dark:text-muted-dark mt-3 text-center" data-i18n="s1.caption">Sesión de estrategia — priority guidelines con CEO</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content pyramid + blocks -->
+  <section class="py-24 bg-card-light/30 dark:bg-card-dark/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <span class="inline-block text-xs font-semibold tracking-wider uppercase text-teal-500 mb-4" data-i18n="s2.label">Arquitectura de contenidos</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-4" data-i18n="s2.title">De la pirámide a los bloques</h2>
+        <p class="text-muted-light dark:text-muted-dark max-w-2xl mx-auto" data-i18n="s2.desc">La pirámide de contenidos se tradujo en bloques funcionales, cada uno con un objetivo claro. Así evitamos que la landing se convirtiera en un catálogo de features sin narrativa.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="reveal stagger-1">
+          <div class="img-frame">
+            <img src="Assests/Img/9.png"
+                 alt="Pirámide de contenidos — estructura de mensajes"
+                 class="w-full object-cover"
+                 onerror="this.style.display='none'">
+          </div>
+          <p class="text-xs text-muted-light dark:text-muted-dark mt-3 text-center" data-i18n="s2.cap1">Pirámide de contenidos</p>
+        </div>
+        <div class="reveal stagger-2">
+          <div class="img-frame">
+            <img src="Assests/Img/10.png"
+                 alt="Bloques de la landing — estructura de secciones"
+                 class="w-full object-cover"
+                 onerror="this.style.display='none'">
+          </div>
+          <p class="text-xs text-muted-light dark:text-muted-dark mt-3 text-center" data-i18n="s2.cap2">Bloques de contenido</p>
+        </div>
+        <div class="reveal stagger-3">
+          <div class="img-frame">
+            <img src="Assests/Img/11.png"
+                 alt="Detalle de secciones — estructura detallada"
+                 class="w-full object-cover"
+                 onerror="this.style.display='none'">
+          </div>
+          <p class="text-xs text-muted-light dark:text-muted-dark mt-3 text-center" data-i18n="s2.cap3">Detalle de secciones</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wireframes -->
+  <section class="py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal order-2 lg:order-1">
+          <div class="img-frame">
+            <img src="Assests/Img/12.png"
+                 alt="Wireframes de la landing — estructura antes del diseño visual"
+                 class="w-full object-cover"
+                 onerror="this.style.display='none'">
+          </div>
+          <p class="text-xs text-muted-light dark:text-muted-dark mt-3 text-center" data-i18n="s3.caption">Wireframes de la landing</p>
+        </div>
+        <div class="reveal stagger-1 order-1 lg:order-2">
+          <span class="inline-block text-xs font-semibold tracking-wider uppercase text-teal-500 mb-4" data-i18n="s3.label">Fase 2 — Wireframes</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-6" data-i18n="s3.title">Estructura antes de color</h2>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="s3.p1">Los wireframes tradujeron la arquitectura de contenidos en layout. En esta fase tomamos las decisiones más importantes: dónde va el CTA principal, cuánta información necesita ver el usuario antes de decidir, cómo organizamos la navegación.</p>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed" data-i18n="s3.p2">También definimos los bloques de app screenshots que el CEO quería incluir para mostrar el producto real, integrando las capturas de la app móvil en el flujo narrativo de la landing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Evolution -->
+  <section class="py-24 bg-card-light/30 dark:bg-card-dark/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal">
+          <span class="inline-block text-xs font-semibold tracking-wider uppercase text-teal-500 mb-4" data-i18n="s4.label">Fase 3 — Diseño visual</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-surface-dark dark:text-surface-light mb-6" data-i18n="s4.title">Evolución hacia producción</h2>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed mb-4" data-i18n="s4.p1">Desde los wireframes hasta la versión que entró a producción hubo múltiples iteraciones. Los cambios más significativos vinieron del feedback en sesiones de revisión con el CEO: ajustes de jerarquía, cambios en el hero, y la decisión final sobre el copy del CTA principal.</p>
+          <p class="text-muted-light dark:text-muted-dark leading-relaxed mb-6" data-i18n="s4.p2">La paleta de Robin Luz — negro profundo, violeta, índigo — se mantuvo coherente con la app móvil para reforzar la identidad de marca en todos los puntos de contacto.</p>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="p-3 rounded-xl bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800 text-center">
+              <div class="w-4 h-4 rounded-full mx-auto mb-2" style="background:#15181C;border:1px solid rgba(255,255,255,.2)"></div>
+              <div class="text-xs text-muted-light dark:text-muted-dark">#15181C</div>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800 text-center">
+              <div class="w-4 h-4 rounded-full mx-auto mb-2" style="background:#8A38F5"></div>
+              <div class="text-xs text-muted-light dark:text-muted-dark">#8A38F5</div>
+            </div>
+            <div class="p-3 rounded-xl bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800 text-center">
+              <div class="w-4 h-4 rounded-full mx-auto mb-2" style="background:#6B63FF"></div>
+              <div class="text-xs text-muted-light dark:text-muted-dark">#6B63FF</div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal stagger-2">
+          <div class="img-frame">
+            <img src="Assests/Img/13.png"
+                 alt="Evolución del diseño de la landing — de wireframe a producción"
+                 class="w-full object-cover"
+                 onerror="this.style.display='none'">
+          </div>
+          <p class="text-xs text-muted-light dark:text-muted-dark mt-3 text-center" data-i18n="s4.caption">Evolución del diseño — wireframe a producción</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation between sub-cases -->
+  <section class="py-16 border-t border-border-light dark:border-border-dark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row gap-4 justify-between items-center">
+        <a href="RobinLuz-UX.html" class="flex items-center gap-2 text-sm font-medium text-muted-light dark:text-muted-dark hover:text-primary transition-colors focus-ring rounded-lg px-3 py-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          <span data-i18n="nav.prev">Anterior: App móvil</span>
+        </a>
+        <a href="RobinLuz-Brand.html" class="flex items-center gap-2 text-sm font-semibold text-teal-600 dark:text-teal-400 hover:text-teal-500 transition-colors focus-ring rounded-lg px-3 py-2">
+          <span data-i18n="nav.next">Siguiente: Identidad visual</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="py-8 border-t border-border-light dark:border-border-dark">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <a href="index.html" class="font-display font-bold text-surface-dark dark:text-surface-light hover:text-primary transition-colors">Iñigo Mendizábal</a>
+    <span class="text-sm text-muted-light dark:text-muted-dark" data-i18n="footer">© 2026 Todos los derechos reservados</span>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  const i18n = {
+    es:{
+      "nav.back":"Robin Luz","nav.title":"Web Design","nav.prev":"Anterior: App móvil","nav.next":"Siguiente: Identidad visual",
+      "hero.title":"Landing robinluz.com","hero.desc":"Una landing que no se diseñó desde el pixel 1. Empezamos con una sesión de estrategia con el CEO y stakeholders para alinear qué comunicar, en qué orden, y para quién. El diseño llegó después.",
+      "stat1":"Estrategia con CEO","stat2live":"En vivo","stat2":"robinluz.com","stat3":"Iteraciones de diseño",
+      "ctx.role":"Rol","ctx.scope":"Alcance","ctx.tools":"Herramientas","ctx.url":"URL",
+      "s1.label":"Fase 1 — Estrategia","s1.title":"Antes de abrir Figma","s1.p1":"Organizamos una sesión de trabajo con el CEO y los stakeholders clave para definir las priority guidelines: quién es el usuario objetivo, qué mensaje es crítico, qué acción queremos que tome, y qué podemos dejar para después.","s1.p2":"El resultado fue una pirámide de contenidos que sirvió de brújula para todo el proceso de diseño posterior. Sin ella, habríamos diseñado una landing bonita sin propósito claro.","s1.caption":"Sesión de estrategia — priority guidelines con CEO",
+      "s2.label":"Arquitectura de contenidos","s2.title":"De la pirámide a los bloques","s2.desc":"La pirámide de contenidos se tradujo en bloques funcionales, cada uno con un objetivo claro. Así evitamos que la landing se convirtiera en un catálogo de features sin narrativa.","s2.cap1":"Pirámide de contenidos","s2.cap2":"Bloques de contenido","s2.cap3":"Detalle de secciones",
+      "s3.label":"Fase 2 — Wireframes","s3.title":"Estructura antes de color","s3.p1":"Los wireframes tradujeron la arquitectura de contenidos en layout. En esta fase tomamos las decisiones más importantes: dónde va el CTA principal, cuánta información necesita ver el usuario antes de decidir, cómo organizamos la navegación.","s3.p2":"También definimos los bloques de app screenshots que el CEO quería incluir para mostrar el producto real, integrando las capturas de la app móvil en el flujo narrativo de la landing.","s3.caption":"Wireframes de la landing",
+      "s4.label":"Fase 3 — Diseño visual","s4.title":"Evolución hacia producción","s4.p1":"Desde los wireframes hasta la versión que entró a producción hubo múltiples iteraciones. Los cambios más significativos vinieron del feedback en sesiones de revisión con el CEO: ajustes de jerarquía, cambios en el hero, y la decisión final sobre el copy del CTA principal.","s4.p2":"La paleta de Robin Luz — negro profundo, violeta, índigo — se mantuvo coherente con la app móvil para reforzar la identidad de marca en todos los puntos de contacto.","s4.caption":"Evolución del diseño — wireframe a producción",
+      "footer":"© 2026 Todos los derechos reservados"
+    },
+    en:{
+      "nav.back":"Robin Luz","nav.title":"Web Design","nav.prev":"Previous: Mobile app","nav.next":"Next: Visual identity",
+      "hero.title":"Landing robinluz.com","hero.desc":"A landing page that wasn't designed from pixel one. We started with a strategy session with the CEO and stakeholders to align what to communicate, in what order, and for whom. The design came after.",
+      "stat1":"Strategy workshop with CEO","stat2live":"Live","stat2":"robinluz.com","stat3":"Design iterations",
+      "ctx.role":"Role","ctx.scope":"Scope","ctx.tools":"Tools","ctx.url":"URL",
+      "s1.label":"Phase 1 — Strategy","s1.title":"Before opening Figma","s1.p1":"We ran a working session with the CEO and key stakeholders to define the priority guidelines: who the target user is, what message is critical, what action we want them to take, and what can wait.","s1.p2":"The result was a content pyramid that served as a compass throughout the design process. Without it, we would have designed a pretty landing with no clear purpose.","s1.caption":"Strategy session — priority guidelines with CEO",
+      "s2.label":"Content architecture","s2.title":"From pyramid to blocks","s2.desc":"The content pyramid was translated into functional blocks, each with a clear objective. This prevented the landing from becoming a feature catalogue without a narrative.","s2.cap1":"Content pyramid","s2.cap2":"Content blocks","s2.cap3":"Section detail",
+      "s3.label":"Phase 2 — Wireframes","s3.title":"Structure before colour","s3.p1":"Wireframes translated the content architecture into layout. This is where we made the most important decisions: where the main CTA goes, how much information the user needs to see before deciding, how to structure the navigation.","s3.p2":"We also defined the app screenshot blocks the CEO wanted to include to show the real product, integrating the mobile app screens into the landing's narrative flow.","s3.caption":"Landing wireframes",
+      "s4.label":"Phase 3 — Visual design","s4.title":"Iterating towards production","s4.p1":"From wireframes to the version that went live there were multiple iterations. The most significant changes came from CEO review sessions: hierarchy adjustments, hero changes, and the final decision on the main CTA copy.","s4.p2":"The Robin Luz palette — deep black, violet, indigo — remained consistent with the mobile app to reinforce brand identity across all touchpoints.","s4.caption":"Design evolution — wireframe to production",
+      "footer":"© 2026 All rights reserved"
+    }
+  };
+  let lang = localStorage.getItem('lang') || 'es';
+  function applyLang(l){lang=l;localStorage.setItem('lang',l);document.documentElement.lang=l;document.getElementById('langLabel').textContent=l==='en'?'ES':'EN';document.querySelectorAll('[data-i18n]').forEach(el=>{if(i18n[l][el.dataset.i18n])el.textContent=i18n[l][el.dataset.i18n];});}
+  document.getElementById('langToggle').addEventListener('click',()=>applyLang(lang==='en'?'es':'en'));
+  applyLang(lang);
+  document.getElementById('themeToggle').addEventListener('click',()=>{document.documentElement.classList.toggle('dark');localStorage.theme=document.documentElement.classList.contains('dark')?'dark':'light';});
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('progress-bar').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';});
+</script>
+</body>
+</html>
