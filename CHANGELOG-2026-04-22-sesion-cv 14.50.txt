@@ -1,0 +1,50 @@
+CAMBIOS CV — Sesión 2026-04-22
+==============================
+
+NUEVAS EXPERIENCIAS
+-------------------
+- Añadido: "Estrategia y UX · NowEat" — 2025 – Presente
+  · Co-fundador de SaaS all-in-one para restaurantes con IA
+  · Setup <10 min, +38% ventas en piloto
+  · Arquitectura de producto y flujos UX priorizando simplicidad
+
+- Añadido: "Diseño Estratégico · En Marcha" — 2026 – Presente
+  · Laboratorio rural de innovación social, La Vera (Extremadura)
+  · Identidad, comunicación y web para acceso a fondos europeos
+  · Investigación territorial con alcaldes, asociaciones y usuarios
+
+FECHAS CORREGIDAS
+-----------------
+- Optimiza Recursos: 2025–Presente → 2024–2025
+- NowEat: fecha inicial 2026 corregida a 2025–Presente
+
+CABECERA / DATOS DE CONTACTO
+-----------------------------
+- Tagline: "Diseñador UX/UI y de Producto · Madrid, España" → "UX · UI · CX"
+- Nueva línea de contacto (.contact-line) en formato:
+  Madrid, España • (+34) 614-321-991 • [email] • [LinkedIn] • [Portfolio]
+- Madrid y teléfono: texto plano
+- Email, LinkedIn, Portfolio: pills con borde clicables
+- Teléfono añadido: +34 614 321 991
+
+TIPOGRAFÍA
+----------
+- Títulos de sección (.label): 8pt → 9.5pt
+- Puesto/empresa (.exp-role): 10pt → 9pt, weight 600 → 500
+
+SKILLS
+------
+- Nueva clase .skill-pill separada de .pill (contacto)
+- Borde suavizado: 0.75pt sólido → 0.5pt rgba(0,0,0,0.12)
+- Fondo sutil añadido: #F2F2F2
+- Gap reducido (2pt 4pt) para caber en 2 líneas exactas
+
+ESPACIADO
+---------
+- Espacio entre secciones (hr + .label margins) igualado al Bio: 4pt en todos los separadores
+
+GENERACIÓN PDF
+--------------
+- El script generar-cv.sh usa puerto 63157
+- En esta sesión se usa: python3 -m http.server 3000 + bloque Chrome headless manual
+- Ambos PDFs actualizados: cv-esp-inigo-mendizabal.pdf / cv-eng-inigo-mendizabal.pdf

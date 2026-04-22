@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iñigo Mendizábal — UX/Product Designer</title>
     <meta name="description" content="Diseñador UX/UI y de Producto. Madrid. Proyectos: Robin Luz, NowEat, En Marcha.">
+    <script>
+        if (localStorage.theme === 'light') {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,27 +49,44 @@
         /* Pill chip */
         .pill {
             display: inline-block;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+        .dark .pill {
+            background: rgba(255,255,255,0.07);
+            color: rgba(255,255,255,0.55);
+        }
+        html:not(.dark) .pill {
+            background: rgba(0,0,0,0.06);
+            color: rgba(0,0,0,0.55);
+        }
+        .pill-link {
+            display: inline-block;
             padding: 4px 14px;
             border-radius: 999px;
             font-size: 12px;
             font-weight: 500;
             letter-spacing: 0.02em;
             transition: all 0.2s;
+            text-decoration: none;
         }
-        .dark .pill {
-            border: 1px solid rgba(255,255,255,0.12);
+        .dark .pill-link {
+            border: 1px solid rgba(255,255,255,0.2);
             color: rgba(255,255,255,0.65);
         }
-        .dark .pill:hover {
-            border-color: rgba(255,255,255,0.3);
+        .dark .pill-link:hover {
+            border-color: rgba(255,255,255,0.5);
             color: #fff;
         }
-        html:not(.dark) .pill {
-            border: 1px solid rgba(0,0,0,0.12);
+        html:not(.dark) .pill-link {
+            border: 1px solid rgba(0,0,0,0.2);
             color: rgba(0,0,0,0.6);
         }
-        html:not(.dark) .pill:hover {
-            border-color: rgba(0,0,0,0.3);
+        html:not(.dark) .pill-link:hover {
+            border-color: rgba(0,0,0,0.4);
             color: #111;
         }
 
@@ -107,58 +131,84 @@
 
         /* ── PRINT / PDF ─────────────────────────────────────────────── */
         @media print {
+            @page { size: A4; margin: 1.2cm 1.5cm; }
+
             * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
-            /* Hide interactive / decorative elements */
-            header, footer, .skip-link, #contact, section[aria-label="Introducción"] { display: none !important; }
+            /* ── OCULTAR ── */
+            header, footer, .skip-link, #contact,
+            section[aria-label="Introducción"],
+            [aria-labelledby="cs-label"],
+            .img-zoom { display: none !important; }
+            /* Ocultar botón Contactar pero no el email */
+            [aria-label="Enviar email a Iñigo"] { display: none !important; }
+            /* Ocultar case studies — selector reforzado */
+            [role="region"][aria-labelledby="cs-label"] { display: none !important; }
+            #cs-label { display: none !important; }
+            /* Ocultar label Bio — mostrar solo el texto */
+            section[aria-label="Perfil"] ~ div > p.tracking-\[0\.28em\]:first-child { display: none !important; }
 
-            body {
-                background: #fff !important;
-                color: #111 !important;
-                font-size: 11pt;
-                line-height: 1.5;
-            }
-
-            /* Remove padding-top added for fixed nav */
+            /* ── BASE ── */
+            body, * { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif !important; }
+            body { background: #fff !important; color: #111 !important; font-size: 9.5pt !important; line-height: 1.32 !important; }
             main { padding-top: 0 !important; }
-
             .reveal { opacity: 1 !important; transform: none !important; }
-
-            /* Content wrapper */
             .px-6 { padding-left: 0 !important; padding-right: 0 !important; }
             .max-w-5xl { max-width: 100% !important; margin: 0 !important; }
 
-            /* Dividers */
-            .row-divider { border-color: rgba(0,0,0,0.12) !important; }
+            /* ── LAYOUT UNA COLUMNA ── */
+            .gap-x-8 { display: block !important; }
 
-            /* Section labels */
-            .text-xs.tracking-\[0\.28em\] { color: #111 !important; }
+            /* ── FOTO PERFIL ── */
+            .w-\[125px\] { width: 90px !important; }
+            .h-\[125px\] { height: 90px !important; }
+            .flex.gap-6 { gap: 16pt !important; }
+            section[aria-label="Perfil"] { padding-top: 2pt !important; padding-bottom: 6pt !important; }
 
-            /* Muted text → readable on white */
-            [class*="text-white\/"] { color: #444 !important; }
-            [class*="text-black\/"] { color: #444 !important; }
+            /* ── SEPARADORES ── */
+            .row-divider { border-top: 0.5pt solid #ddd !important; }
+            .py-10, .py-6 { padding-top: 2pt !important; padding-bottom: 2pt !important; }
+
+            /* ── ENCABEZADOS DE SECCIÓN ── */
+            .tracking-\[0\.28em\] {
+                font-size: 12pt !important;
+                font-weight: 700 !important;
+                letter-spacing: 0 !important;
+                text-transform: none !important;
+                color: #111 !important;
+                border-bottom: 0.5pt solid #bbb !important;
+                padding-bottom: 1pt !important;
+                margin-bottom: 3pt !important;
+                width: 100% !important;
+                display: block !important;
+            }
+            /* fix cascade: text-xs no aplaste el 12pt */
+            .text-xs.tracking-\[0\.28em\] { font-size: 12pt !important; }
+
+            /* ── TAMAÑOS DE TEXTO ── */
+            .text-\[22px\] { font-size: 14pt !important; }
+            .text-base    { font-size: 9.5pt !important; }
+            .text-sm      { font-size: 9.5pt !important; }
+            .text-xs      { font-size: 8pt !important; }
+
+            /* ── COLORES ── */
+            [class*="text-white\/"] { color: #555 !important; }
+            [class*="text-black\/"] { color: #555 !important; }
             .dark\:text-white { color: #111 !important; }
 
-            /* Pills */
-            .pill { border-color: rgba(0,0,0,0.2) !important; color: #333 !important; }
+            /* ── PILLS / SKILLS ── */
+            .pill { border-color: rgba(0,0,0,0.18) !important; color: #333 !important;
+                    padding: 1px 7px !important; font-size: 8pt !important; }
 
-            /* Hide case study images and contact form */
-            .img-zoom, #contact { display: none !important; }
+            /* ── ESPACIADO ── */
+            .space-y-8 > * + * { margin-top: 3pt !important; }
+            .space-y-4 > * + * { margin-top: 1pt !important; }
+            .space-y-2 > * + * { margin-top: 1pt !important; }
+            .mb-2 { margin-bottom: 1pt !important; }
 
-            /* Avoid page breaks inside items */
-            [role="listitem"] { page-break-inside: avoid; }
-            .row-divider { page-break-inside: avoid; }
-
-            /* Page header with name */
-            .px-6.lg\:px-12.max-w-5xl::before {
-                content: "Iñigo Mendizábal — UX/Product Designer · imendifp@gmail.com · Madrid";
-                display: block;
-                font-size: 10pt;
-                color: #666;
-                padding-bottom: 16pt;
-                border-bottom: 1px solid #ddd;
-                margin-bottom: 8pt;
-            }
+            /* ── SALTOS DE PÁGINA ── */
+            [role="listitem"] { page-break-inside: auto; }
+            [role="listitem"] > p:first-child { page-break-after: avoid; }
         }
     </style>
 </head>
@@ -172,11 +222,18 @@
                    px-6 lg:px-12 h-14
                    border-b dark:border-white/5 border-black/6
                    dark:bg-[#111111]/90 bg-[#F5F4F1]/90 backdrop-blur-md">
-        <a href="#" class="text-xs font-semibold tracking-[0.18em] uppercase
-                           dark:text-white text-[#111] hover:opacity-50 transition-opacity"
-           aria-label="Inicio">
-            Iñigo Mendizábal
-        </a>
+        <div class="flex items-center gap-5">
+            <a href="index.html" class="flex items-center gap-1.5 text-xs dark:text-white/70 text-black/60
+                                        hover:dark:text-white hover:text-black transition-colors">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                <span data-i18n="nav_portfolio">Portfolio</span>
+            </a>
+            <a href="#" class="text-xs font-semibold tracking-[0.18em] uppercase
+                               dark:text-white text-[#111] hover:opacity-50 transition-opacity"
+               aria-label="Inicio">
+                Iñigo Mendizábal
+            </a>
+        </div>
         <div class="flex items-center gap-4">
             <button id="langBtn" aria-label="Switch language"
                     class="text-[11px] font-semibold tracking-[0.2em] uppercase
@@ -193,21 +250,21 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 0 0 12 21a9.003 9.003 0 0 0 8.354-5.646z"/>
                 </svg>
             </button>
-            <button onclick="window.print()"
+            <a id="downloadCvNav" href="cv-esp-inigo-mendizabal.pdf" download="CV Iñigo Mendizábal.pdf"
                     class="text-[11px] font-semibold tracking-[0.15em] uppercase
-                           border dark:border-white/20 border-black/20 px-4 py-1.5 rounded-full
                            dark:text-white/60 text-black/55
-                           hover:dark:text-white hover:text-black hover:border-current
+                           hover:dark:text-white hover:text-black
                            transition-all duration-200 print:hidden"
                     aria-label="Descargar CV en PDF">
                 <span data-i18n="nav_download">Descargar CV</span>
-            </button>
+            </a>
             <a href="#contact"
                class="text-[11px] font-semibold tracking-[0.15em] uppercase
-                      border dark:border-white/20 border-black/20 px-4 py-1.5 rounded-full
-                      dark:text-white text-[#111]
-                      hover:bg-[#8A38F5] hover:border-[#8A38F5] hover:text-white
-                      transition-all duration-200">
+                      border dark:border-white/30 border-black/20 px-4 py-1.5 rounded-full bg-transparent
+                      dark:text-white/70 text-black/60
+                      transition-all duration-200"
+               onmouseover="this.style.background='white';this.style.color='#111';this.style.borderColor='white';"
+               onmouseout="this.style.background='';this.style.color='';this.style.borderColor='';">
                 <span data-i18n="nav_contact">Contacto</span>
             </a>
         </div>
@@ -251,14 +308,7 @@
                         <p class="text-sm leading-5 dark:text-white/50 text-black/55 mb-5 max-w-sm" data-i18n="profile_sub">
                             Diseñador UX/UI y de Producto con más de 4 años de experiencia. Madrid, España.
                         </p>
-                        <a href="mailto:imendifp@gmail.com"
-                           class="inline-flex items-center justify-center h-10 text-sm font-medium tracking-[0.01em]
-                                  bg-white text-[#111] px-6 rounded-full
-                                  hover:bg-[#8A38F5] hover:text-white
-                                  transition-all duration-200"
-                           aria-label="Enviar email a Iñigo">
-                            <span data-i18n="profile_cta">Contactar</span>
-                        </a>
+
                     </div>
                 </div>
             </section>
@@ -268,11 +318,11 @@
                 <p class="text-xs tracking-[0.28em] uppercase dark:text-white text-[#111] font-medium pt-0.5"
                    data-i18n="links_label">Links</p>
                 <div class="flex flex-wrap gap-2">
-                    <a href="https://www.linkedin.com/in/inigo-mendizabal/" target="_blank" rel="noopener noreferrer"
-                       class="pill" aria-label="LinkedIn (abre en nueva pestaña)">LinkedIn</a>
-                    <a href="index.html" class="pill" aria-label="Portfolio principal">Portfolio</a>
+                    <a href="https://www.linkedin.com/in/inigomendizabal/" target="_blank" rel="noopener noreferrer"
+                       class="pill-link" aria-label="LinkedIn (abre en nueva pestaña)">LinkedIn</a>
+                    <a href="https://portfolio-mendi.vercel.app/" class="pill-link" aria-label="Portfolio principal">Portfolio</a>
                     <a href="https://en-marcha-web.vercel.app" target="_blank" rel="noopener noreferrer"
-                       class="pill" aria-label="En Marcha (abre en nueva pestaña)">En Marcha</a>
+                       class="pill-link" aria-label="En Marcha (abre en nueva pestaña)">En Marcha</a>
                 </div>
             </div>
 
@@ -332,16 +382,16 @@
 
                     <div role="listitem">
                         <p class="text-base font-medium leading-6 dark:text-white text-[#111]">
-                            <span data-i18n="exp1_role">Diseñador UX multidisciplinar</span> · Optimiza Recursos
+                            <span data-i18n="exp2_role">Estrategia y Negocio</span> · NowEat
                         </p>
-                        <p class="text-xs leading-4 dark:text-white/50 text-black/55 mt-2">2025 – <span data-i18n="present">Presente</span></p>
+                        <p class="text-xs leading-4 dark:text-white/50 text-black/55 mt-2">2025 – 2026</p>
                     </div>
 
                     <div role="listitem">
                         <p class="text-base font-medium leading-6 dark:text-white text-[#111]">
-                            <span data-i18n="exp2_role">Diseñador UX — Cofundador</span> · NowEat
+                            <span data-i18n="exp1_role">Diseñador UX/UI</span> · Optimiza Recursos
                         </p>
-                        <p class="text-xs leading-4 dark:text-white/50 text-black/55 mt-2">2024</p>
+                        <p class="text-xs leading-4 dark:text-white/50 text-black/55 mt-2">2024 – 2025</p>
                     </div>
 
                     <div role="listitem">
@@ -355,7 +405,7 @@
                         <p class="text-base font-medium leading-6 dark:text-white text-[#111]">
                             <span data-i18n="exp4_role">Diseñador UX/UI Junior</span> · Olistiko
                         </p>
-                        <p class="text-xs leading-4 dark:text-white/50 text-black/55 mt-2">2021 – 2023</p>
+                        <p class="text-xs leading-4 dark:text-white/50 text-black/55 mt-2">2021 – 2022</p>
                     </div>
 
                 </div>
@@ -437,15 +487,25 @@
                         <textarea id="msgInput" name="message" rows="4"
                                   class="cv-input resize-none" data-i18n-ph="contact_ph_msg" placeholder="Mensaje" required></textarea>
                     </div>
-                    <button type="submit"
-                            class="w-full h-10 text-sm font-medium tracking-[0.01em]
-                                   border dark:border-white/15 border-black/15
-                                   rounded-full
-                                   dark:text-white/80 text-black/70
-                                   hover:bg-[#8A38F5] hover:border-[#8A38F5] hover:text-white
-                                   transition-all duration-200">
-                        <span data-i18n="contact_send">Enviar</span>
-                    </button>
+                    <div class="flex items-center justify-center gap-6">
+                        <button type="submit"
+                                class="h-10 px-10 text-sm font-medium tracking-[0.01em]
+                                       border dark:border-white/30 border-black/20
+                                       rounded-full bg-transparent
+                                       dark:text-white/70 text-black/60
+                                       transition-all duration-200"
+                                onmouseover="this.style.background='white';this.style.color='#111';this.style.borderColor='white';"
+                                onmouseout="this.style.background='';this.style.color='';this.style.borderColor='';">
+                            <span data-i18n="contact_send">Enviar</span>
+                        </button>
+                        <a href="mailto:imendifp@gmail.com"
+                           class="text-xs font-medium
+                                  dark:text-white/50 text-black/45
+                                  hover:dark:text-white hover:text-black transition-colors"
+                           data-i18n="contact_sub">mail</a>
+                    </div>
+                    <p id="formSuccess" class="hidden text-center text-sm text-emerald-500 pt-1" data-i18n="contact_success">Mensaje enviado. Te respondo pronto.</p>
+                    <p id="formError" class="hidden text-center text-sm text-red-400 pt-1" data-i18n="contact_error">Algo fue mal. Escríbeme a imendifp@gmail.com</p>
                 </form>
             </div>
 
@@ -462,14 +522,14 @@
         <nav class="flex items-center gap-5 order-1 sm:order-2" aria-label="Footer">
             <a href="#contact" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors"
                data-i18n="footer_contact">Contacto</a>
-            <a href="https://www.linkedin.com/in/inigo-mendizabal/" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.linkedin.com/in/inigomendizabal/" target="_blank" rel="noopener noreferrer"
                class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors"
                aria-label="LinkedIn (abre en nueva pestaña)">LinkedIn</a>
             <a href="index.html" class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors"
                data-i18n="footer_portfolio">Portfolio</a>
-            <button onclick="window.print()"
+            <a id="downloadCvFooter" href="cv-esp-inigo-mendizabal.pdf" download="CV Iñigo Mendizábal.pdf"
                     class="text-xs dark:text-white/50 text-black/55 hover:dark:text-white hover:text-black transition-colors print:hidden"
-                    data-i18n="footer_download">Descargar CV</button>
+                    data-i18n="footer_download">Descargar CV</a>
         </nav>
     </footer>
 
@@ -479,12 +539,14 @@
         const T = {
             es: {
                 skip:             'Saltar al contenido',
+                nav_portfolio:    'Portfolio',
                 nav_contact:      'Contacto',
                 nav_download:     'Descargar CV',
                 hero_pre:         'Diseñando mejores',
                 hero_words:       ['experiencias.', 'productos.', 'soluciones.', 'futuros.'],
                 profile_sub:      'Diseñador UX/UI y de Producto con más de 4 años de experiencia. Madrid, España.',
                 profile_cta:      'Contactar',
+                profile_cta_dl:   'Descargar CV',
                 links_label:      'Links',
                 bio_label:        'Bio',
                 bio_p1:           'Diseñador estratégico con más de 4 años de experiencia diseñando y lanzando productos digitales desde fases iniciales hasta producción. He contribuido a definir la estructura y dirección estratégica en startups, agencias y entornos corporativos.',
@@ -492,8 +554,8 @@
                 bio_p3:           'Mi motivación es resolver problemas complejos mediante el diseño estratégico, creando soluciones digitales donde la innovación y la escalabilidad generen un impacto positivo.',
                 skills_label:     'Skills',
                 exp_label:        'Experiencia',
-                exp1_role:        'Diseñador UX multidisciplinar',
-                exp2_role:        'Diseñador UX — Cofundador',
+                exp1_role:        'Diseñador UX/UI',
+                exp2_role:        'Diseñador UX — Estrategia y Negocio',
                 exp3_role:        'Diseñador UX/CX',
                 exp4_role:        'Diseñador UX/UI Junior',
                 present:          'Presente',
@@ -505,22 +567,28 @@
                 p3_title:         'En Marcha',
                 p3_tags:          'Innovación social · Web · Identidad · Cofundador',
                 contact_label:    'Contacto',
+                contact_sub:      'mail',
                 contact_ph_email: 'Email',
                 contact_ph_msg:   'Mensaje',
                 contact_msg_label:'Mensaje',
                 contact_send:     'Enviar',
+                contact_success:  'Mensaje enviado. Te respondo pronto.',
+                contact_error:    'Algo fue mal. Escríbeme a imendifp@gmail.com',
+                contact_or:       'o escríbeme directamente a',
                 footer_contact:   'Contacto',
                 footer_portfolio: 'Portfolio',
                 footer_download:  'Descargar CV',
             },
             en: {
                 skip:             'Skip to content',
+                nav_portfolio:    'Portfolio',
                 nav_contact:      'Contact',
                 nav_download:     'Download CV',
                 hero_pre:         'Designing better',
                 hero_words:       ['experiences.', 'products.', 'solutions.', 'futures.'],
                 profile_sub:      'UX/UI & Product Designer with 4+ years of experience. Madrid, Spain.',
                 profile_cta:      'Get in touch',
+                profile_cta_dl:   'Download CV',
                 links_label:      'Links',
                 bio_label:        'Bio',
                 bio_p1:           'Strategic designer with 4+ years of experience designing and launching digital products from early stages through production. Contributed to defining structure and strategic direction across startups, agencies and corporate environments.',
@@ -528,8 +596,8 @@
                 bio_p3:           'My motivation is solving complex problems through strategic design, creating digital solutions where innovation and scalability generate a positive impact.',
                 skills_label:     'Skills',
                 exp_label:        'Experience',
-                exp1_role:        'Multidisciplinary UX Designer',
-                exp2_role:        'UX Designer — Co-founder',
+                exp1_role:        'UX/UI Designer',
+                exp2_role:        'UX Designer — Strategy & Business',
                 exp3_role:        'UX/CX Designer',
                 exp4_role:        'Junior UX/UI Designer',
                 present:          'Present',
@@ -541,10 +609,14 @@
                 p3_title:         'En Marcha',
                 p3_tags:          'Social innovation · Web · Identity · Co-founder',
                 contact_label:    'Contact',
+                contact_sub:      'mail',
                 contact_ph_email: 'Email',
                 contact_ph_msg:   'Message',
                 contact_msg_label:'Message',
                 contact_send:     'Send',
+                contact_success:  'Message sent. I\'ll get back to you soon.',
+                contact_error:    'Something went wrong. Email me at imendifp@gmail.com',
+                contact_or:       'or email me directly at',
                 footer_contact:   'Contact',
                 footer_portfolio: 'Portfolio',
                 footer_download:  'Download CV',
@@ -566,6 +638,10 @@
                 if (v !== undefined) el.placeholder = v;
             });
             wordList = T[lang].hero_words;
+            document.querySelectorAll('#downloadCvNav, #downloadCvFooter').forEach(a => {
+                a.href = l === 'en' ? 'cv-eng-inigo-mendizabal.pdf' : 'cv-esp-inigo-mendizabal.pdf';
+                a.download = l === 'en' ? 'CV Iñigo Mendizábal EN.pdf' : 'CV Iñigo Mendizábal.pdf';
+            });
         }
 
         document.getElementById('langBtn').addEventListener('click', () => {
@@ -609,11 +685,36 @@
         document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
         // ── CONTACT FORM ──────────────────────────────────────────────────
-        document.getElementById('contactForm').addEventListener('submit', e => {
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email   = document.getElementById('emailInput').value;
-            const message = document.getElementById('msgInput').value;
-            window.location.href = `mailto:imendifp@gmail.com?subject=Contacto desde portfolio&body=${encodeURIComponent('De: ' + email + '\n\n' + message)}`;
+            const btn = contactForm.querySelector('button[type="submit"]');
+            const success = document.getElementById('formSuccess');
+            const error = document.getElementById('formError');
+            btn.disabled = true;
+            btn.querySelector('span').textContent = '...';
+            try {
+                const res = await fetch('https://formspree.io/f/xojynzvr', {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (res.ok) {
+                    contactForm.reset();
+                    success.classList.remove('hidden');
+                    error.classList.add('hidden');
+                    setTimeout(() => success.classList.add('hidden'), 5000);
+                } else {
+                    throw new Error();
+                }
+            } catch {
+                error.classList.remove('hidden');
+                success.classList.add('hidden');
+                setTimeout(() => error.classList.add('hidden'), 5000);
+            } finally {
+                btn.disabled = false;
+                btn.querySelector('span').textContent = lang === 'en' ? 'Send' : 'Enviar';
+            }
         });
     </script>
 </body>

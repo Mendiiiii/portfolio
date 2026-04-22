@@ -1,0 +1,32 @@
+CAMBIOS CV — Sesión 2 · 2026-04-22 · Fin: 15:41
+=================================================
+
+CV-PRINT.HTML / PDFs (ES + EN)
+-------------------------------
+- NowEat y En Marcha añadidos a la sección de experiencia
+- Títulos: "Estrategia y UX · NowEat" y "Diseño Estratégico · En Marcha"
+- Fechas: NowEat 2025–Presente, Optimiza Recursos 2024–2025
+- Tipografía: .label 9.5pt, .exp-role 9pt weight 500
+- Tagline: "UX · UI · CX" (sin "Diseñador")
+- Contacto header: línea con • separadores, Madrid + tlf texto plano, email/LinkedIn/Portfolio pills con borde
+- Teléfono añadido: +34 614 321 991
+- Skills: clase .skill-pill separada — sin borde, fondo #F0F0F0, border-radius 3pt, sin hover
+- Espaciado secciones igualado (hr 4pt, .label margin-top 4pt)
+- La Nave Nodriza: fecha 2024 → 2024–2025
+- Letter-spacing títulos sección: 0.2em → 0.1em
+- Design System University: fecha 2024 → 2022, movido encima de Google Academy
+
+CV.HTML
+-------
+- Dark mode: corregido bug de hardcode class="dark" — ahora respeta localStorage del usuario
+- Nav: añadido "← Portfolio" a la izquierda del nombre con contraste accesible (white/70, black/60)
+- Botón "Descargar CV": sin borde, texto plano (jerarquía secundaria vs Contacto)
+- Botón "Contacto" nav: hover blanco con texto #111 (via JS inline, no Tailwind)
+- CTA hero "Contactar": eliminado (redundante con nav)
+- Skills (.pill): separados de links (.pill-link) — tags sin borde ni hover
+- Links sección (LinkedIn, Portfolio, En Marcha): mantienen borde y hover con .pill-link
+- Experiencia: NowEat primero (2025–2026), Optimiza después (2024–2025)
+- NowEat: "Estrategia y Negocio" (quitado "Diseñador UX" y "Cofundador")
+- Optimiza: "Diseñador UX/UI" (quitado "multidisciplinar")
+- Olistiko: fecha corregida a 2021–2022
+- Contacto: email como CTA secundario sin borde al lado del botón Enviar, texto "mail" en minúsculas

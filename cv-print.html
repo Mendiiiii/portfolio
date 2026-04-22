@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CV — Iñigo Mendizábal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @page { size: A4; margin: 1.2cm 1.5cm; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 9pt;
+            line-height: 1.35;
+            color: #111;
+            background: #fff;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        hr { border: none; border-top: 1pt solid #d0d0d0; margin: 4pt 0; }
+
+        /* ── DOWNLOAD BAR ── */
+        .download-bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: #111;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            z-index: 100;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+        }
+        .download-bar span { opacity: 0.8; }
+        .dl-btn {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s;
+            cursor: pointer;
+        }
+        .dl-btn:hover { opacity: 0.85; }
+        .dl-es { background: #4F46E5; color: #fff; }
+        .dl-en { background: #fff; color: #111; }
+        .download-bar .lang-toggle {
+            position: absolute;
+            right: 20px;
+            padding: 4px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: transparent;
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .download-bar .lang-toggle:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+
+        @media print {
+            .download-bar { display: none !important; }
+            body { padding-top: 0 !important; }
+        }
+        @media screen {
+            body { padding-top: 48px; }
+            #cv {
+                max-width: 210mm;
+                margin: 0 auto;
+                padding: 32pt 40pt 40pt;
+                background: #fff;
+                box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+                min-height: calc(100vh - 48px);
+            }
+            html { background: #f0f0f0; }
+        }
+
+        /* ── PERFIL ── */
+        .profile {
+            display: flex;
+            gap: 14pt;
+            align-items: flex-start;
+            padding-bottom: 6pt;
+        }
+        .photo {
+            width: 78px; height: 78px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .photo img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: 50% 8%;
+            transform: scale(1.5);
+            transform-origin: 50% 8%;
+        }
+        .profile-info { flex: 1; padding-top: 2pt; }
+        .name    { font-size: 16pt; font-weight: 700; line-height: 1.1; color: #111; }
+        .tagline { font-size: 9pt; color: #555; margin-top: 2pt; margin-bottom: 2pt; }
+
+        /* ── PILLS ── */
+        .pills { display: flex; flex-wrap: wrap; gap: 2pt 4pt; margin: 3pt 0; }
+        .pill {
+            display: inline-block;
+            padding: 1.5pt 6pt;
+            border: 0.75pt solid rgba(0,0,0,0.3);
+            border-radius: 999pt;
+            font-size: 8pt;
+            color: #333;
+        }
+        .skill-tag {
+            display: inline-block;
+            font-size: 8pt;
+            color: #444;
+        }
+        .skill-tag + .skill-tag::before {
+            content: " · ";
+            color: #bbb;
+        }
+        .pill a { color: #333; text-decoration: none; }
+        .skill-pill {
+            display: inline-block;
+            padding: 1.5pt 6pt;
+            border-radius: 3pt;
+            font-size: 8pt;
+            color: #444;
+            background: #F0F0F0;
+        }
+        .contact-line { display: flex; align-items: center; flex-wrap: wrap; gap: 0 5pt; margin: 3pt 0; font-size: 8pt; color: #444; }
+        .contact-line a { color: #333; text-decoration: none; padding: 1.5pt 6pt; border: 0.75pt solid rgba(0,0,0,0.3); border-radius: 999pt; }
+        .contact-line .sep { color: #999; }
+
+        /* ── BIO ── */
+        .bio p { font-size: 9pt; color: #444; line-height: 1.4; margin-bottom: 2pt; }
+
+        /* ── SECCIÓN ── */
+        .section { margin-top: 0; }
+        .label {
+            font-size: 9.5pt;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #111;
+            margin-bottom: 4pt;
+            margin-top: 4pt;
+        }
+
+        /* ── EXPERIENCIA ── */
+        .exp-entry { margin-bottom: 5pt; page-break-inside: avoid; }
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 6pt;
+            margin-bottom: 1.5pt;
+        }
+        .exp-role { font-size: 9pt; font-weight: 500; color: #111; }
+        .exp-date { font-size: 8pt; color: #666; white-space: nowrap; flex-shrink: 0; }
+        .exp-bullets { list-style: none; padding-left: 14pt; }
+        .exp-bullets li {
+            position: relative;
+            padding-left: 10pt;
+            font-size: 9pt;
+            color: #444;
+            line-height: 1.35;
+            margin-bottom: 1.5pt;
+        }
+        .exp-bullets li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #999;
+            font-size: 10pt;
+            line-height: 1.2;
+        }
+
+        /* ── EDUCACIÓN ── */
+        .edu-entry {
+            display: flex;
+            justify-content: space-between;
+            gap: 8pt;
+            margin-bottom: 2pt;
+            font-size: 9pt;
+            page-break-inside: avoid;
+        }
+        .edu-name { font-weight: 500; color: #111; }
+        .edu-date { color: #666; white-space: nowrap; flex-shrink: 0; font-size: 8pt; }
+
+    </style>
+</head>
+<body>
+
+    <!-- DOWNLOAD BAR -->
+    <div class="download-bar" id="downloadBar">
+        <span data-k="dlMsg">¿Descargar CV en PDF?</span>
+        <a id="dlBtn" href="cv-esp-inigo-mendizabal.pdf" download="CV Iñigo Mendizábal.pdf" class="dl-btn dl-es" data-k="dlBtnText">Descargar PDF</a>
+        <button class="lang-toggle" id="langToggle">EN</button>
+    </div>
+
+    <!-- CV CONTENT -->
+    <div id="cv">
+
+        <!-- PERFIL -->
+        <div class="profile">
+            <div class="photo">
+                <img src="Assests/Img/Perfil/Mendi - linkedin fondo blanco.jpg" alt="Iñigo Mendizábal">
+            </div>
+            <div class="profile-info">
+                <div class="name">Iñigo Mendizábal</div>
+                <div class="tagline" data-k="tagline">UX · UI · CX</div>
+                <div class="contact-line">
+                    <span>Madrid, España</span>
+                    <span class="sep">•</span>
+                    <span>(+34) 614-321-991</span>
+                    <span class="sep">•</span>
+                    <a href="mailto:imendifp@gmail.com">imendifp@gmail.com</a>
+                    <span class="sep">•</span>
+                    <a href="https://www.linkedin.com/in/inigomendizabal/">LinkedIn</a>
+                    <span class="sep">•</span>
+                    <a href="https://portfolio-mendi.vercel.app/">Portfolio</a>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- BIO -->
+        <div class="section bio">
+            <div class="label" data-k="bioLabel">Bio</div>
+            <p data-k="bio1">Diseñador estratégico con más de 4 años de experiencia diseñando y lanzando productos digitales desde fases iniciales hasta producción. He contribuido a definir la estructura y dirección estratégica en startups, agencias y entornos corporativos.</p>
+            <p data-k="bio2">Especializado en traducir datos y métricas en soluciones escalables, con experiencia en investigación, definición y diseño de productos complejos, siempre adaptados a estándares de accesibilidad WCAG y una visión centrada en las personas.</p>
+            <p data-k="bio3">Mi motivación es resolver problemas complejos mediante el diseño estratégico, creando soluciones digitales donde la innovación y la escalabilidad generen un impacto positivo.</p>
+        </div>
+
+        <hr>
+
+        <!-- EXPERIENCIA -->
+        <div class="section">
+            <div class="label" data-k="expLabel">Experiencia</div>
+
+            <div class="exp-entry">
+                <div class="exp-header">
+                    <span class="exp-role" data-k="expNERole">Estrategia y UX · NowEat</span>
+                    <span class="exp-date" data-k="expNEDate">2025 – Presente</span>
+                </div>
+                <ul class="exp-bullets">
+                    <li data-k="expNEB1">Co-fundador de SaaS all-in-one para restaurantes con IA (menú digital, TPV, reservas y KDS), construido por dos personas y agentes de IA.</li>
+                    <li data-k="expNEB2">Diseñé la experiencia completa del producto desde cero, logrando un setup de menos de 10 minutos y +38% de aumento en ventas en el piloto.</li>
+                    <li data-k="expNEB3">Definí arquitectura de producto y flujos UX priorizando simplicidad frente a herramientas fragmentadas del mercado (+200€/mes).</li>
+                </ul>
+            </div>
+
+            <div class="exp-entry">
+                <div class="exp-header">
+                    <span class="exp-role" data-k="expEMRole">Diseño Estratégico · En Marcha</span>
+                    <span class="exp-date" data-k="expEMDate">2026 – Presente</span>
+                </div>
+                <ul class="exp-bullets">
+                    <li data-k="expEMB1">Co-fundador y diseñador estratégico de laboratorio rural de innovación social en La Vera, Extremadura, orientado a territorios desfavorecidos.</li>
+                    <li data-k="expEMB2">Diseñé la identidad, estrategia de comunicación y web del programa para generar credibilidad institucional y facilitar acceso a fondos europeos.</li>
+                    <li data-k="expEMB3">Lideré investigación territorial con alcaldes, asociaciones y usuarios para definir programas de formación según necesidades reales del territorio.</li>
+                </ul>
+            </div>
+
+            <div class="exp-entry">
+                <div class="exp-header">
+                    <span class="exp-role" data-k="exp1Role">Diseñador UX/UI · Optimiza Recursos</span>
+                    <span class="exp-date" data-k="exp1Date">2024 – 2025</span>
+                </div>
+                <ul class="exp-bullets">
+                    <li data-k="exp1B1">Definí la arquitectura y roadmap inicial, priorizando funcionalidades que permitieron al equipo lanzar el MVP en menos de 4 meses.</li>
+                    <li data-k="exp1B2">Desarrollé el plan de negocio, creé mapas de oportunidad de producto y realicé investigación para identificar socios de inversión y oportunidades de subvenciones.</li>
+                    <li data-k="exp1B3">Lideré decisiones de producto trabajando de forma autónoma y priorizando funcionalidades según impacto en negocio y capacidad técnica.</li>
+                </ul>
+            </div>
+
+            <div class="exp-entry">
+                <div class="exp-header">
+                    <span class="exp-role" data-k="exp2Role">Diseñador UX · Rank Eat</span>
+                    <span class="exp-date">2024</span>
+                </div>
+                <ul class="exp-bullets">
+                    <li data-k="exp2B1">Trabajé en un entorno startup altamente dinámico bajo metodologías Agile, donde fue clave la colaboración entre los diferentes equipos.</li>
+                    <li data-k="exp2B2">Traduje necesidades de negocio y usuario en user stories claras, facilitando la planificación de desarrollo y reduciendo retrabajo en fases posteriores.</li>
+                    <li data-k="exp2B3">Colaboré con los equipos de marketing, negocio y atención al cliente para mejorar la experiencia global y apoyar decisiones de producto basadas en datos.</li>
+                </ul>
+            </div>
+
+            <div class="exp-entry">
+                <div class="exp-header">
+                    <span class="exp-role" data-k="exp3Role">Diseñador UX/CX/UI · Innomad</span>
+                    <span class="exp-date">2022 – 2023</span>
+                </div>
+                <ul class="exp-bullets">
+                    <li data-k="exp3B1">Trabajé en múltiples proyectos en entorno de agencia, diseñando soluciones end-to-end en colaboración con equipos de negocio y desarrollo.</li>
+                    <li data-k="exp3B2">Identifiqué una funcionalidad secundaria con alta adopción, contribuyendo a redefinir el enfoque estratégico del producto hacia esa línea de negocio.</li>
+                    <li data-k="exp3B3">Facilité talleres (workshops) con usuarios y stakeholders, contribuyendo a redefinir funcionalidades clave del producto.</li>
+                </ul>
+            </div>
+
+            <div class="exp-entry">
+                <div class="exp-header">
+                    <span class="exp-role" data-k="exp4Role">Diseñador UX/UI Junior · Olistiko</span>
+                    <span class="exp-date">2021 – 2022</span>
+                </div>
+                <ul class="exp-bullets">
+                    <li data-k="exp4B1">Realicé validación de hipótesis en fase temprana, benchmarking de mercado y análisis de oportunidades para la app Olistiko en fase de concepción.</li>
+                    <li data-k="exp4B2">Investigación cualitativa y cuantitativa con datos que se tradujeron en decisiones de diseño y ayudaron a reducir riesgos antes de la fase de construcción.</li>
+                </ul>
+            </div>
+
+            <div class="exp-entry">
+                <div class="exp-header">
+                    <span class="exp-role" data-k="exp5Role">Gestor y Desarrollador de Programas Deportivos · Keirle Park Tennis Centre</span>
+                    <span class="exp-date">2015 – 2021</span>
+                </div>
+                <ul class="exp-bullets">
+                    <li data-k="exp5B1">Lideré el diseño de la experiencia de cliente en programas, asegurando el engagement y retención.</li>
+                    <li data-k="exp5B2">Diseñé flujos de entrenamiento, gestioné puntos de contacto del servicio y desarrollé nuevas ofertas como campamentos y programas de desarrollo junior.</li>
+                    <li data-k="exp5B3">Trabajé con la dirección del club para escalar los servicios y mejorar la satisfacción del usuario.</li>
+                </ul>
+            </div>
+
+            <div class="exp-entry">
+                <div class="exp-header">
+                    <span class="exp-role" data-k="exp6Role">Asesor Deportivo · Queenwood School</span>
+                    <span class="exp-date">2014 – 2016</span>
+                </div>
+                <ul class="exp-bullets">
+                    <li data-k="exp6B1">Rediseñé el programa de tenis junior, aumentando la participación en más de 20 estudiantes/trimestre.</li>
+                    <li data-k="exp6B2">Elevé el valor percibido del programa un 150% a través de mejoras en el servicio y la experiencia.</li>
+                    <li data-k="exp6B3">Entrené al equipo Tildsley, logrando un récord de representación en el torneo.</li>
+                </ul>
+            </div>
+
+            <div class="exp-entry">
+                <div class="exp-header">
+                    <span class="exp-role" data-k="exp7Role">Editor de Cine y Vídeo · Video On</span>
+                    <span class="exp-date">2011 – 2014</span>
+                </div>
+                <ul class="exp-bullets">
+                    <li data-k="exp7B1">Gestioné múltiples proyectos de forma integral (desde grabación hasta edición), asegurando coherencia y calidad.</li>
+                    <li data-k="exp7B2">Organicé flujos de trabajo de edición completos: estructura narrativa, color, motion y colorimetría.</li>
+                </ul>
+            </div>
+
+            <div class="exp-entry">
+                <div class="exp-header">
+                    <span class="exp-role" data-k="exp8Role">Operador de Cámara e Iluminación · Yo Vi al Yeti</span>
+                    <span class="exp-date">2005 – 2011</span>
+                </div>
+                <ul class="exp-bullets">
+                    <li data-k="exp8B1">Rodé campañas para Nike, Kia, Wilson y otras marcas con filmación de alta velocidad, contenido publicitario y producciones corporativas.</li>
+                    <li data-k="exp8B2">Gestioné proyectos de vídeo end-to-end, asegurando coherencia visual con diferentes equipos.</li>
+                </ul>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- EDUCACIÓN -->
+        <div class="section">
+            <div class="label" data-k="eduLabel">Educación</div>
+            <div class="edu-entry"><span class="edu-name" data-k="edu1">La Nave Nodriza · Programa de Diseño de Experiencia de Usuario (PDEU)</span><span class="edu-date">2024 – 2025</span></div>
+            <div class="edu-entry"><span class="edu-name" data-k="edu2">TAFE NSW · Microcredencial en Desarrollo Front-End</span><span class="edu-date">2024</span></div>
+            <div class="edu-entry"><span class="edu-name" data-k="edu4">TAFE NSW · Microcredencial en Machine Learning</span><span class="edu-date">2024</span></div>
+            <div class="edu-entry"><span class="edu-name" data-k="edu5">Google Academy · Certificado de Diseño UX</span><span class="edu-date">2022 – 2023</span></div>
+            <div class="edu-entry"><span class="edu-name" data-k="edu3">Design System University · Design Systems 101</span><span class="edu-date">2022</span></div>
+            <div class="edu-entry"><span class="edu-name" data-k="edu6">RPT · Entrenador de Tenis Europeo y Negocios</span><span class="edu-date">2013</span></div>
+            <div class="edu-entry"><span class="edu-name" data-k="edu7">IES Puerta Bonita · Técnico Superior en Imagen y Sonido</span><span class="edu-date">2003 – 2007</span></div>
+        </div>
+
+        <hr>
+
+        <!-- SKILLS -->
+        <div class="section">
+            <div class="label">Skills</div>
+            <div class="pills">
+                <span class="skill-pill">Figma</span>
+                <span class="skill-pill">Design Systems</span>
+                <span class="skill-pill" data-k="sk1">Prototipado</span>
+                <span class="skill-pill">User Research</span>
+                <span class="skill-pill">Adobe XD</span>
+                <span class="skill-pill">Miro</span>
+                <span class="skill-pill">Notion</span>
+                <span class="skill-pill">Hotjar</span>
+                <span class="skill-pill">HTML / CSS / JS</span>
+                <span class="skill-pill">Python &amp; ML</span>
+                <span class="skill-pill">Photoshop</span>
+                <span class="skill-pill">Illustrator</span>
+                <span class="skill-pill">Final Cut</span>
+                <span class="skill-pill">Lean UX</span>
+                <span class="skill-pill">Design Thinking</span>
+                <span class="skill-pill">Information Architecture</span>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- HOBBIES -->
+        <div class="section">
+            <div class="label">Hobbies</div>
+            <div style="font-size:9pt;color:#444;" data-k="hobbies">Tenis, surf, diseño, naturaleza, viajar, arte.</div>
+        </div>
+
+    </div>
+
+    <script>
+        const T = {
+            es: {
+                dlMsg: '¿Descargar CV en PDF?',
+                dlBtnText: 'Descargar PDF',
+                tagline: 'UX · UI · CX',
+                bio1: 'Diseñador estratégico con más de 4 años de experiencia diseñando y lanzando productos digitales desde fases iniciales hasta producción. He contribuido a definir la estructura y dirección estratégica en startups, agencias y entornos corporativos.',
+                bio2: 'Especializado en traducir datos y métricas en soluciones escalables, con experiencia en investigación, definición y diseño de productos complejos, siempre adaptados a estándares de accesibilidad WCAG y una visión centrada en las personas.',
+                bio3: 'Mi motivación es resolver problemas complejos mediante el diseño estratégico, creando soluciones digitales donde la innovación y la escalabilidad generen un impacto positivo.',
+                bioLabel: 'Bio',
+                sk1: 'Prototipado',
+                expLabel: 'Experiencia',
+                expNERole: 'Estrategia y UX · NowEat', expNEDate: '2025 – Presente',
+                expNEB1: 'Co-fundador de SaaS all-in-one para restaurantes con IA (menú digital, TPV, reservas y KDS), construido por dos personas y agentes de IA.',
+                expNEB2: 'Diseñé la experiencia completa del producto desde cero, logrando un setup de menos de 10 minutos y +38% de aumento en ventas en el piloto.',
+                expNEB3: 'Definí arquitectura de producto y flujos UX priorizando simplicidad frente a herramientas fragmentadas del mercado (+200€/mes).',
+                expEMRole: 'Diseño Estratégico · En Marcha', expEMDate: '2026 – Presente',
+                expEMB1: 'Co-fundador y diseñador estratégico de laboratorio rural de innovación social en La Vera, Extremadura, orientado a territorios desfavorecidos.',
+                expEMB2: 'Diseñé la identidad, estrategia de comunicación y web del programa para generar credibilidad institucional y facilitar acceso a fondos europeos.',
+                expEMB3: 'Lideré investigación territorial con alcaldes, asociaciones y usuarios para definir programas de formación según necesidades reales del territorio.',
+                exp1Role: 'Diseñador UX/UI · Optimiza Recursos', exp1Date: '2024 – 2025',
+                exp1B1: 'Definí la arquitectura y roadmap inicial, priorizando funcionalidades que permitieron al equipo lanzar el MVP en menos de 4 meses.',
+                exp1B2: 'Desarrollé el plan de negocio, creé mapas de oportunidad de producto y realicé investigación para identificar socios de inversión y oportunidades de subvenciones.',
+                exp1B3: 'Lideré decisiones de producto trabajando de forma autónoma y priorizando funcionalidades según impacto en negocio y capacidad técnica.',
+                exp2Role: 'Diseñador UX · Rank Eat',
+                exp2B1: 'Trabajé en un entorno startup altamente dinámico bajo metodologías Agile, donde fue clave la colaboración entre los diferentes equipos.',
+                exp2B2: 'Traduje necesidades de negocio y usuario en user stories claras, facilitando la planificación de desarrollo y reduciendo retrabajo en fases posteriores.',
+                exp2B3: 'Colaboré con los equipos de marketing, negocio y atención al cliente para mejorar la experiencia global y apoyar decisiones de producto basadas en datos.',
+                exp3Role: 'Diseñador UX/CX/UI · Innomad',
+                exp3B1: 'Trabajé en múltiples proyectos en entorno de agencia, diseñando soluciones end-to-end en colaboración con equipos de negocio y desarrollo.',
+                exp3B2: 'Identifiqué una funcionalidad secundaria con alta adopción, contribuyendo a redefinir el enfoque estratégico del producto hacia esa línea de negocio.',
+                exp3B3: 'Facilité talleres (workshops) con usuarios y stakeholders, contribuyendo a redefinir funcionalidades clave del producto.',
+                exp4Role: 'Diseñador UX/UI Junior · Olistiko',
+                exp4B1: 'Realicé validación de hipótesis en fase temprana, benchmarking de mercado y análisis de oportunidades para la app Olistiko en fase de concepción.',
+                exp4B2: 'Investigación cualitativa y cuantitativa con datos que se tradujeron en decisiones de diseño y ayudaron a reducir riesgos antes de la fase de construcción.',
+                exp5Role: 'Gestor y Desarrollador de Programas Deportivos · Keirle Park Tennis Centre',
+                exp5B1: 'Lideré el diseño de la experiencia de cliente en programas, asegurando el engagement y retención.',
+                exp5B2: 'Diseñé flujos de entrenamiento, gestioné puntos de contacto del servicio y desarrollé nuevas ofertas como campamentos y programas de desarrollo junior.',
+                exp5B3: 'Trabajé con la dirección del club para escalar los servicios y mejorar la satisfacción del usuario.',
+                exp6Role: 'Asesor Deportivo · Queenwood School',
+                exp6B1: 'Rediseñé el programa de tenis junior, aumentando la participación en más de 20 estudiantes/trimestre.',
+                exp6B2: 'Elevé el valor percibido del programa un 150% a través de mejoras en el servicio y la experiencia.',
+                exp6B3: 'Entrené al equipo Tildsley, logrando un récord de representación en el torneo.',
+                exp7Role: 'Editor de Cine y Vídeo · Video On',
+                exp7B1: 'Gestioné múltiples proyectos de forma integral (desde grabación hasta edición), asegurando coherencia y calidad.',
+                exp7B2: 'Organicé flujos de trabajo de edición completos: estructura narrativa, color, motion y colorimetría.',
+                exp8Role: 'Operador de Cámara e Iluminación · Yo Vi al Yeti',
+                exp8B1: 'Rodé campañas para Nike, Kia, Wilson y otras marcas con filmación de alta velocidad, contenido publicitario y producciones corporativas.',
+                exp8B2: 'Gestioné proyectos de vídeo end-to-end, asegurando coherencia visual con diferentes equipos.',
+                eduLabel: 'Educación',
+                edu1: 'La Nave Nodriza · Programa de Diseño de Experiencia de Usuario (PDEU)',
+                edu2: 'TAFE NSW · Microcredencial en Desarrollo Front-End',
+                edu3: 'Design System University · Design Systems 101',
+                edu4: 'TAFE NSW · Microcredencial en Machine Learning',
+                edu5: 'Google Academy · Certificado de Diseño UX',
+                edu6: 'RPT · Entrenador de Tenis Europeo y Negocios',
+                edu7: 'IES Puerta Bonita · Técnico Superior en Imagen y Sonido',
+                hobbies: 'Tenis, surf, diseño, naturaleza, viajar, arte.'
+            },
+            en: {
+                dlMsg: 'Download CV as PDF?',
+                dlBtnText: 'Download PDF',
+                tagline: 'UX · UI · CX',
+                bio1: 'Strategic designer with 4+ years of experience designing and launching digital products from early stages through production. Contributed to defining structure and strategic direction across startups, agencies and corporate environments.',
+                bio2: 'Specialized in translating data and metrics into scalable solutions, with experience in research, definition and complex product design, always aligned with WCAG accessibility standards and a human-centered approach.',
+                bio3: 'My motivation is solving complex problems through strategic design, creating digital solutions where innovation and scalability generate a positive impact.',
+                bioLabel: 'Bio',
+                sk1: 'Prototyping',
+                expLabel: 'Experience',
+                expNERole: 'Strategy & UX · NowEat', expNEDate: '2025 – Present',
+                expNEB1: 'Co-founded an all-in-one SaaS for restaurants with AI (digital menu, POS, reservations and KDS), built by two people and AI agents.',
+                expNEB2: 'Designed the full product experience from scratch, achieving <10 min setup and +38% sales increase in the pilot.',
+                expNEB3: 'Defined product architecture and UX flows prioritizing simplicity over fragmented market tools (+€200/month).',
+                expEMRole: 'Strategic Design · En Marcha', expEMDate: '2026 – Present',
+                expEMB1: 'Co-founded a rural social innovation and entrepreneurship lab in La Vera, Extremadura, focused on disadvantaged territories.',
+                expEMB2: 'Designed brand identity, communication strategy and website to build institutional credibility and facilitate access to European funds.',
+                expEMB3: 'Led territorial research with mayors, associations and end users to define training programs based on real local needs.',
+                exp1Role: 'UX/UI Designer · Optimiza Recursos', exp1Date: '2024 – 2025',
+                exp1B1: 'Defined the architecture and initial roadmap, prioritizing features that enabled the team to launch the MVP in under 4 months.',
+                exp1B2: 'Developed the business plan, created product opportunity maps and conducted research to identify investment partners and grant opportunities.',
+                exp1B3: 'Led product decisions working autonomously, prioritizing features based on business impact and technical capacity.',
+                exp2Role: 'UX Designer · Rank Eat',
+                exp2B1: 'Worked in a highly dynamic startup environment under Agile methodologies, where cross-team collaboration was key.',
+                exp2B2: 'Translated business and user needs into clear user stories, facilitating development planning and reducing rework in later phases.',
+                exp2B3: 'Collaborated with marketing, business and customer support teams to improve the overall experience and support data-driven product decisions.',
+                exp3Role: 'UX/CX/UI Designer · Innomad',
+                exp3B1: 'Worked on multiple projects in an agency environment, designing end-to-end solutions in collaboration with business and development teams.',
+                exp3B2: 'Identified a secondary feature with high adoption, contributing to redefining the product\'s strategic focus toward that business line.',
+                exp3B3: 'Facilitated workshops with users and stakeholders, contributing to redefining key product features.',
+                exp4Role: 'Junior UX/UI Designer · Olistiko',
+                exp4B1: 'Conducted early-stage hypothesis validation, market benchmarking and opportunity analysis for the Olistiko app in its conception phase.',
+                exp4B2: 'Qualitative and quantitative research with data that translated into design decisions and helped reduce risks before the build phase.',
+                exp5Role: 'Sports Program Manager & Developer · Keirle Park Tennis Centre',
+                exp5B1: 'Led the design of client experience in programs, ensuring engagement and retention.',
+                exp5B2: 'Designed training flows, managed service touchpoints and developed new offerings such as camps and junior development programs.',
+                exp5B3: 'Worked with club management to scale services and improve user satisfaction.',
+                exp6Role: 'Sports Advisor · Queenwood School',
+                exp6B1: 'Redesigned the junior tennis program, increasing participation by over 20 students per term.',
+                exp6B2: 'Raised the program\'s perceived value by 150% through service and experience improvements.',
+                exp6B3: 'Coached the Tildsley team, achieving a record representation at the tournament.',
+                exp7Role: 'Film & Video Editor · Video On',
+                exp7B1: 'Managed multiple projects end-to-end (from filming to editing), ensuring coherence and quality.',
+                exp7B2: 'Organized complete editing workflows: narrative structure, color, motion and color grading.',
+                exp8Role: 'Camera Operator & Lighting · Yo Vi al Yeti',
+                exp8B1: 'Shot campaigns for Nike, Kia, Wilson and other brands with high-speed filming, advertising content and corporate productions.',
+                exp8B2: 'Managed end-to-end video projects, ensuring visual coherence across different teams.',
+                eduLabel: 'Education',
+                edu1: 'La Nave Nodriza · User Experience Design Program (PDEU)',
+                edu2: 'TAFE NSW · Front-End Development Microcredential',
+                edu3: 'Design System University · Design Systems 101',
+                edu4: 'TAFE NSW · Machine Learning Microcredential',
+                edu5: 'Google Academy · UX Design Certificate',
+                edu6: 'RPT · European Tennis Coach & Business',
+                edu7: 'IES Puerta Bonita · Advanced Diploma in Image & Sound',
+                hobbies: 'Tennis, surf, design, nature, travel, art.'
+            }
+        };
+
+        const urlLang = new URLSearchParams(window.location.search).get('lang');
+        let lang = urlLang || localStorage.getItem('lang') || 'es';
+        if (lang !== 'en') lang = 'es';
+
+        function applyLang(l) {
+            lang = l;
+            document.documentElement.lang = l;
+            document.querySelectorAll('[data-k]').forEach(el => {
+                const k = el.getAttribute('data-k');
+                if (T[l][k]) el.textContent = T[l][k];
+            });
+            const toggle = document.getElementById('langToggle');
+            if (toggle) toggle.textContent = l === 'es' ? 'EN' : 'ES';
+            const dlBtn = document.getElementById('dlBtn');
+            if (dlBtn) {
+                dlBtn.href = l === 'es' ? 'cv-esp-inigo-mendizabal.pdf' : 'cv-eng-inigo-mendizabal.pdf';
+                dlBtn.download = l === 'es' ? 'CV Iñigo Mendizábal.pdf' : 'CV Iñigo Mendizábal EN.pdf';
+            }
+        }
+
+        applyLang(lang);
+
+        const toggle = document.getElementById('langToggle');
+        if (toggle) {
+            toggle.addEventListener('click', () => {
+                applyLang(lang === 'es' ? 'en' : 'es');
+            });
+        }
+    </script>
+
+</body>
+</html>
