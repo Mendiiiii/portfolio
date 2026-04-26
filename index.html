@@ -337,7 +337,7 @@
                                 class="w-full h-full object-cover">
                         </div>
                         <div
-                            class="absolute -bottom-1 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-xs font-medium rounded-full border border-emerald-200 dark:border-emerald-800">
+                            class="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-xs font-medium rounded-full border border-emerald-200 dark:border-emerald-800">
                             <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
                             <span data-i18n="hero.status">Disponible para proyectos</span>
                         </div>
@@ -480,10 +480,10 @@
                                 alt="NowEat — restaurante"
                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         </div>
-                        <div class="card-content absolute bottom-0 left-0 right-0 p-6 z-10">
+                        <div class="card-content absolute bottom-0 left-0 right-0 p-6 z-10" style="background: linear-gradient(to top, rgba(15,10,2,0.95) 0%, rgba(15,10,2,0.6) 60%, transparent 100%);">
                             <span class="inline-block px-3 py-1 text-xs font-medium bg-amber-500/20 text-amber-300 rounded-full mb-3" data-i18n="works.project2.category">SaaS · Co-founder</span>
                             <h3 class="font-display text-xl font-bold text-white mb-1">NowEat</h3>
-                            <p class="text-sm text-white/60" data-i18n="works.project2.description">Una plataforma, dos founders, beta activa</p>
+                            <p class="text-sm text-white/80" data-i18n="works.project2.description">Una plataforma, dos founders, beta activa</p>
                         </div>
                         <a href="portfolio-noweat.html" class="absolute inset-0 z-20 focus-ring rounded-2xl" aria-label="Ver NowEat"><span class="sr-only">Ver</span></a>
                     </article>
@@ -514,7 +514,8 @@
                         </div>
                         <div class="card-content absolute bottom-0 left-0 right-0 p-6 z-10">
                             <span class="inline-block px-2.5 py-1 text-xs font-medium bg-sky-500/20 text-sky-300 rounded-full mb-3" data-i18n="works.project4.label">Otros proyectos</span>
-                            <p class="text-sm text-white/40">ASOS · Citibank</p>
+                            <h3 class="font-display text-xl font-bold text-white mb-1">ASOS · Citibank</h3>
+                            <p class="text-sm text-white/80" data-i18n="works.project4.description">UX research y diseño para marcas globales</p>
                         </div>
                         <a href="otros-proyectos.html" class="absolute inset-0 z-20 focus-ring rounded-2xl" aria-label="Ver otros proyectos: ASOS y Citibank"><span class="sr-only">Ver</span></a>
                     </article>
@@ -742,10 +743,10 @@
                     los derechos reservados</span>
             </div>
             <nav class="flex items-center gap-6">
-                <span class="text-sm text-muted-light/50 dark:text-muted-dark/50 cursor-default"
-                    data-i18n="footer.privacy">Privacidad</span>
-                <span class="text-sm text-muted-light/50 dark:text-muted-dark/50 cursor-default"
-                    data-i18n="footer.terms">Términos</span>
+                <a href="privacidad.html" class="text-sm text-muted-light/50 dark:text-muted-dark/50 hover:text-muted-light dark:hover:text-muted-dark transition-colors"
+                    data-i18n="footer.privacy">Privacidad</a>
+                <a href="terminos.html" class="text-sm text-muted-light/50 dark:text-muted-dark/50 hover:text-muted-light dark:hover:text-muted-dark transition-colors"
+                    data-i18n="footer.terms">Términos</a>
             </nav>
         </div>
     </footer>

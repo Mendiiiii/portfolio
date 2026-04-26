@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos · Iñigo Mendizábal</title>
+    <script>
+        document.documentElement.classList.remove('no-js');
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { DEFAULT: '#4F46E5', light: '#6366F1', dark: '#4338CA' },
+                        surface: { light: '#FFFFFF', dark: '#0F172A' },
+                        muted: { light: '#64748B', dark: '#94A3B8' },
+                        card: { light: '#F8FAFC', dark: '#1E293B' },
+                        border: { light: '#E2E8F0', dark: '#334155' }
+                    },
+                    fontFamily: {
+                        display: ['Space Grotesk', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif']
+                    },
+                    borderRadius: { '2xl': '1rem', '3xl': '1.5rem', '4xl': '2rem' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'DM Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface-light dark:bg-surface-dark text-surface-dark dark:text-surface-light min-h-screen">
+
+    <!-- Nav -->
+    <header class="border-b border-border-light dark:border-border-dark sticky top-0 z-50 bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-sm">
+        <div class="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 text-sm font-medium text-muted-light dark:text-muted-dark hover:text-surface-dark dark:hover:text-surface-light transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Volver al portfolio
+            </a>
+            <span class="font-display text-sm font-semibold text-surface-dark dark:text-surface-light">Iñigo Mendizábal</span>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 py-16">
+
+        <!-- Header -->
+        <div class="mb-12">
+            <span class="inline-block text-xs font-semibold tracking-wider uppercase text-primary dark:text-primary-light mb-4">Legal</span>
+            <h1 class="font-display text-4xl sm:text-5xl font-bold tracking-tight mb-4">Términos de uso</h1>
+            <p class="text-muted-light dark:text-muted-dark">Última actualización: abril 2026</p>
+        </div>
+
+        <!-- Content -->
+        <div class="space-y-10 text-muted-light dark:text-muted-dark leading-relaxed">
+
+            <section class="p-6 bg-card-light dark:bg-card-dark rounded-2xl border border-border-light dark:border-border-dark">
+                <h2 class="font-display text-lg font-semibold text-surface-dark dark:text-surface-light mb-3">En resumen</h2>
+                <p>Este site es un portfolio personal. Puedes verlo, leerlo y compartirlo. No puedes copiar el trabajo que muestro y hacerlo pasar por tuyo. Es así de sencillo.</p>
+            </section>
+
+            <section>
+                <h2 class="font-display text-xl font-semibold text-surface-dark dark:text-surface-light mb-4">Propiedad intelectual</h2>
+                <div class="space-y-4">
+                    <div class="flex gap-4">
+                        <span class="w-1.5 h-1.5 rounded-full bg-primary dark:bg-primary-light mt-2 shrink-0"></span>
+                        <p>El diseño, el código y los textos de este portfolio son obra de Iñigo Mendizábal y están protegidos por derechos de autor.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="w-1.5 h-1.5 rounded-full bg-primary dark:bg-primary-light mt-2 shrink-0"></span>
+                        <p>Los proyectos de clientes se muestran con su autorización y para fines exclusivamente de portfolio. Las marcas, logotipos y activos visuales de cada cliente son propiedad de sus respectivos titulares.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="w-1.5 h-1.5 rounded-full bg-primary dark:bg-primary-light mt-2 shrink-0"></span>
+                        <p>Queda prohibida la reproducción, distribución o uso comercial de cualquier contenido de este site sin autorización expresa y por escrito.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="font-display text-xl font-semibold text-surface-dark dark:text-surface-light mb-4">Uso del site</h2>
+                <p class="mb-4">Este site se ofrece tal cual, sin garantías de disponibilidad continua. Me reservo el derecho a modificar, actualizar o retirar contenidos en cualquier momento sin previo aviso.</p>
+                <p>Los enlaces a sitios externos son meramente informativos. No me hago responsable del contenido de páginas de terceros.</p>
+            </section>
+
+            <section>
+                <h2 class="font-display text-xl font-semibold text-surface-dark dark:text-surface-light mb-4">Contacto y reclamaciones</h2>
+                <p class="mb-4">Si crees que algún contenido de este site vulnera tus derechos o tienes cualquier duda sobre estos términos, escríbeme directamente:</p>
+                <a href="mailto:imendifp@gmail.com" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-sm font-medium hover:border-primary/40 transition-colors">
+                    imendifp@gmail.com
+                </a>
+            </section>
+
+            <section>
+                <h2 class="font-display text-xl font-semibold text-surface-dark dark:text-surface-light mb-4">Jurisdicción</h2>
+                <p>Estos términos se rigen por la legislación española. Cualquier conflicto derivado de su interpretación o aplicación se someterá a los juzgados y tribunales de Madrid.</p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-border-light dark:border-border-dark mt-16">
+        <div class="max-w-3xl mx-auto px-6 py-8 flex items-center justify-between text-sm text-muted-light/50 dark:text-muted-dark/50">
+            <span>© 2026 Iñigo Mendizábal</span>
+            <nav class="flex items-center gap-6">
+                <a href="privacidad.html" class="hover:text-surface-dark dark:hover:text-surface-light transition-colors">Privacidad</a>
+                <span class="cursor-default">Términos</span>
+            </nav>
+        </div>
+    </footer>
+
+</body>
+</html>

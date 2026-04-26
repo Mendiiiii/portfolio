@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacidad · Iñigo Mendizábal</title>
+    <script>
+        document.documentElement.classList.remove('no-js');
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { DEFAULT: '#4F46E5', light: '#6366F1', dark: '#4338CA' },
+                        surface: { light: '#FFFFFF', dark: '#0F172A' },
+                        muted: { light: '#64748B', dark: '#94A3B8' },
+                        card: { light: '#F8FAFC', dark: '#1E293B' },
+                        border: { light: '#E2E8F0', dark: '#334155' }
+                    },
+                    fontFamily: {
+                        display: ['Space Grotesk', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif']
+                    },
+                    borderRadius: { '2xl': '1rem', '3xl': '1.5rem', '4xl': '2rem' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'DM Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface-light dark:bg-surface-dark text-surface-dark dark:text-surface-light min-h-screen">
+
+    <!-- Nav -->
+    <header class="border-b border-border-light dark:border-border-dark sticky top-0 z-50 bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-sm">
+        <div class="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 text-sm font-medium text-muted-light dark:text-muted-dark hover:text-surface-dark dark:hover:text-surface-light transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Volver al portfolio
+            </a>
+            <span class="font-display text-sm font-semibold text-surface-dark dark:text-surface-light">Iñigo Mendizábal</span>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 py-16">
+
+        <!-- Header -->
+        <div class="mb-12">
+            <span class="inline-block text-xs font-semibold tracking-wider uppercase text-primary dark:text-primary-light mb-4">Legal</span>
+            <h1 class="font-display text-4xl sm:text-5xl font-bold tracking-tight mb-4">Política de Privacidad</h1>
+            <p class="text-muted-light dark:text-muted-dark">Última actualización: abril 2026</p>
+        </div>
+
+        <!-- Content -->
+        <div class="space-y-10 text-muted-light dark:text-muted-dark leading-relaxed">
+
+            <section class="p-6 bg-card-light dark:bg-card-dark rounded-2xl border border-border-light dark:border-border-dark">
+                <h2 class="font-display text-lg font-semibold text-surface-dark dark:text-surface-light mb-3">Lo importante, sin rodeos</h2>
+                <p>Este es el portfolio personal de Iñigo Mendizábal. No vendo nada, no tengo suscripciones y no tengo ningún interés en recopilar tus datos más allá de poder responderte si me escribes.</p>
+            </section>
+
+            <section>
+                <h2 class="font-display text-xl font-semibold text-surface-dark dark:text-surface-light mb-4">Qué datos recojo</h2>
+                <div class="space-y-4">
+                    <div class="flex gap-4">
+                        <span class="w-1.5 h-1.5 rounded-full bg-primary dark:bg-primary-light mt-2 shrink-0"></span>
+                        <p><strong class="text-surface-dark dark:text-surface-light">Formulario de contacto:</strong> si me escribes, recibo tu nombre, email y mensaje. Esos datos se usan únicamente para responderte. No se guardan en ninguna base de datos ni se comparten con terceros.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="w-1.5 h-1.5 rounded-full bg-primary dark:bg-primary-light mt-2 shrink-0"></span>
+                        <p><strong class="text-surface-dark dark:text-surface-light">Preferencias de tema:</strong> el modo claro u oscuro que eliges se guarda en el almacenamiento local de tu navegador (<code class="text-xs bg-border-light dark:bg-border-dark px-1.5 py-0.5 rounded">localStorage</code>). No viaja a ningún servidor.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="w-1.5 h-1.5 rounded-full bg-primary dark:bg-primary-light mt-2 shrink-0"></span>
+                        <p><strong class="text-surface-dark dark:text-surface-light">Analítica básica:</strong> si el site utiliza alguna herramienta de analítica, esta recoge únicamente datos agregados y anónimos (páginas vistas, origen del tráfico). Sin identificadores personales.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="font-display text-xl font-semibold text-surface-dark dark:text-surface-light mb-4">Cookies</h2>
+                <p>Este site no usa cookies de marketing, publicidad ni seguimiento entre sitios. Las únicas cookies técnicas que pueden generarse son las necesarias para el funcionamiento básico del navegador.</p>
+            </section>
+
+            <section>
+                <h2 class="font-display text-xl font-semibold text-surface-dark dark:text-surface-light mb-4">Tus derechos</h2>
+                <p class="mb-4">Tienes derecho a acceder, rectificar o solicitar la eliminación de cualquier dato personal que hayas compartido conmigo. Para ejercerlos, escríbeme directamente a:</p>
+                <a href="mailto:imendifp@gmail.com" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-sm font-medium hover:border-primary/40 transition-colors">
+                    imendifp@gmail.com
+                </a>
+            </section>
+
+            <section>
+                <h2 class="font-display text-xl font-semibold text-surface-dark dark:text-surface-light mb-4">Servicios de terceros</h2>
+                <p>Este site usa Google Fonts para la tipografía, lo que implica que el navegador carga fuentes desde los servidores de Google. Puedes consultar la política de privacidad de Google en su sitio oficial.</p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-border-light dark:border-border-dark mt-16">
+        <div class="max-w-3xl mx-auto px-6 py-8 flex items-center justify-between text-sm text-muted-light/50 dark:text-muted-dark/50">
+            <span>© 2026 Iñigo Mendizábal</span>
+            <nav class="flex items-center gap-6">
+                <span class="cursor-default">Privacidad</span>
+                <a href="terminos.html" class="hover:text-surface-dark dark:hover:text-surface-light transition-colors">Términos</a>
+            </nav>
+        </div>
+    </footer>
+
+</body>
+</html>
