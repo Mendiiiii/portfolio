@@ -659,9 +659,10 @@
             }
         };
 
-        let lang = 'es';
+        let lang = localStorage.getItem('lang') || 'es';
 
         function applyLang(l) {
+            localStorage.setItem('lang', l);
             lang = l;
             document.documentElement.lang = l;
             document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
@@ -673,7 +674,7 @@
                 const v = T[l][el.dataset.i18nPh];
                 if (v !== undefined) el.placeholder = v;
             });
-            wordList = T[lang].hero_words;
+            if (typeof wordList !== 'undefined') wordList = T[l].hero_words;
             document.querySelectorAll('#downloadCvNav, #downloadCvFooter').forEach(a => {
                 a.href = l === 'en' ? 'cv-eng-inigo-mendizabal.pdf' : 'cv-esp-inigo-mendizabal.pdf';
                 a.download = l === 'en' ? 'CV Iñigo Mendizábal EN.pdf' : 'CV Iñigo Mendizábal.pdf';
@@ -718,6 +719,7 @@
 
         // ── TYPEWRITER ────────────────────────────────────────────────────
         let wordList = T[lang].hero_words;
+        applyLang(lang);
         let wIdx = 0, cIdx = 0, deleting = false;
         const twEl = document.getElementById('typewriter');
 

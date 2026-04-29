@@ -176,8 +176,9 @@
             }
         };
 
-        let lang = 'es';
+        let lang = localStorage.getItem('lang') || 'es';
         function applyLang(l) {
+            localStorage.setItem('lang', l);
             lang = l;
             document.documentElement.lang = l;
             document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
@@ -188,6 +189,7 @@
             });
         }
         document.getElementById('langBtn').addEventListener('click', () => applyLang(lang === 'es' ? 'en' : 'es'));
+        applyLang(lang);
 
         let dark = true;
         document.getElementById('themeBtn').addEventListener('click', () => {

@@ -239,14 +239,16 @@
             }
         };
 
-        let lang = 'es';
+        let lang = localStorage.getItem('lang') || 'es';
         function applyLang(l) {
+            localStorage.setItem('lang', l);
             lang = l; document.documentElement.lang = l;
             document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
             document.getElementById('backLabel').textContent = T[l].back;
             document.querySelectorAll('[data-i18n]').forEach(el => { const v = T[l][el.dataset.i18n]; if (v !== undefined) el.innerHTML = v; });
         }
         document.getElementById('langBtn').addEventListener('click', () => applyLang(lang === 'es' ? 'en' : 'es'));
+        applyLang(lang);
         let dark = true;
         document.getElementById('themeBtn').addEventListener('click', () => {
             dark = !dark; document.documentElement.classList.toggle('dark', dark);
