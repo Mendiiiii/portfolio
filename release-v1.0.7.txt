@@ -1,0 +1,16 @@
+gh release create v1.0.7 --title "v1.0.7 — ASOS y En Marcha reescritos" --notes "## Cambios
+
+**ASOS case study**
+- Reescritura completa de S2 y S3 con datos reales del proyecto: 30% devoluciones, 28% mejora top encuesta, 59%/52% sizing data
+- Imágenes propias del proyecto en lugar de Unsplash (spread oscuro, onboarding, ficha de producto)
+- Títulos actualizados: S2 El problema real, S3 De los datos al diseño
+- Copy limpio sin guiones dobles ni jerga
+
+**En Marcha case study**
+- Reescritura completa: de innovación social rural a sistema de programas de activación económica
+- Sección 3 nueva: el sistema, la metodología, la credibilidad institucional
+- Meta strip, misión y callout final actualizados
+
+**Otros ajustes**
+- otros-proyectos.html: como freelance cambiado a en un entorno de agencia a través de Innomad
+- portfolio-citibank.html: párrafo intro al ancho completo" --repo Mendiiiii/portfolio
