@@ -1,0 +1,15 @@
+gh release create v.1.0.9 --title "v.1.0.9 — SEO: meta tags, sitemap y favicon" --notes "## Cambios
+
+**SEO**
+- Meta description, Open Graph, Twitter Card y canonical en index.html y en todas las case studies
+- JSON-LD (schema.org Person) en index.html
+- robots.txt y sitemap.xml nuevos
+- Favicon nuevo en todo el sitio
+- Título y meta description de index.html ahora cambian con el toggle de idioma ES/EN
+
+**Case studies**
+- Meta descriptions revisadas y reescritas para ASOS, Citibank, En Marcha, NowEat y Robin Luz
+
+**CVs personalizados**
+- cv-asos, cv-citibank, cv-en-marcha, cv-noweat y cv-robin-luz marcados como noindex: duplicaban el contenido de las case studies, quedan accesibles solo por link directo
+- Corregido bug en cv-en.html: la meta description estaba en español" --repo Mendiiiii/portfolio

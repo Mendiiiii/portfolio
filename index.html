@@ -4,7 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iñigo Mendizábal | Portfolio</title>
+    <title>Iñigo Mendizábal | Product Designer | UX | IA</title>
+    <meta name="description" content="Product Designer especializado en usar investigación, datos e IA para solucionar problemas complejos. Portfolio de Iñigo Mendizábal.">
+    <link rel="canonical" href="https://inigomendizabal.com/">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inigomendizabal.com/">
+    <meta property="og:title" content="Iñigo Mendizábal | Product Designer | UX | IA">
+    <meta property="og:description" content="Product Designer especializado en usar investigación, datos e IA para solucionar problemas complejos.">
+    <meta property="og:image" content="https://inigomendizabal.com/Assests/Img/Perfil/Foto-perfil.png">
+    <meta property="og:locale" content="es_ES">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Iñigo Mendizábal | Product Designer | UX | IA">
+    <meta name="twitter:description" content="Product Designer especializado en usar investigación, datos e IA para solucionar problemas complejos.">
+    <meta name="twitter:image" content="https://inigomendizabal.com/Assests/Img/Perfil/Foto-perfil.png">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Iñigo Mendizábal",
+        "jobTitle": "Product Designer",
+        "url": "https://inigomendizabal.com/",
+        "image": "https://inigomendizabal.com/Assests/Img/Perfil/Foto-perfil.png",
+        "sameAs": [
+            "https://www.linkedin.com/in/inigomendizabal/"
+        ]
+    }
+    </script>
 
     <!-- Fallback script para asegurar visibilidad -->
     <script>
@@ -789,6 +818,8 @@
         // 2. i18n Data
         const i18n = {
             en: {
+                "meta.title": "Iñigo Mendizábal | Product Designer | UX | AI",
+                "meta.description": "Product Designer specialized in using research, data and AI to solve complex problems. Portfolio of Iñigo Mendizábal.",
                 "nav.home": "Home", "nav.about": "About", "nav.works": "Works", "nav.services": "Services", "nav.cv": "CV", "nav.contact": "Contact me",
                 "hero.title": "I'm a Product Designer,", "hero.subtitle": "mixing strategy and AI.", "hero.status": "Available for new projects",
                 "hero.description": "I create digital experiences that blend aesthetics and functionality. Specialized in research, data and AI to navigate complex systems.",
@@ -820,6 +851,8 @@
                 "skip": "Skip to content", "lang.toggle": "Change language", "theme.toggle": "Toggle theme", "menu.toggle": "Open menu"
             },
             es: {
+                "meta.title": "Iñigo Mendizábal | Product Designer | UX | IA",
+                "meta.description": "Product Designer especializado en usar investigación, datos e IA para solucionar problemas complejos. Portfolio de Iñigo Mendizábal.",
                 "nav.home": "Inicio", "nav.about": "Sobre mí", "nav.works": "Proyectos", "nav.services": "Servicios", "nav.cv": "CV", "nav.contact": "Contactar",
                 "hero.title": "Soy Product Designer,", "hero.subtitle": "combino estrategia e IA.", "hero.status": "Disponible para proyectos",
                 "hero.description": "Creo experiencias digitales que combinan estética y funcionalidad. Especializado en investigación, datos e IA para guiar proyectos ante sistemas complejos.",
@@ -859,6 +892,8 @@
             localStorage.setItem('lang', lang);
             document.documentElement.lang = lang;
             document.getElementById('langLabel').textContent = lang === 'en' ? 'ES' : 'EN';
+            document.title = i18n[lang]['meta.title'];
+            document.querySelector('meta[name="description"]').setAttribute('content', i18n[lang]['meta.description']);
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
